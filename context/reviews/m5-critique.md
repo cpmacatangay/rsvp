@@ -45,6 +45,26 @@
 - All content strings verified against CONTENT.md — no invented wedding facts ✓
 - Status dots: only where real semantic state lives (admin badges, success badge) ✓
 
+## User review findings (2026-09-28, from the couples' hands-on pass) — all FIXED in M6 commit
+
+| # | Finding | Fix |
+|---|---|---|
+| U1 | Stepper +/− glyphs not centered in the 48px buttons | `flex items-center justify-center` on the buttons (Stepper rewrite) |
+| U2 | Children stepper rendered even when the invitation covers no kids | Children stepper only when `maxKids > 0` (hidden kids input stays for submission) |
+| U3 | "Adults of x / Children of x" wording | plain labels; the allowance lives only in the "This invitation covers…" summary line (Stepper helper removed) |
+| U4 | Dietary notes shown after "Regretfully declines" | field only in the accepted branch; server stores `dietary = null` on declines |
+| U5 | No guest search on a 63-row admin table | `AdminTable` client filter across name/status/dietary with a "showing N of 63" caption; totals above always count ALL guests |
+| U6 | (same pass) steppers' "+" and "−" as light hairline Phosphor | covered by U1 centering pass |
+
+## User review round 2 (2026-09-30) — all FIXED in M6
+
+| # | Finding | Fix |
+|---|---|---|
+| U7 | No header-level filter on the admin table | Status chips above the table: All / Pending / Accepted / Declined (aria-pressed toggles), combining with the name search |
+| U8 | "Household" column header | Renamed to "Name" |
+| U9 | Search swept dietary notes + status words; label said "Search guests" | Search is name-only (single lowercase substring test — the fastest approach at 63 rows); placeholder now "Search by name" |
+
 ## Scan log
+
 - `impeccable detect app components lib`: 0 findings (run at 4.4/4.5, 4.6 gates, 4.9)
 - `impeccable detect` verification fixture (Stage 3): 4/4 planted violations caught

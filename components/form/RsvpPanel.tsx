@@ -284,22 +284,10 @@ export function RsvpPanel() {
 
               {attend === 'accepted' && household ? (
                 <div className="grid grid-cols-2 gap-4">
-                  <Stepper
-                    label="Adults"
-                    value={adults}
-                    min={0}
-                    max={household.maxAdults}
-                    onChange={setAdults}
-                    helper={`of ${household.maxAdults}`}
-                  />
-                  <Stepper
-                    label="Children"
-                    value={kids}
-                    min={0}
-                    max={household.maxKids}
-                    onChange={setKids}
-                    helper={household.maxKids > 0 ? `of ${household.maxKids}` : undefined}
-                  />
+                  <Stepper label="Adults" value={adults} min={0} max={household.maxAdults} onChange={setAdults} />
+                  {household.maxKids > 0 ? (
+                    <Stepper label="Children" value={kids} min={0} max={household.maxKids} onChange={setKids} />
+                  ) : null}
                   {adults + kids < 1 ? (
                     <p className="col-span-2 font-body text-caption text-warning">
                       Please add at least one guest before sending.
@@ -308,7 +296,7 @@ export function RsvpPanel() {
                 </div>
               ) : null}
 
-              {attend !== '' ? (
+              {attend === 'accepted' ? (
                 <Field
                   id="dietary"
                   label="Dietary notes (optional)"

@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
-import { Badge } from '~/components/ui/Badge';
+import { AdminTable, type AdminTableRow } from '~/components/admin/AdminTable';
 import { Button } from '~/components/ui/Button';
 import { Card } from '~/components/ui/Card';
-import { computeTotals, getAdminRows, headcountSplit } from '~/lib/admin-data';
-import { statusView } from '~/lib/status';
+import { computeTotals, getAdminRows, headcountSplit, type AdminRow } from '~/lib/admin-data';
 import { isAdminSession } from '~/lib/session';
 import { signOutAdmin } from '~/app/admin/action';
 
@@ -14,7 +13,22 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-/** US8-US10: password-gated dashboard, totals, CSV export (no editing: PRD non-goal). */
+function toTableRow(row: AdminRow): AdminTableRow {
+  return {
+    householdId: row.householdId,
+    displayName: row.displayName,
+    maxAdults: row.maxAdults,
+    maxKids: row.maxKids,
+    capConfirmed: row.capConfirmed,
+    status: row.status,
+    adults: row.adults,
+    kids: row.kids,
+    dietary: row.dietary,
+    respondedAt: row.updatedAt ? row.updatedAt.toISOString() : null,
+  };
+}
+
+/** US8-US10: password-gated dashboard, totals, searchable table, CSV export. */
 export default async function AdminPage() {
   if (!(await isAdminSession())) redirect('/admin/login');
 
@@ -54,61 +68,7 @@ export default async function AdminPage() {
         ))}
       </div>
 
-      <div className="mt-6 overflow-x-auto rounded-lg border border-line bg-card shadow-card">
-        <table className="w-full min-w-[46rem] border-collapse font-body text-caption">
-          <thead>
-            <tr className="bg-warm text-left text-ink-soft">
-              <th className="px-4 py-3">Household</th>
-              <th className="px-4 py-3">Invitation</th>
-              <th className="px-4 py-3">Status</th>
-              <th className="px-4 py-3">Adults</th>
-              <th className="px-4 py-3">Children</th>
-              <th className="px-4 py-3">Dietary</th>
-              <th className="px-4 py-3">Responded</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((row) => {
-              const view = statusView(row.status);
-              const invited =
-                `${row.maxAdults} adult${row.maxAdults === 1 ? '' : 's'}` +
-                `${row.maxKids > 0 ? ` + ${row.maxKids} child${row.maxKids === 1 ? '' : 'ren'}` : ''}`;
-              return (
-                <tr key={row.householdId} className="border-line border-t text-ink">
-                  <td className="px-4 py-3 text-body">{row.displayName}</td>
-                  <td className="px-4 py-3">
-                    <span>{invited}</span>
-                    {!row.capConfirmed ? (
-                      <span className="ml-2">
-                        <Badge label="cap unconfirmed" className="bg-warm text-ink-soft" />
-                      </span>
-                    ) : null}
-                  </td>
-                  <td className="px-4 py-3">
-                    {row.status ? (
-                      <Badge label={view.label} dot={view.dot} className={view.className} />
-                    ) : (
-                      <Badge label="Pending" className={statusView(null).className} />
-                    )}
-                  </td>
-                  <td className="px-4 py-3 tabular-nums">{row.adults ?? ''}</td>
-                  <td className="px-4 py-3 tabular-nums">{row.kids ?? ''}</td>
-                  <td className="px-4 py-3">{row.dietary ?? ''}</td>
-                  <td className="px-4 py-3">
-                    {row.updatedAt
-                      ? new Intl.DateTimeFormat('en-PH', {
-                          dateStyle: 'medium',
-                          timeStyle: 'short',
-                          timeZone: 'Asia/Manila',
-                        }).format(row.updatedAt)
-                      : ''}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+      <AdminTable rows={rows.map(toTableRow)} />
     </main>
   );
 }

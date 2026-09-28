@@ -107,7 +107,8 @@ export async function submitRsvp(
       household,
       status: parsed.data.status,
       counts: { adults: parsed.data.adults, kids: parsed.data.kids },
-      dietary: parsed.data.dietary,
+      // a decline means nobody is coming: no dietary note is meaningful (UX review fix)
+      dietary: parsed.data.status === 'accepted' ? parsed.data.dietary : null,
       now: new Date(),
     });
 

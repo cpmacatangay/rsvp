@@ -19,20 +19,33 @@ export const rsvpLookupSchema = z.object({
     .max(80, 'Too long'),
 });
 
+/** Shared fields; honeypot `website` MUST be empty (ARCHITECTURE §10). */
 export const rsvpSubmitSchema = z
   .object({
-    code: z
-      .string()
-      .trim()
-      .regex(/^[A-Za-z0-9]{12}$/, 'This invitation link is not valid'),
-    // honeypot: every real guest leaves it empty (ARCHITECTURE §10)
     website: z.string().max(0).optional().or(z.literal('')),
     status: attendingStatus,
     adults: z.number().int().min(0).max(10),
     kids: z.number().int().min(0).max(10),
     dietary: z.string().trim().max(280, 'Please keep the note under 280 characters').optional(),
+    /** JS flow: the type-ahead resolved a household by opaque code. */
+    code: z
+      .string()
+      .trim()
+      .regex(/^[A-Za-z0-9]{12}$/, 'This invitation link is not valid')
+      .optional(),
+    /** No-JS fallback: exactly-matched household name, lowercased. */
+    lookupName: z
+      .string()
+      .trim()
+      .min(2, 'Please type your name as it appears on your invitation')
+      .max(80, 'Too long')
+      .optional(),
   })
-  .strict();
+  .strict()
+  .refine(
+    (data) => Number(data.code !== undefined) + Number(data.lookupName !== undefined) === 1,
+    'Missing invitation: pick your household or type your name',
+  );
 
 export type RsvpLookupQuery = z.infer<typeof rsvpLookupSchema>;
 export type RsvpSubmitPayload = z.infer<typeof rsvpSubmitSchema>;

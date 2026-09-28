@@ -103,8 +103,11 @@ export function RsvpCombobox({ onPick }: { onPick: (pick: HouseholdPick) => void
   return (
     <div>
       <div className="relative">
+        <label htmlFor="household-lookup" className="mb-1 flex font-body text-caption text-ink-soft">
+          Your name
+        </label>
         {selectedLabel ? (
-          <p className="font-body text-caption text-ink-faint" role="status">
+          <p className="font-body text-caption text-ink-soft" role="status">
             Picking: you selected {selectedLabel}. Use the Not-you button below to change.
           </p>
         ) : null}
@@ -163,13 +166,13 @@ export function RsvpCombobox({ onPick }: { onPick: (pick: HouseholdPick) => void
         ) : null}
       </div>
       {query.trim().length < 2 ? (
-        <p className="mt-1 font-body text-caption text-ink-faint">Start typing your name (at least 2 letters).</p>
+        <p className="mt-1 font-body text-caption text-ink-soft">Start typing your name (at least 2 letters).</p>
       ) : error ? (
         <p className="mt-1 font-body text-caption text-danger" role="status">
           {error}
         </p>
       ) : loading ? (
-        <p className="mt-1 font-body text-caption text-ink-faint">Searching…</p>
+        <p className="mt-1 font-body text-caption text-ink-soft">Searching…</p>
       ) : null}
     </div>
   );

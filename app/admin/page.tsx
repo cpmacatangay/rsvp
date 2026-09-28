@@ -7,6 +7,7 @@ import { Card } from '~/components/ui/Card';
 import { computeTotals, getAdminRows, headcountSplit } from '~/lib/admin-data';
 import { statusView } from '~/lib/status';
 import { isAdminSession } from '~/lib/session';
+import { signOutAdmin } from '~/app/admin/action';
 
 export const metadata: Metadata = {
   title: 'RSVP dashboard',
@@ -36,8 +37,10 @@ export default async function AdminPage() {
           <Button href="/admin/export.csv" variant="secondary">
             Export CSV
           </Button>
-          <form>
-            {/* sign out posted as a plain form so it never depends on JS */}
+          <form action={signOutAdmin}>
+            <Button type="submit" variant="ghost">
+              Sign out
+            </Button>
           </form>
         </div>
       </div>

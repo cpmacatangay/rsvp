@@ -30,7 +30,7 @@ export function Stepper({ label, value, min, max, onChange, helper, id = `steppe
         <label htmlFor={id} className="font-body text-caption text-ink-soft">
           {label}
         </label>
-        {helper ? <span className="font-body text-caption text-ink-faint">{helper}</span> : null}
+        {helper ? <span className="font-body text-caption text-ink-soft">{helper}</span> : null}
       </div>
       <div className="flex items-center justify-between gap-3">
         <button

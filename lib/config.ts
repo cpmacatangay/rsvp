@@ -56,7 +56,6 @@ export const dressCode = {
 export const copy = {
   tagline: "We're getting married. Come celebrate with us!",
   rsvpOpenHeadline: "Who's coming?",
-  rsvpFindPlaceholder: 'Find your name',
   accept: 'Joyfully accepts',
   decline: 'Regretfully declines',
   closedHeadline: 'RSVPs are closed',

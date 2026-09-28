@@ -30,7 +30,7 @@ export function Field({ label, id, control, hint, error, className = '' }: Field
           {error}
         </p>
       ) : hint ? (
-        <p id={hintId} className="font-body text-caption text-ink-faint">
+        <p id={hintId} className="font-body text-caption text-ink-soft">
           {hint}
         </p>
       ) : null}

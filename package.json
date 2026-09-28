@@ -45,6 +45,7 @@
     "postcss": "latest",
     "prettier": "latest",
     "tailwindcss": "^4.0.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.2"
   }
 }

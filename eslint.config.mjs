@@ -28,8 +28,8 @@ const eslintConfig = [
     },
   },
   {
-    // ops scripts (seed, drizzle helpers) legitimately print reports
-    files: ['scripts/**/*.ts'],
+    // ops scripts (seed, db-check, drizzle helpers) legitimately print reports
+    files: ['scripts/**'],
     rules: { 'no-console': 'off' },
   },
 ];

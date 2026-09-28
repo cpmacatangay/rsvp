@@ -53,8 +53,12 @@ MOBILE.md intentionally does not exist: mobile-first web page, no native client.
 
 | Placeholder | Needed for | Ask |
 |---|---|---|
-| {{TBD_WEDDING_DATE}} · {{TBD_CEREMONY_TIME}} | countdown, schedule, meta | still OPEN (ship-gated) |
+| {{TBD_CEREMONY_TIME}} | schedule section, countdown caption | still OPEN (ship-gated) |
 | {{TBD_RSVP_DEADLINE}} → `RSVP_DEADLINE_DATE` | auto-close logic | still OPEN (ship-gated) |
+
+Wedding date landed 2026-09-28: **Sunday, August 6, 2028** (display confirmed;
+couple marked "for now", reconfirmed at the M4 review). Remaining TBD slots:
+ceremony time + RSVP deadline.
 
 These appear verbatim in the docs; grep `TBD_` to locate every remaining slot.
 Everything else is final. Resolved items (couple, venue, guest list, photos,

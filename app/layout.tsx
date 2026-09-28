@@ -18,7 +18,7 @@ const karla = Karla({
 
 export const metadata: Metadata = {
   title: 'Christian Paul & Christine Jane',
-  description: 'We are getting married. RSVP here.',
+  description: 'We are getting married on Sunday, August 6, 2028. RSVP here.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -16,6 +16,23 @@ export const venue = {
   mapsUrl: 'https://maps.app.goo.gl/axEuRdLZbETTy5UXA',
 } as const;
 
+/**
+ * Wedding date — CONFIRMED for display (CONTENT.md §1; couple marked "for
+ * now", reconfirm at M4 copy review). The countdown flips to "wedding day"
+ * at the start of Aug 6 in Asia/Manila (= Aug 5 16:00 UTC end-of-day math).
+ */
+export const weddingDate = new Date(Date.UTC(2028, 7, 5, 16, 0, 0, 0)); // = 2028-08-06 00:00 +08:00
+
+export const weddingDateDisplay = new Intl.DateTimeFormat('en-US', {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'Asia/Manila',
+})
+  .format(weddingDate)
+  .toUpperCase();
+
 /** Day schedule — CONFIRMED in CONTENT.md §5; labels are the couple's pick. */
 export const schedule = [
   { time: '14:00', label: 'Ceremony' },

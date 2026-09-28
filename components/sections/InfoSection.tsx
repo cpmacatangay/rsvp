@@ -4,16 +4,15 @@ import { CountdownCell } from '~/components/sections/CountdownCell';
 import { Button } from '~/components/ui/Button';
 import { Card } from '~/components/ui/Card';
 import { Section } from '~/components/ui/Section';
-import { venue } from '~/lib/config';
+import { venue, weddingDate, weddingDateDisplay } from '~/lib/config';
 
 /**
  * Info section (#info): countdown + location facts (US2). Two cards side by
  * side from `sm`, stacked on a phone. Map = tappable link-out (deferred
  * decision: no third-party embed iframe).
  *
- * The wedding date is an OPEN fact (CONTENT.md §1): CountdownCell renders the
- * graceful "date to be announced" state until the couple sets it; when the
- * date config exists, pass its cutoff ms as `targetMs` here.
+ * Wedding date lives in lib/config (single source); the countdown runs to the
+ * first minute of that day in Asia/Manila.
  */
 export function InfoSection() {
   return (
@@ -22,9 +21,9 @@ export function InfoSection() {
       <div className="grid gap-6 sm:grid-cols-2">
         <Card className="flex flex-col gap-2">
           <h3 className="font-display text-h3 text-ink">Counting down</h3>
-          <CountdownCell targetMs={null} />
+          <CountdownCell targetMs={weddingDate.getTime()} />
           <p className="font-body text-caption text-ink-soft">
-            The wedding date will be announced here.
+            {weddingDateDisplay} <span aria-hidden="true">·</span> Naga City
           </p>
         </Card>
 

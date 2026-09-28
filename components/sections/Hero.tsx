@@ -2,7 +2,7 @@ import Image from 'next/image';
 import heroPhoto from '~/assets/hero/cpcj.jpg';
 import { Button } from '~/components/ui/Button';
 import { DoubleBezel } from '~/components/ui/Card';
-import { couple, venue } from '~/lib/config';
+import { couple, venue, weddingDateDisplay } from '~/lib/config';
 
 /**
  * Hero — taste rules: stack ≤ 4 elements (names, one subtext line, CTA, photo),
@@ -21,7 +21,7 @@ export function Hero() {
           {couple.names.split(' & ')[1]}
         </h1>
         <p className="font-body text-body text-ink-soft">
-          Save the date: details coming soon <span aria-hidden="true">·</span>{' '}
+          {weddingDateDisplay} <span aria-hidden="true">·</span>{' '}
           <span className="capitalize">{venue.city}</span>
         </p>
         <Button href="#rsvp" variant="primary" className="mt-2">

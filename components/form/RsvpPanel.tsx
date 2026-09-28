@@ -30,6 +30,8 @@ export function RsvpPanel() {
   const [attend, setAttend] = useState<'accepted' | 'declined' | ''>('');
   const [adults, setAdults] = useState(1);
   const [kids, setKids] = useState(0);
+  /** true once the guest interacted: motion runs only post-hydration states */
+  const [touched, setTouched] = useState(false);
   const reduce = useReducedMotion();
 
   const status = state === null ? 'idle' : state.ok ? 'success' : 'error';
@@ -39,6 +41,7 @@ export function RsvpPanel() {
     setAdults(1);
     setKids(0);
     setAttend('');
+    setTouched(true);
     setPhase('answer');
   }
 
@@ -68,6 +71,17 @@ export function RsvpPanel() {
             ? ` and ${household.maxKids} child${household.maxKids === 1 ? '' : 'ren'}`
             : ''
         }.`;
+
+  /** single-authored search content: plain on first paint (hydration-safe), motion after */
+  const searchContent = (
+    <>
+      <h3 className="font-display text-h2 text-ink">{copy.rsvpOpenHeadline}</h3>
+      <p className="font-body text-body text-ink-soft">
+        Find your household on the invitation to answer.
+      </p>
+      <RsvpCombobox onPick={pick} />
+    </>
+  );
 
   return (
     <DoubleBezel>
@@ -204,18 +218,18 @@ export function RsvpPanel() {
               <p className="font-body text-body text-ink">{copy.closedBody}</p>
             </motion.div>
           ) : phase === 'search' ? (
-            <motion.div
-              key="search"
-              {...motionSettings}
-              transition={{ duration: reduce ? 0.01 : 0.24, ease: 'easeOut' }}
-              className="flex flex-col gap-3"
-            >
-              <h3 className="font-display text-h2 text-ink">{copy.rsvpOpenHeadline}</h3>
-              <p className="font-body text-body text-ink-soft">
-                Find your household on the invitation to answer.
-              </p>
-              <RsvpCombobox onPick={pick} />
-            </motion.div>
+            touched ? (
+              <motion.div
+                key="search"
+                {...motionSettings}
+                transition={{ duration: reduce ? 0.01 : 0.24, ease: 'easeOut' }}
+                className="flex flex-col gap-3"
+              >
+                {searchContent}
+              </motion.div>
+            ) : (
+              <div className="flex flex-col gap-3">{searchContent}</div>
+            )
           ) : (
             <motion.form
               key="answer"

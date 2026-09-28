@@ -5,6 +5,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '~': fileURLToPath(new URL('.', import.meta.url)),
+      // keep the strong production guard, but let unit tests import server libs
+      'server-only': fileURLToPath(new URL('./test/server-only-stub.ts', import.meta.url)),
     },
   },
   test: {

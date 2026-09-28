@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -87,12 +88,15 @@ function report(houses: House[], issues: string[]): string {
 }
 
 async function upsert(houses: House[]) {
-  const { getDb } = await import('~/db');
-  const { households } = await import('~/db/schema');
-  const db = getDb();
+  // standalone driver init (not ~/db): plain node must not import
+  // 'server-only' guard modules or rely on bundler path aliases
+  const { neon } = await import('@neondatabase/serverless');
+  const { drizzle } = await import('drizzle-orm/neon-http');
+  const ddb = drizzle(neon(process.env.DATABASE_URL!), { casing: 'snake_case' });
+  const { households } = await import('../db/schema.ts');
   // idempotent: conflict on searchName, keep the existing `code`
   for (const h of houses) {
-    await db
+    await ddb
       .insert(households)
       .values({ ...h, code: makeCode() })
       .onConflictDoUpdate({

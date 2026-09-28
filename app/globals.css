@@ -72,6 +72,8 @@
     /* mobile-native: kills tap-highlight flash */
     -webkit-tap-highlight-color: transparent;
     text-underline-offset: 0.16em;
+    /* gentle anchor scrolling; reduced-motion override below sets it to auto */
+    scroll-behavior: smooth;
   }
 
   body {
@@ -80,6 +82,18 @@
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     overflow-x: clip;
+  }
+
+  /* countdown digit crossfade (DESIGN §9): transform+opacity only */
+  @keyframes count-fade {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 
   ::selection {

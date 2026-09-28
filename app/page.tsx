@@ -1,16 +1,27 @@
+import { Hero } from '~/components/sections/Hero';
+import { InfoSection } from '~/components/sections/InfoSection';
+import { StorySection } from '~/components/sections/StorySection';
+import { ScheduleSection } from '~/components/sections/ScheduleSection';
+import { DressCodeSection } from '~/components/sections/DressCodeSection';
+import { RsvpSection } from '~/components/sections/RsvpSection';
+import { Footer } from '~/components/sections/Footer';
+
 /**
- * Step 4.1 stub — sections arrive in step 4.5; the RSVP flow in steps 4.6+.
- * Kept honest on purpose: no fake sections, no invented copy.
+ * Guest page — one route, all server-rendered facts (PRD §3 scope order:
+ * hero → countdown+location → story → schedule → dress code → RSVP → footer).
  */
 export default function HomePage() {
   return (
-    <main className="flex min-h-[100dvh] flex-col items-center justify-center gap-6 px-5 py-16 text-center sm:px-6">
-      <h1 className="font-display text-hero text-ink">
-        Christian Paul <span className="text-primary">&amp;</span> Christine Jane
-      </h1>
-      <p className="font-body text-body text-ink-soft">
-        We are getting married. Full details and RSVP arrive here soon.
-      </p>
-    </main>
+    <>
+      <Hero />
+      <main>
+        <InfoSection />
+        <StorySection />
+        <ScheduleSection />
+        <DressCodeSection />
+        <RsvpSection />
+      </main>
+      <Footer />
+    </>
   );
 }

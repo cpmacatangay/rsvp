@@ -60,7 +60,7 @@ Every dependency is listed in `context/PRD.md` §7 / `ARCHITECTURE.md` §14 with
 | zod | one validator shared by client + server (RULES §3.4) |
 | `motion` | small, transform/opacity-only island animations; no GSAP timelines for this motion budget |
 | pino | structured logs without PII (server-side only) |
-| lucide-react | the only icon set согласованный with DESIGN §8 — needed for map pin / calendar etc. |
+| @phosphor-icons/react | the only icon set aligned with the soft-premium direction (couple-confirmed at M3): ultra-light hairline icons for map pin / calendar / chevrons / steppers |
 | vitest | pure helpers (deadline clamp, caps, masking, CSV) need deterministic tests |
 | Node `crypto` | household codes (12-char URL-safe) — no extra dep, avoids inventing |
 | impeccable CLI | the quality gate the user mandated (61 anti-pattern detector + stage tooling) |

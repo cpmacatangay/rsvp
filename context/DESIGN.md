@@ -196,7 +196,8 @@ not from color fills — per `emil-design-eng` (no border/radius clashes).
 
 ## 8. Iconography
 
-- **Source:** lucide-react, outline set (1.5px stroke)
+- **Source:** `@phosphor-icons/react`, weight `light` (ultra-light hairline
+  strokes; couple-confirmed 2026-09-28, replacing the earlier lucide choice)
 - **Sizes:** 20px inline, 24px standalone
 - **Color:** `currentColor` (inherits text color); never multi-color icons.
 - Used only where words don't work (calendar, map pin, chevron); every
@@ -335,8 +336,8 @@ aesthetic, leaning toward Tailwind v4 token system + restrained motion."
 ### 14.4 Conflicts between the taste rules and this design system — resolutions
 | Topic | Skill rule (source) | Resolution |
 |---|---|---|
-| Display serif | DTF §4.1 bans Fraunces as a default: it is one of the two "LLM-favorite" display serifs. Override allowed with explicit brand justification (preflight: "or it is, with explicit brand justification") | **Fraunces retained with recorded justification:** this is a wedding invitation in the editorial/luxury/heritage genre, exactly DTF's override case; soft-premium direction was chosen BY the couple, and Fraunces couples the stationery feel with an optical-size axis for large names. Flagged alternative at M4 review if the couple prefers the fresh-pool route: Cormorant Garamond or Canela (both in skill's rotation pool). No silent swap without user approval |
-| Icon library | DTF §3.C discourages lucide (allowed if requested/already used); high-end §2 bans thick-stroked icons | Logged as a flagged change: prefer **Phosphor-light** for icon set consistency with the premium skill. To be confirmed before form section build; no other change |
+| Display serif | DTF §4.1 bans Fraunces as a default: it is one of the two "LLM-favorite" display serifs. Override allowed with explicit brand justification (preflight: "or it is, with explicit brand justification") | **Fraunces retained with recorded justification:** this is a wedding invitation in the editorial/luxury/heritage genre, exactly DTF's override case; soft-premium direction was chosen BY the couple, and Fraunces couples the stationery feel with an optical-size axis for large names. Flagged alternative at M4 review if the couple prefers the fresh-pool route: Cormorant Garamond or Canela (both in skill's rotation pool). No silent swap without user approval. **Confirmed at M3 wrap-up:** the couple chose to keep Fraunces; the recorded justification makes the grandfathering a confirmed decision |
+| Icon library | DTF §3.C discourages lucide (allowed if requested/already used); high-end §2 bans thick-stroked icons | **RESOLVED (couple confirmed at the M3 wrap-up):** `@phosphor-icons/react` (weight `light`) is the project icon set; DESIGN §8 updated accordingly |
 | Eyebrows | DTF §4.7 cap: max 1 eyebrow per 3 sections, hero counts as 1 | Form-card sketch amended: its "RSVP" eyebrow is dropped (headlines carry the sections). Page will use **zero decorative eyebrows**; the type scale keeps the 13px badge level reserved for semantic badges only |
 | Card architecture | high-end §4.A "Double-Bezel": outer shell + inner core with concentric radii | Adopted concentrically **within the approved radius scale** (`rounded-lg` outer, mathematically smaller inner). No 2rem squircles vs the locked 16px system |
 | Section padding | high-end §4.C demands py-24 minimum (its mobile rule allows px-4/py-8 <768px) | Desktop `py-24` as decided (approved); mobile `py-16` exceeds the skill's own mobile minimum (py-8) |

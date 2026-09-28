@@ -166,8 +166,9 @@ exactly what vitest covers per `PRD.md` §7.
 ### 5.6 Dependencies
 - **MUST** use latest stable versions at install time; remove unused deps
   immediately.
-- Justified set only (see `ARCHITECTURE.md` §14): nu, drizzle, zod, pino,
-  motion, lucide-react. Anything beyond needs one review line of rationale.
+- Justified set only (see `ARCHITECTURE.md` §14): next, react, Tailwind,
+  drizzle, zod, pino, motion, `@phosphor-icons/react`. Anything beyond needs
+  one review line of rationale.
 - **MUST NOT** introduce a UI kit (MUI, shadcn blocks) — this design is
   token-driven; kit defaults would fight it.
 

@@ -1,0 +1,19 @@
+# agent harness skills (installed tooling; recorded in skills-lock.json)
+.agents/
+.claude/
+.opencode/
+
+# project artifacts (kept local)
+node_modules/
+.next/
+out/
+.vercel/
+*.tsbuildinfo
+.DS_Store
+
+# secrets and env
+.env*
+!.env.example
+
+# temp plan drafts (kept out of the repo)
+*.tmp.*

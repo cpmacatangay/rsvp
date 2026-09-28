@@ -96,7 +96,9 @@ Melody,6,0
 
 Cap-unconfirmed rows (11): Tito Rodel, Tita Celine, Nanang Bing, Ate Mylene,
 Maliah, Carlo, Ryan, Abby, Eloisa, Kail, Klein.
-Totals if caps hold: **136 adults + 16 children = 152 invited capacity**.
+Totals if caps hold (verified by the seed parser): **136 adults named by the
+couple + 11 cap-defaulted singles = 147 adults; 16 children; 163 invited
+capacity.**
 
 Notes: `data/guest-list.csv` is generated from this table at build step 4.2;
 display names keep honorifics verbatim; search normalizes to lowercase tokens

@@ -27,6 +27,11 @@ const eslintConfig = [
       'prefer-const': 'error',
     },
   },
+  {
+    // ops scripts (seed, drizzle helpers) legitimately print reports
+    files: ['scripts/**/*.ts'],
+    rules: { 'no-console': 'off' },
+  },
 ];
 
 export default eslintConfig;

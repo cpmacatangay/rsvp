@@ -17,7 +17,7 @@ From `context/` docs and user answers (source tags: [R1/R2] earlier Q&A rounds; 
 - Design: soft premium, dials VARIANCE 4 / MOTION 4 / DENSITY 3; ivory+sage; Fraunces/Karla; `motion` lib; 48px taps; transform/opacity-only motion; `prefers-reduced-motion` always [R2]
 - Couple: **Christian Paul & Christine Jane** [R3]
 - Venue: **Peñafrancia Basilica, Naga City** + provided maps link [R3-C]
-- Guests: **63 households** (capacity ≈ 136 adults + 16 children); seed from `CONTENT.md`; **cap-unconfirmed (11) default `1 adult`, flagged, fixable via CSV re-seed** [R3-A]
+- Guests: **63 households** (verified: 136 adults + 16 children named by the couple; with the 11 cap-defaulted singles it becomes **147 adults + 16 children = 163 invited capacity**); seed from `CONTENT.md`; **cap-unconfirmed (11) default `1 adult`, flagged, fixable via CSV re-seed** [R3-A]
 - Photos: **`assets/hero/cpcj.jpg`** verified in repo (4.0 MB) [R3-B]
 - Dress code = site palette; schedule 14:00/15:30/18:30/21:00; story text verbatim [R3]
 - **Timezone Asia/Manila** (corrects approved drafts) + **region: Vercel `sin1`, Neon Singapore** [R3-D]

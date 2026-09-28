@@ -16,7 +16,8 @@ Decided by the couple during planning rounds 1-2; recorded in
 ## Users
 
 Primary: guests of Christian Paul & Christine Jane's wedding. 63 invited
-households (capacity ≈ 136 adults + 16 children), ages roughly 20-80+, almost
+households (136 adults + 16 children named by the couple, 147/163 with the 11
+cap-defaulted singles; see context/CONTENT.md), ages roughly 20-80+, almost
 all arriving on phones via a link shared through messaging apps. Comfort spans
 smartphone-native to wary-of-apps older relatives. Their job: learn the
 essentials of the day (where, when, schedule, dress code) and confirm attendance

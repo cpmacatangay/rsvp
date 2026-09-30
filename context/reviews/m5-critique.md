@@ -79,6 +79,12 @@
 | U13 | Admin dashboard not real-time when guests respond | visibility-aware 15s polling via `router.refresh()` (server components re-render with fresh rows) + "Refresh now" + last-checked stamp — KISS trade recorded in ARCHITECTURE §9.4 (no SSE infra) |
 | U14 | Mobile-first gaps in the admin | stats 2-up on phones; stacked guest cards below `sm` (name + badge + invitation + counts + dietary + time) instead of the 7-col x-scroll table; search/chips reflow on mobile |
 
+## User review round 5 (screenshot, 2026-09-30) — FIXED in M6
+
+| # | Finding | Fix |
+|---|---|---|
+| U15 | Top of the dashboard not optimized on phones (title/actions mis-stack, refresh row wrapping, "5 adults + 1 children" grammar) | Header redesigned: title text-h2 on mobile with both actions pinned right on one compact line; "Guests coming: N guests" stat (grammar-safe); refresh row is one line (truncating caption + compact "Refresh" button) |
+
 ## Scan log
 
 - `impeccable detect app components lib`: 0 findings (run at 4.4/4.5, 4.6 gates, 4.9)

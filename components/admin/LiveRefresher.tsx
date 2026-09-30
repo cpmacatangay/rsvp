@@ -44,12 +44,17 @@ export function LiveRefresher() {
   }, [refreshNow]);
 
   return (
-    <div className="flex items-center gap-3">
-      <p className="font-body text-caption text-ink-soft" role="status">
+    <div className="flex items-center justify-between gap-3">
+      <p className="truncate font-body text-caption text-ink-soft" role="status">
         Live updates every 15s{checkedAt ? ` · last ${checkedAt}` : ''}
       </p>
-      <Button onClick={refreshNow} variant="ghost" trailingIcon={<ArrowClockwise size={20} weight="light" />}>
-        Refresh now
+      <Button
+        onClick={refreshNow}
+        variant="ghost"
+        className="shrink-0 whitespace-nowrap px-3 text-caption"
+        trailingIcon={<ArrowClockwise size={18} weight="light" />}
+      >
+        Refresh
       </Button>
     </div>
   );

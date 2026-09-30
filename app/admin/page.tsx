@@ -40,31 +40,35 @@ export default async function AdminPage() {
   const stats = [
     { label: 'Households invited', value: totals.households },
     { label: 'Responded', value: `${totals.responded} of ${totals.households}` },
-    { label: 'Accepted headcount', value: `${split.adults} adults + ${split.kids} children` },
+    {
+      label: 'Guests coming',
+      value: `${split.adults + split.kids} guest${split.adults + split.kids === 1 ? '' : 's'}`,
+    },
     { label: 'Notes to caterer', value: totals.dietaryNotes },
   ];
 
   return (
     <main className="mx-auto w-full max-w-[72rem] px-5 py-12 sm:px-6 sm:py-16">
-      <div className="flex flex-wrap items-baseline justify-between gap-4">
-        <h1 className="font-display text-h1 text-ink">RSVP dashboard</h1>
-        <div className="flex gap-3">
-          <Button href="/admin/export.csv" variant="secondary">
+      {/* mobile-first header (U15): compact title, actions pinned right on one line */}
+      <div className="flex items-center justify-between gap-3">
+        <h1 className="font-display text-h2 text-ink sm:text-h1">RSVP dashboard</h1>
+        <div className="flex shrink-0 items-center gap-1">
+          <Button href="/admin/export.csv" variant="secondary" className="h-11 whitespace-nowrap px-3 text-caption">
             Export CSV
           </Button>
           <form action={signOutAdmin}>
-            <Button type="submit" variant="ghost">
+            <Button type="submit" variant="ghost" className="h-11 whitespace-nowrap px-3 text-caption">
               Sign out
             </Button>
           </form>
         </div>
       </div>
 
-      <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+      <div className="mt-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label} className="flex flex-col gap-1">
             <p className="font-body text-caption text-ink-soft">{stat.label}</p>
-            <p className="font-display text-h3 tabular-nums text-ink">{stat.value}</p>
+            <p className="break-words font-display text-h3 tabular-nums text-ink">{stat.value}</p>
           </Card>
         ))}
       </div>

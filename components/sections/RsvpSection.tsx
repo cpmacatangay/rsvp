@@ -9,7 +9,7 @@ import { copy } from '~/lib/config';
  */
 export function RsvpSection() {
   return (
-    <Section id="rsvp" ariaLabel="RSVP" title={copy.rsvpOpenHeadline}>
+    <Section id="rsvp" ariaLabel="RSVP" title={copy.rsvpOpenHeadline} reveal={false}>
       <p className="mt-4 max-w-[65ch] font-body text-body text-ink-soft">
         Find your household on the invitation to answer. Already answered? We
         remember your latest RSVP.

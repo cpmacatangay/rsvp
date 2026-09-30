@@ -157,15 +157,10 @@
     outline-offset: 2px;
   }
 
-  /* hover feedback only where a fine pointer exists (mobile-native §1) */
-  @media (hover: hover) and (pointer: fine) {
-    a[class],
-    button {
-      transition-property: background-color, color, transform, border-color, box-shadow;
-      transition-duration: 150ms;
-      transition-timing-function: var(--ease-enter);
-    }
-  }
+  /* (M8 audit removed a redundant blanket hover-transition rule here: Tailwind
+     hover: variants already compile into the hover gate, and components declare
+     their own exact transition properties — global re-declaration risked
+     animating borders/box-shadows that should be instant.) */
 
   /* DESIGN §9: reduced motion collapses everything, always */
   @media (prefers-reduced-motion: reduce) {

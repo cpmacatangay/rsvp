@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 
+import { RevealOnce } from '~/components/ui/RevealOnce';
+
 /**
  * Section shell — DESIGN §5/§6: single column on the locked measure.
  * Rhythm ruling (2026-10-01 proportion pass): headings sit tight to their
@@ -34,10 +36,10 @@ export function Section({
       aria-label={ariaLabel}
       className={`px-5 py-16 sm:px-6 sm:py-24 ${tone === 'warm' ? 'bg-warm' : 'bg-page-ivory'} ${className}`}
     >
-      <div className={`mx-auto flex w-full max-w-3xl flex-col ${reveal ? 'reveal-on-scroll' : ''}`}>
+      <RevealOnce className={reveal ? '' : 'reveal-disabled'}>
         {title ? <h2 className="font-display text-h1 text-ink">{title}</h2> : null}
         {children}
-      </div>
+      </RevealOnce>
     </section>
   );
 }

@@ -17,3 +17,8 @@ out/
 
 # temp plan drafts (kept out of the repo)
 *.tmp.*
+
+# playwright capture artifacts (regenerable evidence)
+.playwright-mcp/
+guest-*.png
+.playwright/

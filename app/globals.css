@@ -119,32 +119,11 @@
   }
 
   /*
-   * Section reveals (DESIGN §9): scroll-linked CSS — runs OFF the main thread
-   * (Emil: CSS animations beat JS under load), needs no JS/IntersectionObserver,
-   * and degrades to fully-visible static content where unsupported or when
-   * scripts are off. Reduced motion collapses the movement to a fade.
+   * (M10) Section reveals moved to a once-only IntersectionObserver component
+   * (`RevealOnce`) — the scroll-linked CSS approach re-hid content on upward
+   * scroll and broke full-page captures. Removed here; no keyframes left.
+   * Death row kept clean on purpose: no dead keyframes in the token file.
    */
-  @keyframes reveal-rise {
-    from {
-      opacity: 0;
-      transform: translateY(16px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-
-  @supports (animation-timeline: view()) {
-    @media (prefers-reduced-motion: no-preference) {
-      .reveal-on-scroll {
-        animation: reveal-rise linear both;
-        animation-timeline: view();
-        /* completes while the section's top edge travels the first 55% of its entry */
-        animation-range: entry 0% entry 55%;
-      }
-    }
-  }
 
   ::selection {
     background-color: var(--color-primary-soft);

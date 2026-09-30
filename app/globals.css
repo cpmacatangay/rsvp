@@ -69,12 +69,34 @@
 
 @layer base {
   html {
-    /* mobile-native: kills tap-highlight flash */
+    /* mobile-native baseline */
     -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%; /* no font inflation in landscape */
     text-underline-offset: 0.16em;
     /* gentle anchor scrolling; reduced-motion override below sets it to auto */
     scroll-behavior: smooth;
+    /* the page is a scrolling document: keep pull-to-refresh welcome (skill
+       drops overscroll-behavior for this case) */
   }
+
+  /* controls respond and never select their label on long-press */
+  button,
+  a,
+  [role='button'] {
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* software keyboard never zooms into inputs (16px floor, no zoom disabling) */
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+
+  /* hover is a fine-pointer capability, never a touch artifact (the media
+     query below is where all :hover rules live — components use hover:) */
 
   body {
     background-color: var(--color-page-ivory);
@@ -96,6 +118,34 @@
     }
   }
 
+  /*
+   * Section reveals (DESIGN §9): scroll-linked CSS — runs OFF the main thread
+   * (Emil: CSS animations beat JS under load), needs no JS/IntersectionObserver,
+   * and degrades to fully-visible static content where unsupported or when
+   * scripts are off. Reduced motion collapses the movement to a fade.
+   */
+  @keyframes reveal-rise {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal-on-scroll {
+        animation: reveal-rise linear both;
+        animation-timeline: view();
+        /* completes while the section's top edge travels the first 55% of its entry */
+        animation-range: entry 0% entry 55%;
+      }
+    }
+  }
+
   ::selection {
     background-color: var(--color-primary-soft);
     color: var(--color-ink);
@@ -105,6 +155,16 @@
   :focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
+  }
+
+  /* hover feedback only where a fine pointer exists (mobile-native §1) */
+  @media (hover: hover) and (pointer: fine) {
+    a[class],
+    button {
+      transition-property: background-color, color, transform, border-color, box-shadow;
+      transition-duration: 150ms;
+      transition-timing-function: var(--ease-enter);
+    }
   }
 
   /* DESIGN §9: reduced motion collapses everything, always */

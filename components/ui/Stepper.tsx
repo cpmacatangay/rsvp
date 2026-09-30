@@ -33,7 +33,7 @@ export function Stepper({ label, value, min, max, onChange, id = `stepper-${labe
           onClick={() => step(-1)}
           aria-label={`Fewer ${label.toLowerCase()}`}
           disabled={value <= min}
-          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border-[1.5px] border-line bg-card text-ink transition-colors duration-150 ease-enter hover:bg-warm active:scale-[0.98] motion-reduce:active:scale-100 disabled:opacity-45 disabled:pointer-events-none"
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border-[1.5px] border-line bg-card text-ink transition-[background-color,transform] duration-[160ms] ease-enter hover:bg-warm active:scale-[0.98] motion-reduce:active:scale-100 disabled:opacity-45 disabled:pointer-events-none"
         >
           <Minus size={20} weight="light" />
         </button>
@@ -45,7 +45,7 @@ export function Stepper({ label, value, min, max, onChange, id = `stepper-${labe
           onClick={() => step(1)}
           aria-label={`More ${label.toLowerCase()}`}
           disabled={value >= max}
-          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border-[1.5px] border-line bg-card text-ink transition-colors duration-150 ease-enter hover:bg-warm active:scale-[0.98] motion-reduce:active:scale-100 disabled:opacity-45 disabled:pointer-events-none"
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border-[1.5px] border-line bg-card text-ink transition-[background-color,transform] duration-[160ms] ease-enter hover:bg-warm active:scale-[0.98] motion-reduce:active:scale-100 disabled:opacity-45 disabled:pointer-events-none"
         >
           <Plus size={20} weight="light" />
         </button>

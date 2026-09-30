@@ -120,6 +120,7 @@ export function RsvpCombobox({ onPick }: { onPick: (pick: HouseholdPick) => void
           aria-expanded={open}
           aria-controls={listboxId}
           aria-autocomplete="list"
+          enterKeyHint="search"
           aria-activedescendant={open && activeIndex >= 0 ? `${listboxId}-${activeIndex}` : undefined}
           autoComplete="off"
           className={controlClass(null)}
@@ -142,7 +143,13 @@ export function RsvpCombobox({ onPick }: { onPick: (pick: HouseholdPick) => void
           }}
         />
         {open ? (
-          <ul id={listboxId} role="listbox" className="absolute z-10 mt-2 w-full rounded-md border border-line bg-card shadow-card">
+          /* keyboard-initiated UI (typing): NO entrance animation — Emil
+             framework rule #1; the press feedback below is pointer-only */
+          <ul
+            id={listboxId}
+            role="listbox"
+            className="absolute z-10 mt-2 w-full overflow-hidden rounded-md border border-line bg-card shadow-card"
+          >
             {results.map((result, index) => (
               <li
                 key={result.code}
@@ -155,7 +162,7 @@ export function RsvpCombobox({ onPick }: { onPick: (pick: HouseholdPick) => void
                   pick(result);
                 }}
                 onMouseEnter={() => setActiveIndex(index)}
-                className={`flex cursor-pointer items-baseline justify-between px-4 py-3 font-body text-body text-ink ${index === activeIndex ? 'bg-primary-soft' : ''}`}
+                className={`flex cursor-pointer items-baseline justify-between px-4 py-3 font-body text-body text-ink transition-colors duration-100 ease-enter active:bg-warm ${index === activeIndex ? 'bg-primary-soft' : ''}`}
               >
                 <span>{result.label}</span>
                 <span className="ml-3 shrink-0 font-body text-caption text-ink-soft">

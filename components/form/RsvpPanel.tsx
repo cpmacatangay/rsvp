@@ -1,8 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import { useActionState, useState } from 'react';
-
+import { useActionState, useEffect, useRef, useState } from 'react';
 import { RsvpCombobox, type HouseholdPick } from '~/components/form/RsvpCombobox';
 import { Badge } from '~/components/ui/Badge';
 import { Button } from '~/components/ui/Button';
@@ -32,8 +31,14 @@ export function RsvpPanel() {
   /** true once the guest interacted: motion runs only post-hydration states */
   const [touched, setTouched] = useState(false);
   const reduce = useReducedMotion();
+  const successRef = useRef<HTMLDivElement>(null);
 
   const status = state === null ? 'idle' : state.ok ? 'success' : 'error';
+
+  /** keyboard + screen-reader focus lands on the confirmation (M7 craft) */
+  useEffect(() => {
+    if (status === 'success') successRef.current?.focus();
+  }, [status]);
 
   function pick(pick: HouseholdPick) {
     setHousehold(pick);
@@ -61,12 +66,40 @@ export function RsvpPanel() {
   const closed = status === 'error' && state?.reason === 'closed';
   const failure = status === 'error' ? state! : null;
 
+  /**
+   * Motion per Emil's framework (M7): asymmetric enter/exit, hardware-safe,
+   * custom curves from DESIGN tokens — enter ease-out 240ms, exit faster
+   * 150ms ("system responds fast"), success gets the drawer curve.
+   */
+  const enterEase = [0.16, 1, 0.3, 1] as const;
+  const exitEase = [0.7, 0, 0.84, 0] as const;
+  const successEase = [0.32, 0.72, 0, 1] as const;
+
+  /**
+   * Motion per Emil's framework (M7): asymmetric enter/exit, hardware-safe,
+   * custom curves — enter ease-out 240ms, exit faster 150ms ("system responds
+   * fast"), success gets the drawer curve; framer x/y shorthands avoided in
+   * favor of the full transform string (hardware acceleration, Emil §Perf).
+   */
   const motionSettings = reduce
-    ? { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } }
+    ? {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0, transition: { duration: 0.01 } },
+      }
     : {
-        initial: { opacity: 0, y: 12 },
-        animate: { opacity: 1, y: 0 },
-        exit: { opacity: 0, y: -8 },
+        initial: { opacity: 0, transform: 'translateY(12px)' },
+        animate: {
+          opacity: 1,
+          transform: 'translateY(0px)',
+          transition: { duration: 0.24, ease: enterEase },
+        },
+        exit: {
+          opacity: 0,
+          transform: 'translateY(-8px)',
+          /** asymmetric: the system always steps aside faster (Emil §Timing) */
+          transition: { duration: 0.15, ease: exitEase },
+        },
       };
 
   const allowance =
@@ -104,6 +137,8 @@ export function RsvpPanel() {
                 required
                 minLength={2}
                 maxLength={80}
+                autoComplete="name"
+                enterKeyHint="send"
                 className={controlClass(null)}
               />
             }
@@ -178,9 +213,11 @@ export function RsvpPanel() {
           {success ? (
             <motion.div
               key="success"
+              ref={successRef}
+              tabIndex={-1}
               {...motionSettings}
-              transition={{ duration: reduce ? 0.01 : 0.3, ease: 'easeOut' }}
-              className="flex flex-col gap-4"
+              transition={{ duration: reduce ? 0.01 : 0.3, ease: successEase }}
+              className="flex flex-col gap-4 outline-none"
               role="status"
             >
               <Badge
@@ -214,7 +251,7 @@ export function RsvpPanel() {
             <motion.div
               key="closed"
               {...motionSettings}
-              transition={{ duration: reduce ? 0.01 : 0.24, ease: 'easeOut' }}
+              transition={{ duration: reduce ? 0.01 : 0.24, ease: enterEase }}
               className="flex flex-col gap-3"
             >
               <h3 className="font-display text-h1 text-ink">{copy.closedHeadline}</h3>
@@ -225,7 +262,7 @@ export function RsvpPanel() {
               <motion.div
                 key="search"
                 {...motionSettings}
-                transition={{ duration: reduce ? 0.01 : 0.24, ease: 'easeOut' }}
+                transition={{ duration: reduce ? 0.01 : 0.24, ease: enterEase }}
                 className="flex flex-col gap-3"
               >
                 {searchContent}
@@ -237,7 +274,7 @@ export function RsvpPanel() {
             <motion.form
               key="answer"
               {...motionSettings}
-              transition={{ duration: reduce ? 0.01 : 0.24, ease: 'easeOut' }}
+              transition={{ duration: reduce ? 0.01 : 0.24, ease: enterEase }}
               action={formAction}
               className="flex flex-col gap-4"
             >

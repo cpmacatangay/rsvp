@@ -20,7 +20,7 @@ type ButtonProps = {
 };
 
 const base =
-  'inline-flex h-12 items-center justify-center gap-2 rounded-full px-5 font-body text-body font-semibold transition-colors duration-150 ease-enter active:scale-[0.98] motion-reduce:active:scale-100 disabled:opacity-45 disabled:pointer-events-none';
+  'inline-flex h-12 items-center justify-center gap-2 rounded-full px-5 font-body text-body font-semibold transition-[background-color,color,transform] duration-150 ease-enter active:scale-[0.98] motion-reduce:active:scale-100 disabled:opacity-45 disabled:pointer-events-none';
 
 const variants = {
   primary: 'bg-primary text-page-ivory hover:bg-primary-dark',

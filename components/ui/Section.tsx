@@ -13,18 +13,28 @@ type SectionProps = {
   title?: string;
   /** alternating surfaces per DESIGN §3; 'warm' for story + dress code */
   tone?: 'ivory' | 'warm';
+  /** scroll-linked entry reveal (CSS `animation-timeline: view()`, M7). */
+  reveal?: boolean;
   children: ReactNode;
   className?: string;
 };
 
-export function Section({ id, ariaLabel, title, tone = 'ivory', children, className = '' }: SectionProps) {
+export function Section({
+  id,
+  ariaLabel,
+  title,
+  tone = 'ivory',
+  reveal = true,
+  children,
+  className = '',
+}: SectionProps) {
   return (
     <section
       id={id}
       aria-label={ariaLabel}
       className={`px-5 py-16 sm:px-6 sm:py-24 ${tone === 'warm' ? 'bg-warm' : 'bg-page-ivory'} ${className}`}
     >
-      <div className="mx-auto flex w-full max-w-3xl flex-col">
+      <div className={`mx-auto flex w-full max-w-3xl flex-col ${reveal ? 'reveal-on-scroll' : ''}`}>
         {title ? <h2 className="font-display text-h1 text-ink">{title}</h2> : null}
         {children}
       </div>

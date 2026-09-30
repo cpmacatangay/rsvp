@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 
 import { Badge } from '~/components/ui/Badge';
+import { cardRecipe } from '~/components/ui/Card';
 import { statusView } from '~/lib/status';
 
 /**
@@ -111,12 +112,12 @@ export function AdminTable({ rows }: { rows: AdminTableRow[] }) {
         </p>
       ) : null}
 
-      {/* mobile-first: stacked cards below sm */}
-      <ul className="flex flex-col divide-line divide-y sm:hidden">
+      {/* mobile-first: stacked per-household cards below sm */}
+      <ul className="flex flex-col gap-3 sm:hidden">
         {filtered.map((row) => {
           const view = statusView(row.status);
           return (
-            <li key={row.householdId} className="flex flex-col gap-1 py-4">
+            <li key={row.householdId} className={`flex flex-col gap-1 p-4 ${cardRecipe}`}>
               <div className="flex items-center justify-between gap-3">
                 <p className="font-body text-body text-ink">{row.displayName}</p>
                 <Badge label={view.label} dot={view.dot} className={view.className} />

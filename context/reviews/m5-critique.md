@@ -99,6 +99,12 @@
 | U18 | Action buttons not mobile-first ("Sign out" clipped at the right edge) | On phones "Export CSV" + "Sign out" stack as full-page buttons (grid-cols-2, 48px); from `sm` they return to the single header line |
 | U19 | Spacing out of proportion (mixed mt-5/mt-6 margins) | Blanket rhythm: the dashboard is one `gap-6` column — header, stats, live row, table — so every block separates identically; AdminTable root no longer carries its own margin |
 
+## User review round 8 (2026-09-30) — FIXED in M6
+
+| # | Finding | Fix |
+|---|---|---|
+| U20 | Phone household rows read as hairline-divided list rows, disconnected from the card system | Each household is now a true card (white surface + warm border + radius 16 + soft shadow) via a shared `cardRecipe` exported from `Card.tsx` — the stat cards, form card, login card, and mobile rows all draw from ONE recipe |
+
 ## Scan log
 
 - `impeccable detect app components lib`: 0 findings (run at 4.4/4.5, 4.6 gates, 4.9)

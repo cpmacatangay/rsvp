@@ -105,6 +105,18 @@
 |---|---|---|
 | U20 | Phone household rows read as hairline-divided list rows, disconnected from the card system | Each household is now a true card (white surface + warm border + radius 16 + soft shadow) via a shared `cardRecipe` exported from `Card.tsx` — the stat cards, form card, login card, and mobile rows all draw from ONE recipe |
 
+## User review round 9 (2026-09-30) — FIXED in M6
+
+| # | Finding | Fix |
+|---|---|---|
+| U21 | Status filter pills wrapped to two rows on narrow screens | 4-column grid on phones (structurally one row; chips stretch/shrink + truncate fallback), natural pills `sm` up |
+
+## User review round 10 (2026-10-01) — proportion pass on the guest page — FIXED in M6
+
+| # | Finding | Fix |
+|---|---|---|
+| U22 | Guest-page spacing out of proportion: uniform 12px under the hero wordmark (CTA crowded), 112px hero→info gap vs 128px elsewhere, every h2 exactly 24px from its content (flat hierarchy), dress-code swatches floating as far from their sentence as the heading | Title-slot API in `Section` (heading tight `mt-4` to text, 16px; big blocks 24px), hero rhythm recrafted (8px names→date, 16px→CTA, 24px→photo) and hero bottom padding removed so ALL adjacent section gaps equal the site-wide 64px mobile / 96px desktop rhythm |
+
 ## Scan log
 
 - `impeccable detect app components lib`: 0 findings (run at 4.4/4.5, 4.6 gates, 4.9)

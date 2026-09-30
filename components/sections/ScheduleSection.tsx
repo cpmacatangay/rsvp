@@ -8,9 +8,8 @@ import { schedule } from '~/lib/config';
  */
 export function ScheduleSection() {
   return (
-    <Section id="schedule" ariaLabel="How the day runs">
-      <h2 className="font-display text-h1 text-ink">How the day runs</h2>
-      <ol className="flex flex-col">
+    <Section id="schedule" ariaLabel="How the day runs" title="How the day runs">
+      <ol className="mt-4 flex flex-col">
         {schedule.map((item, index) => (
           <li
             key={item.time}

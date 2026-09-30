@@ -14,9 +14,9 @@ export function Hero() {
   return (
     <section
       aria-label={`${couple.names} wedding`}
-      className="flex min-h-[100dvh] flex-col items-center gap-8 px-5 pb-12 pt-16 text-center sm:px-6 sm:pt-20"
+      className="flex min-h-[100dvh] flex-col items-center gap-6 px-5 pt-16 text-center sm:px-6 sm:pt-20"
     >
-      <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-3">
+      <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-2">
         <h1 className="font-display text-hero text-ink sm:text-[46px]">
           {couple.names.split(' & ')[0]} <span className="text-primary">&amp;</span>{' '}
           {couple.names.split(' & ')[1]}
@@ -25,7 +25,7 @@ export function Hero() {
           {weddingDateDisplay} <span aria-hidden="true">·</span>{' '}
           <span className="capitalize">{venue.city}</span>
         </p>
-        <Button href="#rsvp" variant="primary" className="mt-2">
+        <Button href="#rsvp" variant="primary" className="mt-4">
           RSVP
         </Button>
       </div>

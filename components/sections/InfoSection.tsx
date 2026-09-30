@@ -11,14 +11,13 @@ import { venue, weddingDate, weddingDateDisplay } from '~/lib/config';
  * side from `sm`, stacked on a phone. Map = tappable link-out (deferred
  * decision: no third-party embed iframe).
  *
- * Wedding date lives in lib/config (single source); the countdown runs to the
- * first minute of that day in Asia/Manila.
+ * Countdown counts to the START of the wedding day (midnight Asia/Manila).
+ * Wedding date lives in lib/config (single source).
  */
 export function InfoSection() {
   return (
-    <Section id="info" ariaLabel="When and where">
-      <h2 className="font-display text-h1 text-ink">The day</h2>
-      <div className="grid gap-6 sm:grid-cols-2">
+    <Section id="info" ariaLabel="When and where" title="The day">
+      <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
         <Card className="flex flex-col gap-2">
           <h3 className="font-display text-h3 text-ink">Counting down</h3>
           <CountdownCell targetMs={weddingDate.getTime()} />

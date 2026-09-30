@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 
 import { AdminTable, type AdminTableRow } from '~/components/admin/AdminTable';
 import { LiveRefresher } from '~/components/admin/LiveRefresher';
+import { BackToTop } from '~/components/ui/BackToTop';
 import { Button } from '~/components/ui/Button';
 import { Card } from '~/components/ui/Card';
 import { computeTotals, getAdminRows, headcountSplit, type AdminRow } from '~/lib/admin-data';
@@ -38,17 +39,19 @@ export default async function AdminPage() {
   const split = headcountSplit(rows);
 
   const stats = [
-    { label: 'Households invited', value: totals.households },
+    { label: 'Households invited', value: `${totals.households}` },
     { label: 'Responded', value: `${totals.responded} of ${totals.households}` },
     {
       label: 'Guests coming',
       value: `${split.adults + split.kids} guest${split.adults + split.kids === 1 ? '' : 's'}`,
+      /** couple review r9: dedicated counters inside the same card */
+      caption: `${split.adults} adult${split.adults === 1 ? '' : 's'} + ${split.kids} child${split.kids === 1 ? '' : 'ren'}`,
     },
-    { label: 'Notes to caterer', value: totals.dietaryNotes },
+    { label: 'Notes to caterer', value: `${totals.dietaryNotes}` },
   ];
 
   return (
-    <main className="mx-auto flex w-full max-w-[72rem] flex-col gap-6 px-5 py-12 sm:px-6 sm:py-16">
+    <main className="mx-auto flex w-full max-w-[88rem] flex-col gap-6 px-5 py-12 sm:px-6 sm:py-16">
       {/* header: stacked on a phone (full-page buttons, couple review r7), one row from sm */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="font-display text-h2 text-ink sm:text-h1">RSVP dashboard</h1>
@@ -77,12 +80,16 @@ export default async function AdminPage() {
           <Card key={stat.label} className="flex flex-col gap-1">
             <p className="font-body text-caption text-ink-soft">{stat.label}</p>
             <p className="break-words font-display text-h3 tabular-nums text-ink">{stat.value}</p>
+            {'caption' in stat ? (
+              <p className="font-body text-caption text-ink-soft">{stat.caption}</p>
+            ) : null}
           </Card>
         ))}
       </div>
 
       <LiveRefresher />
       <AdminTable rows={rows.map(toTableRow)} />
+      <BackToTop observeId="guest-search" />
     </main>
   );
 }

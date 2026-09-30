@@ -117,6 +117,14 @@
 |---|---|---|
 | U22 | Guest-page spacing out of proportion: uniform 12px under the hero wordmark (CTA crowded), 112px hero→info gap vs 128px elsewhere, every h2 exactly 24px from its content (flat hierarchy), dress-code swatches floating as far from their sentence as the heading | Title-slot API in `Section` (heading tight `mt-4` to text, 16px; big blocks 24px), hero rhythm recrafted (8px names→date, 16px→CTA, 24px→photo) and hero bottom padding removed so ALL adjacent section gaps equal the site-wide 64px mobile / 96px desktop rhythm |
 
+## User review round 11 (2026-10-01) — FIXED in M6 — including an ASKED recommendation
+
+| # | Finding / ask | Decision |
+|---|---|---|
+| U23 | Guests-coming card: add separate adult/child counters — "what is your recommendation?" | Implemented the recommendation: counters INSIDE the same card as a caption row ("N guests" hero number, adults/children as a soft caption beneath), rather than two new cards — one glance, one concept, keeps the 4-card grid intact. Split into separate cards rejected: it fragments the single answer to "how many are coming?" |
+| U24 | Widen desktop so "cap unconfirmed" stays on the invitation line (was wrapping under it) | Dashboard max width 72rem → **88rem** (INFO viewport + room for the widest row: name + full invitation + badge inline; table min-width unchanged so phones still scroll it, not squeeze it) |
+| U25 | Back-to-top button vs constraining scroll — "which is better?" | **Recommendation accepted: floating back-to-top on BOTH dashboards (web + mobile)**. Constraining scroll fights a paged, freely-scrolling content model and hurts discoverability; a threshold button is additive and reversible. Built per skill rules: IntersectionObserver on the search block (never a scroll listener — DTF §5.D hard ban), fade/scale in-out, safe-area-aware bottom placement, reduced-motion collapses the smooth scroll to instant |
+
 ## Scan log
 
 - `impeccable detect app components lib`: 0 findings (run at 4.4/4.5, 4.6 gates, 4.9)

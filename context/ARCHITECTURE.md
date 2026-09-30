@@ -257,8 +257,7 @@ a sub-second push alert.
 | Transport | HTTPS only | Vercel edge, HSTS default |
 | Credentials | One shared admin password | env var, constant-time compare |
 | Sessions | Signed cookie, HttpOnly, 24h | `SESSION_SECRET` + `jose` HMAC |
-| Guest enumeration | Masked lookups + rate limit + honeypot | `429` responses, silent discard on honeypot |
-| Admin routes | Session guard + `noindex` + robots disallow | `/admin/*`, `/admin/export.csv` |
+| Guest enumeration | Full-name lookups (couple decision) rate-limited per IP + honeypot; no bulk payloads | `429` responses, silent discard on honeypot || Admin routes | Session guard + `noindex` + robots disallow | `/admin/*`, `/admin/export.csv` |
 | Secrets | Environment variables only | never committed; `.env.example` documents shape |
 | Validation | zod at boundary | every action/handler, no exceptions |
 | Headers | CSP (self + fonts/images allowlist), X-Frame-Options DENY | edge middleware |

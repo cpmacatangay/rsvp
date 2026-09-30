@@ -118,11 +118,15 @@ No time for a second tool — the fewer clicks the better.
 ### 6.2 Household Lookup
 - `households` seeded from the couple's list (name, max adults, max children),
   each with an opaque random public code (not guessable).
-- Type-ahead queries the server with ≥ 2 characters, rate-limited, returning
-  masked matches (first name + surname initial, e.g. "Anna M."). Selecting a
-  match reveals that household only: pre-filled name(s) and allowed counts.
-- Guests never see the full guest list at once; capitalisation does not matter
-  in search.
+- Type-ahead queries the server with ≥ 2 characters, rate-limited. PRIVATE
+  NOMENCLATURE UPDATE (couple decision, 2026-09-30): matches display the FULL
+  household name (no masking) — the couple judged the invitation-list
+  privacy trade acceptable for a family wedding; rate limiting + honeypot
+  remain the bot defenses. Selecting a match reveals that household:
+  pre-filled name(s), allowed counts, and any previously recorded response.
+- Sorted for relevance (prefix > word-prefix > contains); the full guest
+  list is never shipped as a bulk payload; search runs against a server-side
+  memory cache (60s TTL) with RAM ranking instead of per-keystroke SQL.
 
 ### 6.3 RSVP Submission
 - Fields: attending (`accepted` / `declined`), if accepted: guests coming

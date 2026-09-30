@@ -83,7 +83,7 @@ extracted into a shared helper/service.** Count resets after extraction.
 |---|---|---|
 | Deadline gating | page render + action + admin | `lib/deadline.ts` |
 | Cap clamp | form + action | `lib/rsvp.ts` |
-| Name masking | lookup + admin | `lib/mask.ts` |
+| Name search ranking | lookup | `lib/search-index.ts` |
 | Status → label/color | admin + confirmation | `lib/status.ts` |
 
 ### 3.4 The Client/Server Exception

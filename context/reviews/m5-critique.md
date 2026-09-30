@@ -85,6 +85,13 @@
 |---|---|---|
 | U15 | Top of the dashboard not optimized on phones (title/actions mis-stack, refresh row wrapping, "5 adults + 1 children" grammar) | Header redesigned: title text-h2 on mobile with both actions pinned right on one compact line; "Guests coming: N guests" stat (grammar-safe); refresh row is one line (truncating caption + compact "Refresh" button) |
 
+## User review round 6 (2026-09-30) — all FIXED in M6
+
+| # | Finding | Fix |
+|---|---|---|
+| U16 | Guest search performance | Households list cached in server memory (60s TTL, re-seeded rarely) + pure RAM ranker `lib/search-index.ts` (prefix > word-prefix > contains, length, alphabetical — 6 new unit tests). Per keystroke the server does zero household SQL; one small live query joins the ≤8 finalists' recorded RSVPs for the pre-fill |
+| U17 | Masked last names ("Evelyn C.") | Full names shown in type-ahead + selection, per the couple's explicit call; PRD §6.2 + ARCHITECTURE §10 privacy rows updated (rate limits + honeypot unchanged); `lib/mask.ts` + its tests removed (unused code purged per RULES §5.6) |
+
 ## Scan log
 
 - `impeccable detect app components lib`: 0 findings (run at 4.4/4.5, 4.6 gates, 4.9)

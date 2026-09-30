@@ -1,17 +1,19 @@
 import 'server-only';
 
-import { ilike, sql } from 'drizzle-orm';
 import { eq } from 'drizzle-orm';
 
 import { getDb } from '~/db';
 import { households, rsvps } from '~/db/schema';
+import { rankMatches, type CachedHousehold } from '~/lib/search-index';
 import { clampCounts, type SubmitCounts } from '~/lib/rsvp';
-import { maskName } from '~/lib/mask';
 
 /**
  * Submit orchestration service (ARCH §3.2): domain steps, db injected by
  * callers via getDb(); the server action stays thin (RULES §6.1/6.2).
  * Result reasons match lib/validation `actionReasons`.
+ *
+ * Perf model (U16): search ranks the in-memory household cache (zero SQL
+ * per keystroke) and joins each finalist's recorded RSVP in ONE small query.
  */
 
 export type HouseholdSummary = {
@@ -127,55 +129,86 @@ export async function recordRsvp(input: SubmitInput, dbPick = getDb): Promise<Re
   };
 }
 
-/** Masked type-ahead candidates (PRD §6.2: never the full guest list). */
-export async function searchHouseholds(query: string): Promise<
-  Array<{
-    code: string;
-    label: string;
-    maxAdults: number;
-    maxKids: number;
-    previous: {
-      status: 'accepted' | 'declined';
-      adults: number;
-      kids: number;
-      dietary: string | null;
-      respondedAt: string;
-    } | null;
-  }>
-> {
+export type SearchHit = {
+  code: string;
+  label: string;
+  maxAdults: number;
+  maxKids: number;
+  previous: {
+    status: 'accepted' | 'declined';
+    adults: number;
+    kids: number;
+    dietary: string | null;
+    respondedAt: string;
+  } | null;
+};
+
+const TTL_MS = 60_000;
+
+let cache: { rows: CachedHousehold[]; loadedAt: number } | null = null;
+
+export function invalidateHouseholdCache() {
+  cache = null;
+}
+
+async function loadRows(): Promise<CachedHousehold[]> {
   const db = getDb();
-  const escaped = query.replace(/[%_\\]/g, '\\$&');
-  const rows = await db
+  return db
     .select({
+      id: households.id,
       code: households.code,
       displayName: households.displayName,
+      searchName: households.searchName,
       maxAdults: households.maxAdults,
       maxKids: households.maxKids,
-      prevStatus: rsvps.status,
-      prevAdults: rsvps.adultsAttending,
-      prevKids: rsvps.kidsAttending,
-      prevDietary: rsvps.dietaryNotes,
-      prevRespondedAt: rsvps.updatedAt,
     })
-    .from(households)
-    .leftJoin(rsvps, eq(rsvps.householdId, households.id))
-    .where(ilike(households.searchName, sql`'%' || ${escaped} || '%'`))
-    .orderBy(sql`length(${households.searchName}) asc, ${households.searchName} asc`)
-    .limit(8);
-  return rows.map((row) => ({
-    code: row.code,
-    label: maskName(row.displayName),
-    maxAdults: row.maxAdults,
-    maxKids: row.maxKids,
-    previous:
-      row.prevStatus !== null && row.prevStatus !== undefined
-        ? {
-            status: row.prevStatus,
-            adults: row.prevAdults ?? 0,
-            kids: row.prevKids ?? 0,
-            dietary: row.prevDietary,
-            respondedAt: (row.prevRespondedAt ?? new Date()).toISOString(),
-          }
-        : null,
-  }));
+    .from(households);
+}
+
+async function cachedRows(): Promise<CachedHousehold[]> {
+  const now = Date.now();
+  if (cache && now - cache.loadedAt < TTL_MS) return cache.rows;
+  const rows = await loadRows();
+  cache = { rows, loadedAt: now };
+  return rows;
+}
+
+/** Full names (couple decision, 2026-09-30: masking removed). */
+export async function searchHouseholds(query: string): Promise<SearchHit[]> {
+  const rows = rankMatches(await cachedRows(), query);
+  if (rows.length === 0) return [];
+
+  // live join: recorded responses change at any moment, so they are never cached
+  const db = getDb();
+  const prevRows = await db
+    .select({
+      householdId: rsvps.householdId,
+      status: rsvps.status,
+      adults: rsvps.adultsAttending,
+      kids: rsvps.kidsAttending,
+      dietary: rsvps.dietaryNotes,
+      updatedAt: rsvps.updatedAt,
+    })
+    .from(rsvps);
+  const prevByHouseholdId = new Map(prevRows.map((p) => [p.householdId, p]));
+
+  return rows.map((row) => {
+    const prev = prevByHouseholdId.get(row.id);
+    return {
+      code: row.code,
+      label: row.displayName,
+      maxAdults: row.maxAdults,
+      maxKids: row.maxKids,
+      previous:
+        prev && prev.status
+          ? {
+              status: prev.status,
+              adults: prev.adults ?? 0,
+              kids: prev.kids ?? 0,
+              dietary: prev.dietary,
+              respondedAt: (prev.updatedAt ?? new Date()).toISOString(),
+            }
+          : null,
+    } satisfies SearchHit;
+  });
 }

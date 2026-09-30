@@ -129,7 +129,19 @@ export async function recordRsvp(input: SubmitInput, dbPick = getDb): Promise<Re
 
 /** Masked type-ahead candidates (PRD §6.2: never the full guest list). */
 export async function searchHouseholds(query: string): Promise<
-  Array<{ code: string; label: string; maxAdults: number; maxKids: number }>
+  Array<{
+    code: string;
+    label: string;
+    maxAdults: number;
+    maxKids: number;
+    previous: {
+      status: 'accepted' | 'declined';
+      adults: number;
+      kids: number;
+      dietary: string | null;
+      respondedAt: string;
+    } | null;
+  }>
 > {
   const db = getDb();
   const escaped = query.replace(/[%_\\]/g, '\\$&');
@@ -139,8 +151,14 @@ export async function searchHouseholds(query: string): Promise<
       displayName: households.displayName,
       maxAdults: households.maxAdults,
       maxKids: households.maxKids,
+      prevStatus: rsvps.status,
+      prevAdults: rsvps.adultsAttending,
+      prevKids: rsvps.kidsAttending,
+      prevDietary: rsvps.dietaryNotes,
+      prevRespondedAt: rsvps.updatedAt,
     })
     .from(households)
+    .leftJoin(rsvps, eq(rsvps.householdId, households.id))
     .where(ilike(households.searchName, sql`'%' || ${escaped} || '%'`))
     .orderBy(sql`length(${households.searchName}) asc, ${households.searchName} asc`)
     .limit(8);
@@ -149,5 +167,15 @@ export async function searchHouseholds(query: string): Promise<
     label: maskName(row.displayName),
     maxAdults: row.maxAdults,
     maxKids: row.maxKids,
+    previous:
+      row.prevStatus !== null && row.prevStatus !== undefined
+        ? {
+            status: row.prevStatus,
+            adults: row.prevAdults ?? 0,
+            kids: row.prevKids ?? 0,
+            dietary: row.prevDietary,
+            respondedAt: (row.prevRespondedAt ?? new Date()).toISOString(),
+          }
+        : null,
   }));
 }

@@ -16,14 +16,16 @@ export type HouseholdPick = {
   label: string;
   maxAdults: number;
   maxKids: number;
+  previous: {
+    status: 'accepted' | 'declined';
+    adults: number;
+    kids: number;
+    dietary: string | null;
+    respondedAt: string;
+  } | null;
 };
 
-type LookupResult = {
-  code: string;
-  label: string;
-  maxAdults: number;
-  maxKids: number;
-};
+type LookupResult = HouseholdPick;
 
 function allowanceText(maxAdults: number, maxKids: number): string {
   const adults = `${maxAdults} adult${maxAdults === 1 ? '' : 's'}`;

@@ -64,6 +64,13 @@
 | U8 | "Household" column header | Renamed to "Name" |
 | U9 | Search swept dietary notes + status words; label said "Search guests" | Search is name-only (single lowercase substring test — the fastest approach at 63 rows); placeholder now "Search by name" |
 
+## User review round 3 (2026-09-30) — all FIXED in M6
+
+| # | Finding | Fix |
+|---|---|---|
+| U10 | Returning guests saw a blank form instead of their previous answer | Lookup now LEFT-JOINs the household's recorded response; picking a household pre-fills attending/counts/dietary (clamped to current caps) and shows "Your earlier RSVP on {date}: …" |
+| U11 | RSVP form inside a card felt boxed | Card removed: the flow renders free on the section surface, headline moved into the section (matching sibling sections), state transitions unchanged |
+
 ## Scan log
 
 - `impeccable detect app components lib`: 0 findings (run at 4.4/4.5, 4.6 gates, 4.9)

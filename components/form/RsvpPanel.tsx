@@ -6,7 +6,6 @@ import { useActionState, useState } from 'react';
 import { RsvpCombobox, type HouseholdPick } from '~/components/form/RsvpCombobox';
 import { Badge } from '~/components/ui/Badge';
 import { Button } from '~/components/ui/Button';
-import { DoubleBezel } from '~/components/ui/Card';
 import { Field, controlClass } from '~/components/ui/Field';
 import { Stepper } from '~/components/ui/Stepper';
 import { statusView } from '~/lib/status';
@@ -38,9 +37,16 @@ export function RsvpPanel() {
 
   function pick(pick: HouseholdPick) {
     setHousehold(pick);
-    setAdults(1);
-    setKids(0);
-    setAttend('');
+    if (pick.previous) {
+      // returning guest (US6): pre-fill their recorded answer
+      setAttend(pick.previous.status);
+      setAdults(Math.min(pick.previous.adults, pick.maxAdults));
+      setKids(Math.min(pick.previous.kids, pick.maxKids));
+    } else {
+      setAttend('');
+      setAdults(1);
+      setKids(0);
+    }
     setTouched(true);
     setPhase('answer');
   }
@@ -72,19 +78,16 @@ export function RsvpPanel() {
             : ''
         }.`;
 
-  /** single-authored search content: plain on first paint (hydration-safe), motion after */
+  /** single-authored search content: plain on first paint (hydration-safe), motion after.
+   * Headline + lead moved to RsvpSection (the couple's no-card pass, 2026-09-30). */
   const searchContent = (
     <>
-      <h3 className="font-display text-h2 text-ink">{copy.rsvpOpenHeadline}</h3>
-      <p className="font-body text-body text-ink-soft">
-        Find your household on the invitation to answer.
-      </p>
       <RsvpCombobox onPick={pick} />
     </>
   );
 
   return (
-    <DoubleBezel>
+    <div className="flex flex-col gap-5">
       {/* No-JS twin (PRD §6.3): typed name, native number inputs, same action. */}
       <noscript>
         <form action={formAction} className="flex flex-col gap-4">
@@ -250,6 +253,24 @@ export function RsvpPanel() {
                 </Button>
               </div>
               <p className="font-body text-caption text-ink-soft">{allowance}</p>
+              {household?.previous ? (
+                <p className="font-body text-caption text-ink-soft" role="status">
+                  Your earlier RSVP on{' '}
+                  {new Intl.DateTimeFormat('en-PH', {
+                    dateStyle: 'medium',
+                    timeZone: 'Asia/Manila',
+                  }).format(new Date(household.previous.respondedAt))}
+                  : {household.previous.status === 'accepted' ? copy.accept.toLowerCase() : copy.decline.toLowerCase()}
+                  {household.previous.status === 'accepted'
+                    ? ` with ${household.previous.adults} adult${household.previous.adults === 1 ? '' : 's'}${
+                        household.previous.kids > 0
+                          ? ` ${household.previous.kids} child${household.previous.kids === 1 ? '' : 'ren'}`
+                          : ''
+                      }`
+                    : ''}
+                  . We kept it below; sending again updates it.
+                </p>
+              ) : null}
 
               <fieldset className="grid grid-cols-2 gap-3">
                 <legend className="sr-only">Will you come?</legend>
@@ -329,6 +350,6 @@ export function RsvpPanel() {
           )}
         </AnimatePresence>
       </div>
-    </DoubleBezel>
+    </div>
   );
 }

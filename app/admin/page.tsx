@@ -48,23 +48,31 @@ export default async function AdminPage() {
   ];
 
   return (
-    <main className="mx-auto w-full max-w-[72rem] px-5 py-12 sm:px-6 sm:py-16">
-      {/* mobile-first header (U15): compact title, actions pinned right on one line */}
-      <div className="flex items-center justify-between gap-3">
+    <main className="mx-auto flex w-full max-w-[72rem] flex-col gap-6 px-5 py-12 sm:px-6 sm:py-16">
+      {/* header: stacked on a phone (full-page buttons, couple review r7), one row from sm */}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="font-display text-h2 text-ink sm:text-h1">RSVP dashboard</h1>
-        <div className="flex shrink-0 items-center gap-1">
-          <Button href="/admin/export.csv" variant="secondary" className="h-11 whitespace-nowrap px-3 text-caption">
+        <div className="grid grid-cols-2 gap-3 sm:flex sm:items-center sm:gap-3">
+          <Button
+            href="/admin/export.csv"
+            variant="secondary"
+            className="h-12 w-full whitespace-nowrap px-4 text-caption sm:h-11 sm:w-auto sm:text-caption"
+          >
             Export CSV
           </Button>
-          <form action={signOutAdmin}>
-            <Button type="submit" variant="ghost" className="h-11 whitespace-nowrap px-3 text-caption">
+          <form action={signOutAdmin} className="contents">
+            <Button
+              type="submit"
+              variant="ghost"
+              className="h-12 w-full whitespace-nowrap px-4 text-caption sm:h-11 sm:w-auto sm:text-caption"
+            >
               Sign out
             </Button>
           </form>
         </div>
       </div>
 
-      <div className="mt-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label} className="flex flex-col gap-1">
             <p className="font-body text-caption text-ink-soft">{stat.label}</p>

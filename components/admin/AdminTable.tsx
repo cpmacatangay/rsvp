@@ -68,7 +68,7 @@ export function AdminTable({ rows }: { rows: AdminTableRow[] }) {
   const showCounts = query.trim().length > 0 || statusFilter !== 'all';
 
   return (
-    <div className="mt-6 flex flex-col gap-3">
+    <div className="flex flex-col gap-3">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div className="flex flex-col gap-1 lg:max-w-sm lg:flex-1">
           <label htmlFor="guest-search" className="font-body text-caption text-ink-soft">

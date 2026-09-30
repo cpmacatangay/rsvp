@@ -92,6 +92,13 @@
 | U16 | Guest search performance | Households list cached in server memory (60s TTL, re-seeded rarely) + pure RAM ranker `lib/search-index.ts` (prefix > word-prefix > contains, length, alphabetical — 6 new unit tests). Per keystroke the server does zero household SQL; one small live query joins the ≤8 finalists' recorded RSVPs for the pre-fill |
 | U17 | Masked last names ("Evelyn C.") | Full names shown in type-ahead + selection, per the couple's explicit call; PRD §6.2 + ARCHITECTURE §10 privacy rows updated (rate limits + honeypot unchanged); `lib/mask.ts` + its tests removed (unused code purged per RULES §5.6) |
 
+## User review round 7 (2026-09-30) — FIXED in M6
+
+| # | Finding | Fix |
+|---|---|---|
+| U18 | Action buttons not mobile-first ("Sign out" clipped at the right edge) | On phones "Export CSV" + "Sign out" stack as full-page buttons (grid-cols-2, 48px); from `sm` they return to the single header line |
+| U19 | Spacing out of proportion (mixed mt-5/mt-6 margins) | Blanket rhythm: the dashboard is one `gap-6` column — header, stats, live row, table — so every block separates identically; AdminTable root no longer carries its own margin |
+
 ## Scan log
 
 - `impeccable detect app components lib`: 0 findings (run at 4.4/4.5, 4.6 gates, 4.9)

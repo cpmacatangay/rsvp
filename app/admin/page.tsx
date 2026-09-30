@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
 import { AdminTable, type AdminTableRow } from '~/components/admin/AdminTable';
+import { LiveRefresher } from '~/components/admin/LiveRefresher';
 import { Button } from '~/components/ui/Button';
 import { Card } from '~/components/ui/Card';
 import { computeTotals, getAdminRows, headcountSplit, type AdminRow } from '~/lib/admin-data';
@@ -59,7 +60,7 @@ export default async function AdminPage() {
         </div>
       </div>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label} className="flex flex-col gap-1">
             <p className="font-body text-caption text-ink-soft">{stat.label}</p>
@@ -68,6 +69,7 @@ export default async function AdminPage() {
         ))}
       </div>
 
+      <LiveRefresher />
       <AdminTable rows={rows.map(toTableRow)} />
     </main>
   );

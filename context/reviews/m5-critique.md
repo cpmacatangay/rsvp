@@ -71,6 +71,14 @@
 | U10 | Returning guests saw a blank form instead of their previous answer | Lookup now LEFT-JOINs the household's recorded response; picking a household pre-fills attending/counts/dietary (clamped to current caps) and shows "Your earlier RSVP on {date}: …" |
 | U11 | RSVP form inside a card felt boxed | Card removed: the flow renders free on the section surface, headline moved into the section (matching sibling sections), state transitions unchanged |
 
+## User review round 4 (2026-09-30) — all FIXED in M6
+
+| # | Finding | Fix |
+|---|---|---|
+| U12 | Hero photo still boxed in the wrapper | Double-bezel dropped; photograph free on ivory with radius + warm shadow only |
+| U13 | Admin dashboard not real-time when guests respond | visibility-aware 15s polling via `router.refresh()` (server components re-render with fresh rows) + "Refresh now" + last-checked stamp — KISS trade recorded in ARCHITECTURE §9.4 (no SSE infra) |
+| U14 | Mobile-first gaps in the admin | stats 2-up on phones; stacked guest cards below `sm` (name + badge + invitation + counts + dietary + time) instead of the 7-col x-scroll table; search/chips reflow on mobile |
+
 ## Scan log
 
 - `impeccable detect app components lib`: 0 findings (run at 4.4/4.5, 4.6 gates, 4.9)

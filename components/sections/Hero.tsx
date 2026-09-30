@@ -1,13 +1,14 @@
 import Image from 'next/image';
 import heroPhoto from '~/assets/hero/cpcj.jpg';
 import { Button } from '~/components/ui/Button';
-import { DoubleBezel } from '~/components/ui/Card';
 import { couple, venue, weddingDateDisplay } from '~/lib/config';
 
 /**
  * Hero — taste rules: stack ≤ 4 elements (names, one subtext line, CTA, photo),
  * min-h-[100dvh] (never h-screen), top padding under the pt-24 cap. The photo
- * is the couple's own (CONTENT.md §3); alt describes the real scene.
+ * is the couple's own (CONTENT.md §3); the couple's review (2026-09-30) removed
+ * the card wrapper: the photograph sits free on the ivory surface, framed only
+ * by its radius and the warm shadow.
  */
 export function Hero() {
   return (
@@ -30,16 +31,14 @@ export function Hero() {
       </div>
 
       <div className="w-full max-w-3xl">
-        <DoubleBezel className="overflow-hidden">
-          <Image
-            src={heroPhoto}
-            alt="Christian and Christine smiling together at a cozy hotpot restaurant, steam rising from the table in front of them"
-            className="h-auto w-full rounded-sm object-cover"
-            sizes="(max-width: 768px) 100vw, 768px"
-            priority
-            quality={85}
-          />
-        </DoubleBezel>
+        <Image
+          src={heroPhoto}
+          alt="Christian and Christine smiling together at a cozy hotpot restaurant, steam rising from the table in front of them"
+          className="h-auto w-full rounded-lg object-cover shadow-card"
+          sizes="(max-width: 768px) 100vw, 768px"
+          priority
+          quality={85}
+        />
       </div>
     </section>
   );

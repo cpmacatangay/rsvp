@@ -240,6 +240,14 @@ SameSite=Lax, 24h expiry, constant-time password compare. /admin pages and
 ### 9.3 Scheduled Job
 None (see §4.4) — deadline is derived, not enforced by cron.
 
+### 9.4 Dashboard Freshness
+The admin dashboard re-renders live without dedicated push infra: a
+visibility-aware 15s polling loop (`router.refresh()`, only when the tab is
+visible) plus a manual "Refresh now" button. At wedding-scale traffic a
+database round trip every 15s per open admin tab is cheap; SSE/websockets
+would add infra for no observed need — revisit only if the couple ever wants
+a sub-second push alert.
+
 ---
 
 ## 10. Security Boundaries

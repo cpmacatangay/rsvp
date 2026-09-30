@@ -86,14 +86,19 @@ export function AdminTable({ rows }: { rows: AdminTableRow[] }) {
           />
         </div>
 
-        <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Filter by status">
+        {/* U21: grid = structurally one row on phones; chips stretch/shrink with the device */}
+        <div
+          className="grid grid-cols-4 gap-1.5 sm:flex sm:flex-wrap sm:items-center sm:justify-start sm:gap-2"
+          role="group"
+          aria-label="Filter by status"
+        >
           {STATUS_CHIPS.map((chip) => (
             <button
               key={chip.key}
               type="button"
               onClick={() => setStatusFilter(chip.key)}
               aria-pressed={statusFilter === chip.key}
-              className={`h-11 rounded-full border-[1.5px] px-4 font-body text-caption transition-colors duration-150 ease-enter ${
+              className={`h-11 w-full min-w-0 truncate rounded-full border-[1.5px] px-1 text-center font-body text-caption transition-colors duration-150 ease-enter sm:w-auto sm:px-4 ${
                 statusFilter === chip.key
                   ? 'border-primary bg-primary text-page-ivory'
                   : 'border-line bg-card text-ink-soft hover:bg-warm'

@@ -122,7 +122,6 @@ export function RsvpCombobox({ onPick }: { onPick: (pick: HouseholdPick) => void
           aria-autocomplete="list"
           aria-activedescendant={open && activeIndex >= 0 ? `${listboxId}-${activeIndex}` : undefined}
           autoComplete="off"
-          placeholder="e.g. Clarisse Calamiong"
           className={controlClass(null)}
           value={query}
           onChange={(event) => setQuery(event.target.value)}

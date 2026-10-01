@@ -244,5 +244,6 @@ One household ⇒ zero or one RSVP. Full detail in `SCHEMA.md`.
 
 All page content facts (couple, venue, schedule, story, dress code, guest
 list, photos, locale) are recorded verbatim in `CONTENT.md` with a per-item
-status (CONFIRMED / RECOMMENDATION / OPEN). Ship blockers remain: ceremony
-time, RSVP deadline ({{TBD_*}} slots); wedding date landed 2028-08-06.
+status. The two temporal facts (ceremony time 14:00, RSVP deadline
+2028-07-10) are CONFIRMED but provisional — the couple may change them;
+both live in env/config so a change is one edit + redeploy.

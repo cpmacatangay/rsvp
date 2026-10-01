@@ -9,12 +9,12 @@
 | Item | Value | Status |
 |---|---|---|
 | Couple | Christian Paul & Christine Jane | CONFIRMED |
-| Wedding date | Sunday, August 6, 2028 (Asia/Manila) | CONFIRMED for display (couple said "for now": reconfirm at M4 copy review) |
-| Ceremony time | — | OPEN → {{TBD_CEREMONY_TIME}} (ship-gated) |
+| Wedding date | Sunday, August 6, 2028 (Asia/Manila) | CONFIRMED |
+| Ceremony time | 14:00 (Asia/Manila) | CONFIRMED (provisional: couple noted it might change; env/config only, no code change needed) |
 | Venue | Minor Basilica and National Shrine of Our Lady of Peñafrancia | CONFIRMED |
 | City | Naga City, Camarines Sur, Philippines | CONFIRMED (from the couple's own maps link) |
 | Maps link | https://maps.app.goo.gl/axEuRdLZbETTy5UXA | CONFIRMED |
-| RSVP deadline | — | OPEN → `RSVP_DEADLINE_DATE` (ship-gated) |
+| RSVP deadline | July 10, 2028, end-of-day Asia/Manila | CONFIRMED (provisional: couple noted it might change; lives in `RSVP_DEADLINE_DATE` env only) |
 | Deadline timezone | Asia/Manila | CONFIRMED |
 
 ## 2. Guest list (seed source — 63 households)

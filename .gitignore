@@ -22,3 +22,5 @@ out/
 .playwright-mcp/
 guest-*.png
 .playwright/
+.vercel
+.env*

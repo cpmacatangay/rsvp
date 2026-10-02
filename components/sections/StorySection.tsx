@@ -10,7 +10,7 @@ import { story } from '~/lib/config';
 export function StorySection() {
   return (
     <Section id="story" ariaLabel="Our story" tone="warm" title="Our story">
-      <p className="mt-4 max-w-[65ch] font-display text-h3 leading-relaxed text-ink">
+      <p className="mt-4 max-w-[65ch] font-display text-h3 font-normal text-ink">
         {story}
       </p>
     </Section>

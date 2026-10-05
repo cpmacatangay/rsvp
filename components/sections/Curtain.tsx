@@ -8,18 +8,24 @@ import { couple, invitation } from '~/lib/config';
  * The invitation curtain (v1.1): first thing every visitor sees, ONCE per
  * browser session (sessionStorage — mid-party address checks skip it).
  *
- * Choreography (MOTION dial 7, all transform/opacity, token curves):
- *   tap → monogram + hint fade away (200ms) → two panels sweep outward
- *   (900ms, drawer curve) → unmount; focus then lands on the hero title.
+ * Choreography (MOTION dial 7, transform/opacity only, token curves):
+ *   tap → crest + hint fade (200ms) AND the two panels sweep outward
+ *   (900ms, drawer curve) run concurrently → the overlay unmounts at
+ *   950ms and focus lands on the hero title. The overlay never paints an
+ *   opaque backdrop: it is transparent except the panels, so the page
+ *   itself is what the parting panels reveal.
  *
  * Guarantees:
  * - SSR: rendered in the server HTML (true first paint); scroll locked only
- *   while mounted (style tag — no JS class juggling).
- * - noscript: this component is client-mounted, so guests without JS never
- *   see it; they land straight on the full page.
+ *   while closed (style tag — no JS class juggling).
+ * - noscript: client-mounted, so guests without JS never see it.
  * - reduced-motion: the global override collapses transitions to ~0 — the
  *   tap simply dismisses (an action, not decoration).
  * - sessionStorage failures degrade to "shows again", never to a broken lock.
+ * - regression note (2026-10-06): an ivory "peek-through" layer once sat
+ *   absolutely over the viewport and, with the unmount timer originally
+ *   missing, kept the hero blocked until refresh. Both were removed; the
+ *   panels are the only painted surface and the overlay always unmounts.
  */
 
 const SEEN_KEY = 'curtain-opened-v1';
@@ -29,8 +35,8 @@ export function Curtain() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // decide AFTER hydration so server HTML always contains the curtain, but
-    // a mid-session client navigation (SPA refresh flow) skips it
+    // decide AFTER hydration so the server HTML always contains the curtain,
+    // but a mid-session revisit skips it
     let seen = false;
     try {
       seen = window.sessionStorage.getItem(SEEN_KEY) === '1';
@@ -57,8 +63,10 @@ export function Curtain() {
     } catch {
       // write failed → the curtain simply shows again next visit
     }
-    // focus the hero heading after the sweep (keyboard users land in content)
+    // sweep budget: 900ms panels + margin. Then the overlay unmounts for
+    // good and keyboard/AT focus moves into the revealed content.
     window.setTimeout(() => {
+      setPhase('gone');
       document.getElementById('hero-title')?.focus();
     }, 950);
   }
@@ -75,14 +83,6 @@ export function Curtain() {
       className={`fixed inset-0 z-50 ${opening ? 'pointer-events-none' : ''}`}
     >
       {phase === 'closed' ? <style>{'body{overflow:hidden!important}'}</style> : null}
-
-      {/* the revealed page "peeks through" as panels part */}
-      <div
-        aria-hidden="true"
-        className={`absolute inset-0 bg-page-ivory transition-opacity duration-700 ease-enter ${
-          opening ? 'opacity-100' : 'opacity-0'
-        }`}
-      />
 
       {/* LEFT panel (the keyboard stop) */}
       <button

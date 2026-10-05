@@ -46,8 +46,9 @@ export function RevealOnce({
   return (
     <div
       ref={ref}
-      className={`mx-auto flex w-full max-w-3xl flex-col transition-[opacity,transform] duration-300 ease-enter ${
-        revealed ? 'opacity-100' : 'translate-y-4 opacity-0'
+      data-revealed={revealed || undefined}
+      className={`mx-auto flex w-full max-w-3xl flex-col transition-[opacity,transform] duration-[450ms] ease-enter ${
+        revealed ? 'opacity-100' : 'translate-y-6 opacity-0'
       } ${className}`}
     >
       {children}

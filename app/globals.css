@@ -118,6 +118,21 @@
     }
   }
 
+  /* curtain hint: gentle opacity pulse (opacity only) */
+  @keyframes curtain-hint-pulse {
+    0%,
+    100% {
+      opacity: 0.55;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  .curtain-hint-pulse {
+    animation: curtain-hint-pulse 2.2s var(--ease-enter) infinite;
+  }
+
   /*
    * (M10) Section reveals moved to a once-only IntersectionObserver component
    * (`RevealOnce`) — the scroll-linked CSS approach re-hid content on upward

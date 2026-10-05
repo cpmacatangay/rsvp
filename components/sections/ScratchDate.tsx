@@ -7,7 +7,7 @@ import { invitation } from '~/lib/config';
 /**
  * Scratch-the-date (v1.1): three foil circles (MONTH · DAY · YEAR) the guest
  * erases with a pointer stroke; each circle pops when ≥55% erased; the third
- * triggers a one-time subtle confetti + the celebration line.
+ * reveals the celebration line behind a one-time subtle confetti burst.
  *
  * Mechanics, honestly:
  * - Each circle = a real <span> with the value + an overlay <canvas> (foil).
@@ -21,6 +21,12 @@ import { invitation } from '~/lib/config';
  *   value spans are separate (always visible when no canvas covers them).
  * - Reduced motion: global override kills the pop/confetti transforms;
  *   confetti is additionally skipped as pure decoration.
+ *
+ * Regression note (2026-10-06): the confetti canvas used to gate visibility
+ * on `celebrate && !allDone` (always hidden exactly when firing) and the
+ * burst trigger lived inside a setState updater. Visibility is now simply
+ * `celebrate`, and a single-fire effect keyed on `allDone` starts the burst
+ * after the canvas is committed visible.
  */
 
 type CircleKey = 'month' | 'day' | 'year';
@@ -72,18 +78,16 @@ export function ScratchDate() {
     });
   }, []);
 
-  const checkAllDone = useCallback(
-    (nowRevealed: Record<CircleKey, boolean>) => {
-      if (!nowRevealed.month || !nowRevealed.day || !nowRevealed.year) return;
-      if (reduced.current) {
-        setCelebrate(true); // text only, no confetti burst
-        return;
-      }
-      setCelebrate(true);
+  const allDone = revealed.month && revealed.day && revealed.year;
+
+  // single-fire celebration: runs AFTER the canvas is committed visible
+  useEffect(() => {
+    if (!allDone || celebrate) return;
+    setCelebrate(true);
+    if (!reduced.current) {
       runConfetti(confettiRef.current);
-    },
-    [],
-  );
+    }
+  }, [allDone, celebrate]);
 
   const scratchAt = useCallback((key: CircleKey, x: number, y: number) => {
     const canvas = canvasRefs.current[key];
@@ -100,35 +104,27 @@ export function ScratchDate() {
     ctx.stroke();
   }, []);
 
-  const estimateAndMaybeReveal = useCallback(
-    (key: CircleKey) => {
-      const canvas = canvasRefs.current[key];
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
-      const dpr = canvas.width / SIZE;
-      const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-      let cleared = 0;
-      let total = 0;
-      const step = Math.max(4, Math.floor(8 * dpr)); // sparse sample grid
-      for (let yy = 0; yy < canvas.height; yy += step) {
-        for (let xx = 0; xx < canvas.width; xx += step) {
-          total += 1;
-          if (data[(yy * canvas.width + xx) * 4 + 3] === 0) cleared += 1;
-        }
+  const estimateAndMaybeReveal = useCallback((key: CircleKey) => {
+    const canvas = canvasRefs.current[key];
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    const dpr = canvas.width / SIZE;
+    const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    let cleared = 0;
+    let total = 0;
+    const step = Math.max(4, Math.floor(8 * dpr)); // sparse sample grid
+    for (let yy = 0; yy < canvas.height; yy += step) {
+      for (let xx = 0; xx < canvas.width; xx += step) {
+        total += 1;
+        if (data[(yy * canvas.width + xx) * 4 + 3] === 0) cleared += 1;
       }
-      if (total === 0) return;
-      if (cleared / total >= THRESHOLD) {
-        setRevealed((prev) => {
-          if (prev[key]) return prev;
-          const next = { ...prev, [key]: true };
-          checkAllDone(next);
-          return next;
-        });
-      }
-    },
-    [checkAllDone],
-  );
+    }
+    if (total === 0) return;
+    if (cleared / total >= THRESHOLD) {
+      setRevealed((prev) => (prev[key] ? prev : { ...prev, [key]: true }));
+    }
+  }, []);
 
   function pointerPos(event: React.PointerEvent<HTMLCanvasElement>): { x: number; y: number } {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -160,15 +156,8 @@ export function ScratchDate() {
     if (ctx && canvas) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
-    setRevealed((prev) => {
-      if (prev[key]) return prev;
-      const next = { ...prev, [key]: true };
-      checkAllDone(next);
-      return next;
-    });
+    setRevealed((prev) => (prev[key] ? prev : { ...prev, [key]: true }));
   }
-
-  const allDone = revealed.month && revealed.day && revealed.year;
 
   return (
     <div>
@@ -231,7 +220,7 @@ export function ScratchDate() {
           width={320}
           height={140}
           className={`pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${
-            celebrate && !allDone ? '' : 'hidden'
+            celebrate ? '' : 'hidden'
           }`}
           aria-hidden="true"
         />

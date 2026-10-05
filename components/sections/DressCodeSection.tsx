@@ -1,3 +1,6 @@
+import Image from 'next/image';
+
+import dressCodePhoto from '~/assets/dress-code/dresscode.jpg';
 import { Section } from '~/components/ui/Section';
 import { OrnamentRule } from '~/components/ui/OrnamentRule';
 import { dressCode } from '~/lib/config';
@@ -32,6 +35,15 @@ export function DressCodeSection() {
             </li>
           ))}
         </ul>
+        <div className="overflow-hidden rounded-lg border border-line bg-card shadow-card">
+          <Image
+            src={dressCodePhoto}
+            alt="Guests in festive celebration attire posing among tall cacti, as attire inspiration"
+            className="h-auto w-full object-cover"
+            sizes="(max-width: 768px) 100vw, 768px"
+            quality={80}
+          />
+        </div>
       </div>
     </Section>
   );

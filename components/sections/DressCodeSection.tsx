@@ -2,7 +2,6 @@ import Image from 'next/image';
 
 import dressCodePhoto from '~/assets/dress-code/dresscode.jpg';
 import { Section } from '~/components/ui/Section';
-import { OrnamentRule } from '~/components/ui/OrnamentRule';
 import { dressCode } from '~/lib/config';
 
 const PALETTE_SWATCHES = [
@@ -20,7 +19,6 @@ const PALETTE_SWATCHES = [
 export function DressCodeSection() {
   return (
     <Section id="dresscode" ariaLabel="Dress code" tone="warm" title={dressCode.heading}>
-      <OrnamentRule className="mb-3" />
       <div className="mt-4 flex flex-col gap-5">
         <p className="max-w-[65ch] font-body text-body text-ink">{dressCode.line}</p>
         <ul className="flex flex-wrap gap-3">

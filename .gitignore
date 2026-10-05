@@ -24,3 +24,7 @@ guest-*.png
 .playwright/
 .vercel
 .env*
+v11-*.png
+prod-*.png
+
+prod-*.png

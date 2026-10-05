@@ -1,7 +1,5 @@
 import { Church, Camera, Cake, DiscoBall, ForkKnife, HandWaving, Martini, MoonStars } from '@phosphor-icons/react/dist/ssr';
-import type { Icon } from '@phosphor-icons/react';
 
-import { OrnamentRule } from '~/components/ui/OrnamentRule';
 import { Section } from '~/components/ui/Section';
 import { timeline } from '~/lib/config';
 
@@ -26,7 +24,6 @@ const ICONS = {
 export function TimelineSection() {
   return (
     <Section id="timeline" ariaLabel="How the day runs" title="How the day runs">
-      <OrnamentRule className="mb-3" />
       <ol className="mt-4 flex flex-col">
         {timeline.map((item, index) => {
           const IconComponent = ICONS[item.icon];

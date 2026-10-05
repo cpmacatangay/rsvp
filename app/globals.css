@@ -134,6 +134,43 @@
   }
 
   /*
+   * Section entry rise (v1.1 motion emphasis): pure CSS, clock-based —
+   * deterministic in full-page captures (finished by then), animates without
+   * JS, and the reduced-motion override above collapses it to instantly
+   * visible. Stagger: each section follows the previous by 90ms.
+   */
+  @keyframes section-rise {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  main > section {
+    animation: section-rise 480ms var(--ease-enter) backwards;
+  }
+
+  main > section:nth-child(1) { animation-delay: 60ms; }
+  main > section:nth-child(2) { animation-delay: 150ms; }
+  main > section:nth-child(3) { animation-delay: 240ms; }
+  main > section:nth-child(4) { animation-delay: 330ms; }
+  main > section:nth-child(5) { animation-delay: 420ms; }
+  main > section:nth-child(6) { animation-delay: 510ms; }
+  main > section:nth-child(7) { animation-delay: 600ms; }
+  main > section:nth-child(8) { animation-delay: 690ms; }
+  main > section:nth-child(9) { animation-delay: 780ms; }
+
+  @media print {
+    main > section {
+      animation: none;
+    }
+  }
+
+  /*
    * (M10) Section reveals moved to a once-only IntersectionObserver component
    * (`RevealOnce`) — the scroll-linked CSS approach re-hid content on upward
    * scroll and broke full-page captures. Removed here; no keyframes left.

@@ -11,7 +11,8 @@ import { couple, invitation } from '~/lib/config';
  */
 export function Hero() {
   return (
-    <section
+    <header
+      id="hero"
       aria-label={`${couple.names} wedding`}
       className="flex min-h-[100dvh] flex-col items-center justify-center gap-8 px-5 pb-20 text-center sm:px-6"
     >
@@ -27,6 +28,6 @@ export function Hero() {
         </h1>
         <p className="max-w-[52ch] font-body text-body text-ink-soft">{invitation.heroMessage}</p>
       </div>
-    </section>
+    </header>
   );
 }

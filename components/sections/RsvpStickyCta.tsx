@@ -18,7 +18,7 @@ export function RsvpStickyCta() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const hero = document.querySelector('section[aria-label$="wedding"]');
+    const hero = document.getElementById('hero');
     const rsvp = document.getElementById('rsvp');
     if (!hero || !rsvp || typeof IntersectionObserver === 'undefined') return;
 

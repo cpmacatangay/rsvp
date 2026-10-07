@@ -16,7 +16,7 @@ export function Footer() {
           href={venue.mapsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-1 inline-flex items-center gap-1.5 font-body text-caption text-ink-soft underline transition-colors duration-150 ease-enter hover:text-primary"
+          className="mt-1 inline-flex min-h-11 items-center gap-1.5 font-body text-caption text-ink-soft underline transition-colors duration-150 ease-enter hover:text-primary"
         >
           <MapPin size={16} weight="light" aria-hidden="true" />
           {venue.name}

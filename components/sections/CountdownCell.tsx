@@ -60,21 +60,25 @@ export function CountdownCell({ targetMs }: { targetMs: number | null }) {
   }
 
   return (
-    <div className="flex items-start justify-center gap-3 sm:gap-6" role="timer" aria-live="off">
+    <div
+      className="flex items-start justify-center gap-2 min-[380px]:gap-3 sm:gap-6"
+      role="timer"
+      aria-live="off"
+    >
       {UNITS.map(({ key, label }, index) => (
-        <div key={label} className="flex items-start gap-3 sm:gap-6">
+        <div key={label} className="flex items-start gap-2 min-[380px]:gap-3 sm:gap-6">
           {index > 0 ? (
             <span aria-hidden="true" className="mt-2 h-10 w-px bg-gold/60 sm:h-12" />
           ) : null}
-          <div className="flex min-w-[3.4rem] flex-col items-center gap-1 sm:min-w-[4.5rem]">
+          <div className="flex min-w-0 flex-col items-center gap-1 min-[380px]:min-w-[3.4rem] sm:min-w-[4.5rem]">
             <span
               key={`${label}-${r[key]}`}
-              className="font-display text-[40px] leading-none tabular-nums text-ink sm:text-[52px]"
+              className="font-display text-[clamp(30px,11vw,40px)] leading-none tabular-nums text-ink sm:text-[52px]"
               style={{ animation: 'count-fade 180ms var(--ease-enter)' }}
             >
               {r[key]}
             </span>
-            <span className="font-body text-badge uppercase tracking-[0.18em] text-ink-soft">
+            <span className="font-body text-badge uppercase tracking-[0.1em] text-ink-soft min-[380px]:tracking-[0.18em]">
               {label}
             </span>
           </div>

@@ -16,8 +16,9 @@ The page brand = the wedding itself: couple names as wordmark
 (**Christian Paul & Christine Jane**).
 
 ### Tagline
-Warm, short, no exclamation marks — e.g. "We're getting married —
-and we'd love you there."
+Warm and short. Exclamation marks are rationed: exactly one celebratory line
+carries them ("We're getting married!"), and the hero tagline may close with a
+single one; everywhere else the voice stays declarative.
 
 ### Brand Personality
 
@@ -34,9 +35,10 @@ and trust beat cleverness everywhere in this system.
 ---
 
 ## 2. Logo — Concept
-No logo mark; the wordmark is the couple's names set in the display serif.
-Favicon: single sage monogram letter on ivory (SVG). OG image: hero photo with
-names overlaid (1200×630).
+No logo mark; the wordmark is the couple's names set in the script accent
+(Great Vibes). Favicon: single sage monogram letter on ivory (SVG). OG image:
+names over the ivory ground (1200×630; generated from `app/opengraph-image`).
+The hero itself carries no photograph — the invitation is type-led.
 
 ---
 
@@ -90,27 +92,33 @@ names overlaid (1200×630).
 
 | Role | Font | Fallback | Weights |
 |---|---|---|---|
-| Display / headings / wordmark | **Fraunces** (opsz axis, soft serif) | Georgia, serif | 300, 400, 600 |
+| Display / headings / wordmark | **Karla** | system-ui, sans-serif | 400, 600 |
+| Script accents (names, celebration) | **Great Vibes** | cursive | 400 |
 | Body / UI | **Karla** | system-ui, sans-serif | 400, 600 |
 
-Fraunces is deliberately not in the overused-font pool (impeccable's typographic
-sl tells); Karla is humanist-warm, open apertures, excellent small-size
-legibility on phones.
+Karla carries everything structural — humanist-warm, open apertures, excellent
+small-size legibility on phones — at weight 600 for headings (v1.2.2). Great
+Vibes is reserved for the couple's names and the celebration line. Fraunces and
+Cormorant Garamond were retired by the couple's call (see §14 log); no display
+serif is in use.
 
 ### Type Scale (mobile-first; desktop +2px via `sm` overrides)
 
-| Level | Size (mobile) | Weight | Line Height | Letter-spacing | Font |
-|---|---|---|---|---|---|
-| Hero wordmark | 44px | 300 | 1.05 | -0.01em | Fraunces |
-| H1 | 34px | 400 | 1.15 | -0.005em | Fraunces |
-| H2 | 26px | 400 | 1.2 | 0 | Fraunces |
-| H3 | 21px | 600 | 1.3 | 0 | Karla |
-| Body | 17px | 400 | 1.6 | 0 | Karla |
-| Caption | 14px | 400 | 1.45 | 0.01em | Karla |
-| Badge/eyebrow | 13px | 600 | 1.2 | 0.08em uppercase | Karla |
+| Level | Token | Size (mobile) | Weight | Line Height | Letter-spacing | Font |
+|---|---|---|---|---|---|---|
+| Hero wordmark (script names) | `hero` | 64px | 400 | 0.95 | -0.01em | Great Vibes |
+| Section heading | `h1` | 34px | 600 | 1.15 | -0.005em | Karla |
+| Subheading | `h2` | 26px | 600 | 1.2 | 0 | Karla |
+| H3 | `h3` | 21px | 600 | 1.3 | 0 | Karla |
+| Body | `body` | 17px | 400 | 1.6 | 0 | Karla |
+| Caption | `caption` | 14px | 400 | 1.45 | 0.01em | Karla |
+| Badge | `badge` | 13px | 600 | 1.2 | 0.08em uppercase | Karla |
 
 Only these seven levels exist. Body copy never smaller than 17px mobile
-(reading comfort for older guests).
+(reading comfort for older guests); the badge level (13px) is the floor and is
+reserved for semantic micro-labels — the countdown unit labels use it. Section
+headings render as `<h2>` elements but take the 34px `h1` scale (one `<h1>`
+exists per page: the hero wordmark).
 
 ---
 
@@ -306,6 +314,20 @@ labels. Countdown: editorial numerals, card removed. Timeline: free hairline
 icons in editorial blocks. Story: body typography. Full notes:
 `context/reviews/v1.2-review.md`.
 
+### v1.3.3 — Impeccable critique fix pass (2026-10-08)
+Full dual-agent critique recorded at
+`context/reviews/impeccable-critique.md` (28/36, 0 detector findings). P1+P2
+fixes shipped: a sticky RSVP pill (appears after the hero, hides over the form)
+for discoverability; the curtain rebuilt as lighter woven linen with a visible
+rod, legible meeting edges, one accessible control (tap/wheel/touch/Escape),
+~1.25s sweep, `localStorage` persistence and `#rsvp` deep-link skip, with the
+page behind `inert` while closed; `Field` now actually attaches
+`aria-describedby`/`aria-invalid` via `cloneElement`; accept/decline pills and
+inputs gained a visible keyboard focus ring; docs/code drift reconciled (fonts,
+hero photo, exclamation rule, countdown labels to the 13px badge floor, dead
+reveal delays and stale comments removed, unused config pruned). Deferred P3s:
+hero paragraph alignment and the RSVP deadline near the form.
+
 ---
 
 ## 14. Taste Application Log (Stage 2 deliverable)
@@ -350,7 +372,7 @@ aesthetic, leaning toward Tailwind v4 token system + restrained motion."
 ### 14.4 Conflicts between the taste rules and this design system — resolutions
 | Topic | Skill rule (source) | Resolution |
 |---|---|---|
-| Display serif | DTF §4.1 bans Fraunces as a default: it is one of the two "LLM-favorite" display serifs. Override allowed with explicit brand justification (preflight: "or it is, with explicit brand justification") | **Fraunces retained with recorded justification:** this is a wedding invitation in the editorial/luxury/heritage genre, exactly DTF's override case; soft-premium direction was chosen BY the couple, and Fraunces couples the stationery feel with an optical-size axis for large names. Flagged alternative at M4 review if the couple prefers the fresh-pool route: Cormorant Garamond or Canela (both in skill's rotation pool). No silent swap without user approval. **Confirmed at M3 wrap-up:** the couple chose to keep Fraunces; the recorded justification makes the grandfathering a confirmed decision |
+| Display serif | DTF §4.1 bans Fraunces as a default: it is one of the two "LLM-favorite" display serifs. Override allowed with explicit brand justification (preflight: "or it is, with explicit brand justification") | **Superseded (v1.2.2):** the couple removed both display serifs. Karla now carries display and body; Great Vibes is the only decorative face. The earlier Fraunces justification is retained here for history but no longer applies |
 | Icon library | DTF §3.C discourages lucide (allowed if requested/already used); high-end §2 bans thick-stroked icons | **RESOLVED (couple confirmed at the M3 wrap-up):** `@phosphor-icons/react` (weight `light`) is the project icon set; DESIGN §8 updated accordingly |
 | Eyebrows | DTF §4.7 cap: max 1 eyebrow per 3 sections, hero counts as 1 | Form-card sketch amended: its "RSVP" eyebrow is dropped (headlines carry the sections). Page will use **zero decorative eyebrows**; the type scale keeps the 13px badge level reserved for semantic badges only |
 | Card architecture | high-end §4.A "Double-Bezel": outer shell + inner core with concentric radii | Adopted concentrically **within the approved radius scale** (`rounded-lg` outer, mathematically smaller inner). No 2rem squircles vs the locked 16px system |
@@ -359,7 +381,7 @@ aesthetic, leaning toward Tailwind v4 token system + restrained motion."
 | Hero stack | DTF §4.7: max 4 text elements, subtext ≤ 20 words, prefs pt-24 cap | Hero = names (headline, 1-2 lines) + one date/location subtext line ≤ 20 words + 1 CTA; no eyebrow; padding ≤ pt-24 on desktop |
 | Content density | DTF §4.9 sub-paragraphs ≤ 25 words | Exception recorded: story section copy is couple-verbatim (user-provided fact; brief names the copy). Presenting with larger measure + more whitespace to compensate |
 | Dark mode | DTF §6.C/§8 wants both modes unless user instructed otherwise | Light-only v1 is an explicit couple decision (recorded in PRD non-goals); dark mode stays a later-phase consideration |
-| Images | DTF §4.8: real asset required in hero | Satisfied: real couple photograph `cpcj.jpg` via `next/image`; no fake shots, no hand-rolled decorative SVGs |
+| Images | DTF §4.8: real asset required in hero | Overridden by the couple (v1.2): the hero is type-led with no photograph. Real assets remain elsewhere (dress-code sample via `next/image`); no fake shots, no hand-rolled decorative SVGs |
 
 ### 14.5 Motion mapping (ties to §9 easing column)
 | §9 word | Token curve | Notes |

@@ -11,6 +11,9 @@ out/
 *.tsbuildinfo
 .DS_Store
 
+# impeccable tool snapshots (regenerable; durable records live in context/reviews)
+.impeccable/
+
 # secrets and env
 .env*
 !.env.example

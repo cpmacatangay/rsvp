@@ -82,7 +82,7 @@ export function AdminTable({ rows }: { rows: AdminTableRow[] }) {
             placeholder="Search by name"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            className="w-full rounded-md border-[1.5px] border-line bg-card px-4 py-3 font-body text-body text-ink transition-colors duration-150 ease-enter focus:border-primary focus:outline-none"
+            className="w-full rounded-md border-[1.5px] border-line bg-card px-4 py-3 font-body text-body text-ink transition-colors duration-150 ease-enter focus:border-primary"
           />
         </div>
 

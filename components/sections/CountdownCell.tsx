@@ -74,7 +74,7 @@ export function CountdownCell({ targetMs }: { targetMs: number | null }) {
             >
               {r[key]}
             </span>
-            <span className="font-body text-[10px] uppercase tracking-[0.18em] text-ink-soft sm:text-badge">
+            <span className="font-body text-badge uppercase tracking-[0.18em] text-ink-soft">
               {label}
             </span>
           </div>

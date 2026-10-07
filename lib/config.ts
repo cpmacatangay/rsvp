@@ -53,14 +53,11 @@ export const story =
   'We both swiped right on a quiet weeknight, not expecting much more than a good conversation. What started as simple messages quickly turned into hours of talking that felt as easy as breathing. Across the screen, we found a real connection that made the distance between us feel small. Looking back, that simple digital match was the moment my whole world changed for the better.' as const;
 
 /** Dress code — couple's rule (site palette); draft copy pending M4 approval.
- * Sample photo: assets/dress-code/dresscode.jpg (v1.1 redesign). */
+ * The sample photo lives at assets/dress-code/dresscode.jpg and its alt text
+ * is owned by the component that renders it (DressCodeSection). */
 export const dressCode = {
   heading: 'Dress Code',
   line: 'Festive attire in our palette: ivory, cream, sage, soft gold.',
-  photo: {
-    src: 'assets/dress-code/dresscode.jpg',
-    alt: 'A group of guests in celebration attire among cacti, as attire inspiration',
-  },
 } as const;
 
 export const copy = {
@@ -74,7 +71,7 @@ export const copy = {
 
 /** v1.1 invitation-moment copy (couple-approved redesign). */
 export const invitation = {
-  curtainHint: 'Tap to open',
+  curtainHint: 'Tap anywhere to open',
   /** hero message (v1.3.2): one paragraph, couple-approved tone */
   heroMessage:
     'We would like to invite you to celebrate the beginning of our forever. On August 6, 2028, we will say our vows surrounded by the people we love most, and we are saving a place for you. Come as you are, bring your joy, and share this day with us.',

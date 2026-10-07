@@ -219,7 +219,7 @@ export function RsvpPanel() {
                     required
                     className="peer sr-only"
                   />
-                  <span className="flex h-12 items-center justify-center rounded-full border-[1.5px] border-primary px-3 text-center font-body text-caption uppercase text-primary transition-colors duration-150 ease-enter peer-checked:bg-primary peer-checked:text-page-ivory">
+                  <span className="flex h-12 items-center justify-center rounded-full border-[1.5px] border-primary px-3 text-center font-body text-caption text-primary transition-colors duration-150 ease-enter peer-checked:bg-primary peer-checked:text-page-ivory peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-primary">
                     {copy.accept}
                   </span>
                 </label>
@@ -232,7 +232,7 @@ export function RsvpPanel() {
                     onChange={() => setAttend('declined')}
                     className="peer sr-only"
                   />
-                  <span className="flex h-12 items-center justify-center rounded-full border-[1.5px] border-primary px-3 text-center font-body text-caption uppercase text-primary transition-colors duration-150 ease-enter peer-checked:bg-primary peer-checked:text-page-ivory">
+                  <span className="flex h-12 items-center justify-center rounded-full border-[1.5px] border-primary px-3 text-center font-body text-caption text-primary transition-colors duration-150 ease-enter peer-checked:bg-primary peer-checked:text-page-ivory peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-primary">
                     {copy.decline}
                   </span>
                 </label>

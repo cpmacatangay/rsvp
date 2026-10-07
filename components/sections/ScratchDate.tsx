@@ -261,9 +261,10 @@ function paintFoil(ctx: CanvasRenderingContext2D) {
 }
 
 /**
- * Subtle confetti: ONE burst of ~60 small shapes from the top of a 320x140
- * canvas; transform/opacity-only frame math (no layout reads), physics in a
- * rAF loop that self-stops at ~2.5s (respecting `once` in the plan).
+ * Subtle confetti: ONE burst of ~120 small shapes on a 640x420 stage from
+ * just above the celebration line; transform/opacity-only frame math (no
+ * layout reads), gentle gravity, physics in a rAF loop that self-stops at
+ * ~4.2s with a soft tail fade.
  */
 function runConfetti(canvas: HTMLCanvasElement | null) {
   if (!canvas) return;

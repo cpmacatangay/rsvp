@@ -42,11 +42,11 @@ export function NoJsRsvpForm({
         <fieldset className="flex flex-col gap-2">
           <legend className="font-body text-caption text-ink-soft">Will you come?</legend>
           <label className="flex items-center gap-2 font-body text-body text-ink">
-            <input type="radio" name="status" value="accepted" required className="accent-[#5B6E4F]" />
+            <input type="radio" name="status" value="accepted" required className="accent-primary" />
             {copy.accept}
           </label>
           <label className="flex items-center gap-2 font-body text-body text-ink">
-            <input type="radio" name="status" value="declined" className="accent-[#5B6E4F]" />
+            <input type="radio" name="status" value="declined" className="accent-primary" />
             {copy.decline}
           </label>
         </fieldset>

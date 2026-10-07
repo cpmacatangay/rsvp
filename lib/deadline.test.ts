@@ -1,6 +1,6 @@
-import { beforeAll, afterAll, describe, expect, it } from 'vitest';
+import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
 
-import { deadlineDateToMs, deadlineState } from '~/lib/deadline';
+import { deadlineDateToMs, deadlineDisplayDate, deadlineState } from '~/lib/deadline';
 
 const PH_END = '2027-03-14'; // arbitrary test date
 
@@ -55,5 +55,23 @@ describe('deadlineState', () => {
     } finally {
       if (restore !== undefined) process.env.RSVP_DEADLINE_DATE = restore;
     }
+  });
+});
+
+describe('deadlineDisplayDate', () => {
+  afterEach(() => {
+    delete process.env.RSVP_DEADLINE_DATE;
+  });
+
+  it('formats the configured deadline as a long Asia/Manila date', () => {
+    process.env.RSVP_DEADLINE_DATE = '2028-07-10';
+    expect(deadlineDisplayDate()).toBe('July 10, 2028');
+  });
+
+  it('returns null when the config is absent or malformed', () => {
+    delete process.env.RSVP_DEADLINE_DATE;
+    expect(deadlineDisplayDate()).toBeNull();
+    process.env.RSVP_DEADLINE_DATE = '2028-13-40';
+    expect(deadlineDisplayDate()).toBeNull();
   });
 });

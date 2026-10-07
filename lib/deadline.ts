@@ -55,3 +55,20 @@ export function deadlineState(now: TimeProvider = Date.now): DeadlineState {
   const closesAtMs = deadlineDateToMs(dateIso);
   return now() > closesAtMs ? { state: 'closed', closesAtMs } : { state: 'open', closesAtMs };
 }
+
+/**
+ * Presentation-only: the configured deadline as a human date in Asia/Manila
+ * ("July 10, 2028"), or null when the config is absent/invalid. The deadline
+ * DATE is a fixed fact (unlike the open/closed state), so callers may render it
+ * in a statically generated page.
+ */
+export function deadlineDisplayDate(): string | null {
+  const dateIso = readDeadlineEnv();
+  if (dateIso === null) return null;
+  const ms = deadlineDateToMs(dateIso);
+  if (Number.isNaN(ms)) return null;
+  return new Intl.DateTimeFormat('en-PH', {
+    dateStyle: 'long',
+    timeZone: 'Asia/Manila',
+  }).format(new Date(ms));
+}

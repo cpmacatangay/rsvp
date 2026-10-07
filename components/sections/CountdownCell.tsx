@@ -61,12 +61,12 @@ export function CountdownCell({ targetMs }: { targetMs: number | null }) {
 
   return (
     <div
-      className="flex items-start justify-center gap-2 min-[380px]:gap-3 sm:gap-6"
+      className="flex flex-nowrap items-start justify-center gap-2 gap-y-3 min-[380px]:flex-wrap sm:gap-6"
       role="timer"
       aria-live="off"
     >
       {UNITS.map(({ key, label }, index) => (
-        <div key={label} className="flex items-start gap-2 min-[380px]:gap-3 sm:gap-6">
+        <div key={label} className="flex items-start gap-2 sm:gap-6">
           {index > 0 ? (
             <span aria-hidden="true" className="mt-2 h-10 w-px bg-gold/60 sm:h-12" />
           ) : null}

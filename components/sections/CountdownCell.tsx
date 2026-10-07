@@ -3,11 +3,10 @@
 import { useEffect, useState } from 'react';
 
 /**
- * Countdown — client island inside the server-rendered Info section.
- * targetMs: end-of-day Asia/Manila cutoff, or null while date is TBD
- * (CONTENT.md: wedding date is an explicit open fact => graceful state).
- * Changing digits crossfade 180ms (DESIGN §9); reduced-motion collapses this
- * via the global CSS rule, so no extra hook needed.
+ * Countdown (v1.2 review): editorial numerals, no card — four display-serif
+ * numbers with thin gold hairlines between them and letter-spaced micro
+ * labels beneath. Counts to the start of the wedding day (midnight
+ * Asia/Manila); each digit crossfades 180ms on change.
  */
 
 type Remaining = {
@@ -27,10 +26,10 @@ function remaining(targetMs: number, now: number): Remaining {
 }
 
 const UNITS: Array<{ key: keyof Remaining; label: string }> = [
-  { key: 'days', label: 'days' },
-  { key: 'hours', label: 'hours' },
-  { key: 'minutes', label: 'minutes' },
-  { key: 'seconds', label: 'seconds' },
+  { key: 'days', label: 'Days' },
+  { key: 'hours', label: 'Hours' },
+  { key: 'minutes', label: 'Minutes' },
+  { key: 'seconds', label: 'Seconds' },
 ];
 
 export function CountdownCell({ targetMs }: { targetMs: number | null }) {
@@ -51,8 +50,8 @@ export function CountdownCell({ targetMs }: { targetMs: number | null }) {
   }
 
   if (now === null) {
-    // first server/browser paint: reserved height (tabular digits) avoids CLS
-    return <p className="font-display text-h1 tabular-nums text-ink-soft">&nbsp;</p>;
+    // first paint: reserved height avoids layout shift
+    return <p className="font-display text-[40px] tabular-nums text-ink-soft sm:text-[52px]">&nbsp;</p>;
   }
 
   const r = remaining(targetMs, now);
@@ -61,22 +60,29 @@ export function CountdownCell({ targetMs }: { targetMs: number | null }) {
   }
 
   return (
-    <p className="flex items-baseline gap-1 font-display text-h1 tabular-nums text-ink">
+    <div className="flex items-start justify-center gap-3 sm:gap-6" role="timer" aria-live="off">
       {UNITS.map(({ key, label }, index) => (
-        <span key={label} className="flex items-baseline gap-1">
+        <div key={label} className="flex items-start gap-3 sm:gap-6">
           {index > 0 ? (
-            <span aria-hidden="true" className="text-ink-faint">
-              :
-            </span>
+            <span aria-hidden="true" className="mt-2 h-10 w-px bg-gold/60 sm:h-12" />
           ) : null}
-          <span key={`${label}-${r[key]}`} style={{ animation: 'count-fade 180ms var(--ease-enter)' }}>
-            {r[key]}
-          </span>
-          <span aria-label={label} className="sr-only">
-            {label}
-          </span>
-        </span>
+          <div className="flex min-w-[3.4rem] flex-col items-center gap-1 sm:min-w-[4.5rem]">
+            <span
+              key={`${label}-${r[key]}`}
+              className="font-display text-[40px] leading-none tabular-nums text-ink sm:text-[52px]"
+              style={{ animation: 'count-fade 180ms var(--ease-enter)' }}
+            >
+              {r[key]}
+            </span>
+            <span className="font-body text-[10px] uppercase tracking-[0.18em] text-ink-soft sm:text-badge">
+              {label}
+            </span>
+          </div>
+        </div>
       ))}
-    </p>
+      <span className="sr-only">
+        {r.days} days, {r.hours} hours, {r.minutes} minutes, {r.seconds} seconds until the wedding
+      </span>
+    </div>
   );
 }

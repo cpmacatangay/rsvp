@@ -12,10 +12,10 @@ import { venue } from '~/lib/config';
  */
 export function VenuesSection() {
   return (
-    <Section id="venues" ariaLabel="Venues" title="Where we gather">
+    <Section id="venues" ariaLabel="Venues" title="Where We Gather">
       <div className="mt-4 grid gap-6 sm:grid-cols-2">
         <Card className="flex flex-col gap-2">
-          <h3 className="font-display text-h3 text-ink">The church</h3>
+          <h3 className="font-display text-h3 text-ink">The Church</h3>
           <p className="font-body text-body text-ink">
             {venue.name}
             {', '}
@@ -33,7 +33,7 @@ export function VenuesSection() {
         </Card>
 
         <Card className="flex flex-col gap-2">
-          <h3 className="font-display text-h3 text-ink">The reception</h3>
+          <h3 className="font-display text-h3 text-ink">The Reception</h3>
           <p className="font-body text-body text-ink-soft">{venue.receptionNote}</p>
         </Card>
       </div>

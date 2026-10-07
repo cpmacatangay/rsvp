@@ -34,7 +34,7 @@
   --text-hero: 44px;
   --text-hero--line-height: 1.05;
   --text-hero--letter-spacing: -0.01em;
-  --text-hero--font-weight: 300;
+  --text-hero--font-weight: 400;
   --text-h1: 34px;
   --text-h1--line-height: 1.15;
   --text-h1--letter-spacing: -0.005em;
@@ -52,8 +52,11 @@
   --text-badge--line-height: 1.2;
   --text-badge--letter-spacing: 0.08em;
 
-  /* ---- Fonts — wired to next/font variables in app/layout.tsx */
-  --font-display: var(--font-fraunces), Georgia, serif;
+  /* ---- Fonts — wired to next/font variables in app/layout.tsx
+     (v1.2 review: Cormorant Garamond display, Great Vibes script accents,
+     Karla body — Fraunces retired) ------------------------------ */
+  --font-display: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  --font-script: var(--font-great-vibes), 'Great Vibes', cursive;
   --font-body: var(--font-karla), system-ui, sans-serif;
 
   /* ---- Motion — DESIGN.md §9 + §14.5 ------------------------- */
@@ -133,6 +136,38 @@
     animation: curtain-hint-pulse 2.2s var(--ease-enter) infinite;
   }
 
+  /* curtain fabric (v1.2 review): layered gradients read as cloth —
+     stacked fold shading, a soft vertical sheen, and a faint weave */
+  .curtain-fabric {
+    background-color: #55684a;
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(250, 247, 240, 0.05) 0px,
+      rgba(47, 42, 32, 0.1) 9px,
+      rgba(250, 247, 240, 0.045) 20px,
+      rgba(47, 42, 32, 0.16) 32px,
+      rgba(250, 247, 240, 0.03) 42px,
+      rgba(47, 42, 32, 0.08) 52px
+    );
+  }
+
+  .curtain-sheen {
+    background-image: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0) 22%,
+      rgba(0, 0, 0, 0.12) 88%
+    );
+  }
+
+  .curtain-weave {
+    background-image: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.025) 0 1px,
+      rgba(255, 255, 255, 0.02) 1px 2px
+    );
+  }
+
   /*
    * Section entry rise (v1.1 motion emphasis): pure CSS, clock-based —
    * deterministic in full-page captures (finished by then), animates without
@@ -201,6 +236,7 @@
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
+      transition-delay: 0ms !important;
       scroll-behavior: auto !important;
     }
   }

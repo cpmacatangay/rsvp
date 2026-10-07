@@ -8,7 +8,7 @@ const PALETTE_SWATCHES = [
   { name: 'Ivory', hex: '#FAF7F0' },
   { name: 'Cream', hex: '#F3EEE3' },
   { name: 'Sage', hex: '#5B6E4F' },
-  { name: 'Soft gold', hex: '#B79B5B' },
+  { name: 'Soft Gold', hex: '#B79B5B' },
 ] as const;
 
 /**

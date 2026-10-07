@@ -294,6 +294,18 @@ hover states avoided per `mobile-native`).
 
 ---
 
+## 14. v1.2 Review Log (2026-10-07)
+Fonts: **Cormorant Garamond** display + **Great Vibes** script accents +
+Karla body (Fraunces retired). Curtain: real-cloth fabric layers, monogram
+removed, 300ms beat then a 1600ms sweep (2.1s total). Motion: MOTION dial
+runs at 7 (emphasized), confetti stage 640×420, ~4.2s fall with soft tail.
+Casing ruling: Title Case for headings, uppercase reserved for tiny micro
+labels. Countdown: editorial numerals, card removed. Timeline: free hairline
+icons in editorial blocks. Story: body typography. Full notes:
+`context/reviews/v1.2-review.md`.
+
+---
+
 ## 14. Taste Application Log (Stage 2 deliverable)
 
 Source skills read in full: `design-taste-frontend` (v2, 1206 lines),

@@ -30,9 +30,7 @@ export const weddingDateDisplay = new Intl.DateTimeFormat('en-US', {
   month: 'long',
   day: 'numeric',
   timeZone: 'Asia/Manila',
-})
-  .format(weddingDate)
-  .toUpperCase();
+}).format(weddingDate);
 
 /** Wedding-day timeline — confirmed by the couple (2026-09-30 message);
  * supersedes CONTENT.md's earlier 4-row schedule; ceremony now 3:00 pm.
@@ -57,7 +55,7 @@ export const story =
 /** Dress code — couple's rule (site palette); draft copy pending M4 approval.
  * Sample photo: assets/dress-code/dresscode.jpg (v1.1 redesign). */
 export const dressCode = {
-  heading: 'Dress code',
+  heading: 'Dress Code',
   line: 'Festive attire in our palette: ivory, cream, sage, soft gold.',
   photo: {
     src: 'assets/dress-code/dresscode.jpg',
@@ -67,7 +65,7 @@ export const dressCode = {
 
 export const copy = {
   tagline: "We're getting married. Come celebrate with us!",
-  rsvpOpenHeadline: "Who's coming?",
+  rsvpOpenHeadline: "Who's Coming?",
   accept: 'Joyfully accepts',
   decline: 'Regretfully declines',
   closedHeadline: 'RSVPs are closed',
@@ -77,7 +75,13 @@ export const copy = {
 /** v1.1 invitation-moment copy (couple-approved redesign). */
 export const invitation = {
   curtainHint: 'Tap to open',
-  heroSubline: 'We would like to invite you',
+  /** hero message (v1.2): lead + two supporting sentences, couple-approved tone */
+  heroMessage: {
+    lead: 'We would like to invite you to celebrate the beginning of our forever.',
+    body1:
+      'On August 6, 2028, we will say our vows surrounded by the people we love most, and we are saving a place for you.',
+    body2: 'Come as you are, bring your joy, and share this day with us.',
+  },
   scratchHint: 'Scratch to discover the date',
   celebration: "We're getting married!",
   /** circle values are display-only; the machine date stays in weddingDate */

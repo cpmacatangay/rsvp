@@ -1,12 +1,18 @@
 import type { Metadata, Viewport } from 'next';
-import { Fraunces, Karla } from 'next/font/google';
-import { Analytics } from '@vercel/analytics/next';
+import { Cormorant_Garamond, Great_Vibes, Karla } from 'next/font/google';
 import './globals.css';
 
-const fraunces = Fraunces({
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  weight: ['300', '400', '600'],
-  variable: '--font-fraunces',
+  weight: ['400', '500', '600'],
+  variable: '--font-cormorant',
+  display: 'swap',
+});
+
+const greatVibes = Great_Vibes({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-great-vibes',
   display: 'swap',
 });
 
@@ -23,10 +29,11 @@ export const metadata: Metadata = {
 };
 
 /**
- * mobile-native baseline (skill "Baseline" section): viewport-fit=cover so the
- * safe-area env() variables are live (BackToTop uses them), theme-color per
- * scheme matching the ivory header, and the interactive-widget hint so the
- * Android software keyboard shrinks the layout like iOS does.
+ * mobile-native baseline (viewport-fit=cover so safe-area env() vars are
+ * live; theme-color per scheme matching the ivory chrome; interactive-widget
+ * so the Android keyboard shrinks the layout like iOS). Fonts (v1.2 review):
+ * Great Vibes = script for names, Cormorant Garamond = headings/display,
+ * Karla = body.
  */
 export const viewport: Viewport = {
   width: 'device-width',
@@ -41,11 +48,8 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${karla.variable}`}>
-      <body className="min-h-[100dvh]">
-        {children}
-        <Analytics />
-      </body>
+    <html lang="en" className={`${cormorant.variable} ${greatVibes.variable} ${karla.variable}`}>
+      <body className="min-h-[100dvh]">{children}</body>
     </html>
   );
 }

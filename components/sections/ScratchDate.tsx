@@ -217,15 +217,15 @@ export function ScratchDate() {
       <div aria-live="polite" className="relative mt-10 min-h-16 text-center">
         <canvas
           ref={confettiRef}
-          width={320}
-          height={140}
-          className={`pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${
+          width={640}
+          height={420}
+          className={`pointer-events-none absolute left-1/2 top-1/2 h-auto w-[min(92vw,640px)] -translate-x-1/2 -translate-y-1/2 ${
             celebrate ? '' : 'hidden'
           }`}
           aria-hidden="true"
         />
         <p
-          className={`font-display text-h1 text-primary transition-all duration-300 ease-enter ${
+          className={`font-script text-[44px] leading-[1.25] text-primary transition-all duration-500 ease-enter sm:text-[56px] ${
             celebrate ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
           }`}
         >
@@ -271,32 +271,35 @@ function runConfetti(canvas: HTMLCanvasElement | null) {
   if (!ctx) return;
 
   const COLORS = ['#5B6E4F', '#B79B5B', '#DCE3D2', '#8F9F7F'];
-  const width = 320;
-  const height = 140;
-  const pieces = Array.from({ length: 60 }, () => ({
-    x: width / 2 + (Math.random() - 0.5) * 60,
-    y: height / 2 - 10,
-    vx: (Math.random() - 0.5) * 4.2,
-    vy: -(Math.random() * 3.4 + 2.2),
-    size: Math.random() * 3.4 + 2,
+  const width = 640;
+  const height = 420;
+  /** v1.2 review: slow + luxurious — 120 pieces on a tall stage, staggered
+   * entry, gentle gravity so the fall stays on screen ~3s with a soft tail */
+  const pieces = Array.from({ length: 120 }, () => ({
+    x: width / 2 + (Math.random() - 0.5) * 280,
+    y: height / 2 - 140 + Math.random() * 70,
+    vx: (Math.random() - 0.5) * 3.0,
+    vy: -(Math.random() * 2.0 + 1.2),
+    size: Math.random() * 3.8 + 1.8,
     color: COLORS[Math.floor(Math.random() * COLORS.length)]!,
     rot: Math.random() * Math.PI,
-    vr: (Math.random() - 0.5) * 0.28,
+    vr: (Math.random() - 0.5) * 0.2,
   }));
 
   const started = performance.now();
-  const DURATION = 2500;
+  const DURATION = 4200;
 
   function frame(now: number) {
     const elapsed = now - started;
     ctx!.clearRect(0, 0, width, height);
     if (elapsed > DURATION) return; // one burst, self-stopping
     for (const p of pieces) {
-      p.vy += 0.11; // soft gravity
+      p.vy += 0.045; // slower gravity = longer, calmer fall
       p.x += p.vx;
       p.y += p.vy;
       p.rot += p.vr;
-      const alpha = Math.max(0, 1 - elapsed / DURATION);
+      const t = Math.min(1, elapsed / DURATION);
+      const alpha = Math.pow(1 - t, 0.85); // soft tail fade
       ctx!.save();
       ctx!.globalAlpha = alpha;
       ctx!.translate(p.x, p.y);

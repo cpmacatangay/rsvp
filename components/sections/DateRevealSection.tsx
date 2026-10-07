@@ -16,7 +16,7 @@ const ScratchDate = dynamic(
 
 export function DateRevealSection() {
   return (
-    <Section id="date" ariaLabel="The date" title="Save the date">
+    <Section id="date" ariaLabel="The date" title="Save the Date">
       <ScratchDate />
     </Section>
   );

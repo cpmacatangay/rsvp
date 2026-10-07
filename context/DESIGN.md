@@ -336,6 +336,14 @@ swatches use palette tokens instead of inline hex; footer link meets the 44px
 touch target; hero is now a `<header>` banner landmark. Deferred: favicon asset
 (needs a monogram choice) and the 200% text-zoom residual on the countdown.
 
+### v1.3.5 — audit follow-ups (2026-10-08)
+`app/icon.svg` (sage "C" monogram on ivory) ends the `/favicon.ico` 404; the
+countdown gains a `flex-wrap` fallback from 380px up so 200% text zoom reflows
+(one row preserved at 320–414px); the hero invitation paragraph is left-aligned
+for older readers; the RSVP section states the env-driven deadline ("Please
+respond by July 10, 2028.") via `deadlineDisplayDate` while the page stays
+statically generated. Residual: text-only zoom below 380px.
+
 ---
 
 ## 14. Taste Application Log (Stage 2 deliverable)

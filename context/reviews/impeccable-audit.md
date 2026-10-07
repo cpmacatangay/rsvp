@@ -94,3 +94,17 @@ every other section reflows correctly at 320px.
    add the banner landmark.
 3. **[final] `/impeccable polish`** — confirm the whole path at 320/390/1280 and close
    the critique snapshot once its Priority Issues are cleared.
+
+## Disposition (v1.3.4–v1.3.5, 2026-10-08)
+
+| Finding | Status | Resolution |
+|---|---|---|
+| P2 countdown overflow | **Fixed** | Fluid below 380px (clamp numerals, tighter gap/tracking); `flex-wrap` from 380px up so 200% text zoom reflows. Verified one row at 320/360/375/380/390/414 with no horizontal overflow, and a 2-row wrap with no overflow at 200% zoom on 390. |
+| P2 missing favicon | **Fixed** | `app/icon.svg` — sage "C" monogram on ivory (DESIGN §2); `/icon.svg` returns 200 and is linked. |
+| P3 hard-coded swatch hex | **Fixed** | Dress-code swatches use `bg-page-ivory`/`bg-warm`/`bg-primary`/`bg-gold`. |
+| P3 footer touch target | **Fixed** | Footer address link now `min-h-11` (44px). |
+| P3 no banner landmark | **Fixed** | Hero root is now `<header id="hero">`. |
+| Residual: <380px text-only zoom | **Documented** | Below 380px the countdown stays on one row; a 200% *text-only* zoom on a <380px viewport can still overflow. Full-page zoom and desktop text zoom are handled. |
+
+Re-audit after these fixes is recommended; the Responsive dimension should move
+from 2 to 3–4.

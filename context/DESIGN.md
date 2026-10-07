@@ -328,6 +328,14 @@ hero photo, exclamation rule, countdown labels to the 13px badge floor, dead
 reveal delays and stale comments removed, unused config pruned). Deferred P3s:
 hero paragraph alignment and the RSVP deadline near the form.
 
+### v1.3.4 — Impeccable audit + polish (2026-10-08)
+Audit scored 16/20 (Good); full report `context/reviews/impeccable-audit.md`.
+Fixed: countdown made fluid below 380px (clamp numerals, tighter gap/tracking;
+≥380px composition unchanged) so it no longer overflows at ≤365px; dress-code
+swatches use palette tokens instead of inline hex; footer link meets the 44px
+touch target; hero is now a `<header>` banner landmark. Deferred: favicon asset
+(needs a monogram choice) and the 200% text-zoom residual on the countdown.
+
 ---
 
 ## 14. Taste Application Log (Stage 2 deliverable)

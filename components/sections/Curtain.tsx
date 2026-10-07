@@ -83,11 +83,11 @@ export function Curtain() {
         type="button"
         onClick={open}
         aria-label={invitation.curtainHint}
-        className={`absolute inset-y-0 left-0 w-1/2 cursor-pointer overflow-hidden border-r-4 border-gold shadow-[inset_-48px_0_64px_-36px_rgba(0,0,0,0.5)] outline-none transition-transform duration-[1600ms] ease-[cubic-bezier(0.32,0.72,0,1)] delay-300 ${
+        className={`absolute inset-y-0 left-0 w-1/2 cursor-pointer overflow-hidden shadow-[inset_-48px_0_64px_-36px_rgba(0,0,0,0.5)] outline-none transition-transform duration-[1600ms] ease-[cubic-bezier(0.32,0.72,0,1)] delay-300 ${
           opening ? '-translate-x-full' : 'translate-x-0'
         }`}
       >
-        <Panel />
+        <Panel side="left" />
       </button>
 
       {/* RIGHT panel */}
@@ -96,11 +96,11 @@ export function Curtain() {
         onClick={open}
         aria-label={invitation.curtainHint}
         tabIndex={-1}
-        className={`absolute inset-y-0 right-0 w-1/2 cursor-pointer overflow-hidden border-l-4 border-gold shadow-[inset_48px_0_64px_-36px_rgba(0,0,0,0.5)] outline-none transition-transform duration-[1600ms] ease-[cubic-bezier(0.32,0.72,0,1)] delay-300 ${
+        className={`absolute inset-y-0 right-0 w-1/2 cursor-pointer overflow-hidden shadow-[inset_48px_0_64px_-36px_rgba(0,0,0,0.5)] outline-none transition-transform duration-[1600ms] ease-[cubic-bezier(0.32,0.72,0,1)] delay-300 ${
           opening ? 'translate-x-full' : 'translate-x-0'
         }`}
       >
-        <Panel />
+        <Panel side="right" />
       </button>
 
       {/* pulsing hint */}
@@ -116,14 +116,24 @@ export function Curtain() {
   );
 }
 
-/** Fabric stack: fold shading (base), sheen, weave, top rod shadow. */
-function Panel() {
+/** Fabric stack: fold shading (base), sheen, weave, top rod shadow, and a
+ * soft gold gradient trim at the meeting edge (v1.2.1: replaces the former
+ * 4px one-sided border that the design detector flagged as a side-tab tell). */
+function Panel({ side }: { side: 'left' | 'right' }) {
   return (
     <span aria-hidden="true" className="curtain-fabric absolute inset-0 block">
       <span className="curtain-sheen absolute inset-0 block" />
       <span className="curtain-weave absolute inset-0 block" />
       {/* implied rod shadow along the top */}
       <span className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-[rgba(0,0,0,0.30)] to-transparent" />
+      {/* gold trim at the curtain's meeting edge */}
+      <span
+        className={`absolute inset-y-0 w-2 ${
+          side === 'left'
+            ? 'right-0 bg-gradient-to-l from-gold/80 via-gold/35 to-transparent'
+            : 'left-0 bg-gradient-to-r from-gold/80 via-gold/35 to-transparent'
+        }`}
+      />
     </span>
   );
 }

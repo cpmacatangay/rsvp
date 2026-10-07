@@ -41,7 +41,7 @@ Executable source (code, config, build scripts) wins over every doc above.
 | Copy | English only |
 | Design | Soft premium · ivory + sage · photo hero · dials 4/4/3 · `motion` for animation |
 | Hosting | Vercel free `.vercel.app` URL |
-| Skills in use | `design-taste-frontend`, `high-end-visual-design`, `emil-design-eng`, `mobile-native` (quality gate: Lighthouse mobile, `impeccable` retired 2026-10-07) |
+| Skills in use | `design-taste-frontend`, `high-end-visual-design`, `emil-design-eng`, `mobile-native`, `impeccable` (reinstalled officially 2026-10-07; gate: `npx impeccable detect`) |
 | Couple | Christian Paul & Christine Jane |
 | Venue | Minor Basilica and National Shrine of Our Lady of Peñafrancia, Naga City (confirmed; maps link in `CONTENT.md`) |
 | Guests | 63 households seeded from `CONTENT.md`; 11 without counts default to 1 adult, flagged "cap unconfirmed", correctable via CSV re-seed |

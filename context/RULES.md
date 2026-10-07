@@ -224,15 +224,20 @@ single quotes, trailing commas).
 | 6 | New payload → new/updated zod schema, client derives types |
 | 7 | Errors `ActionResult`-shaped, logged with request-id |
 | 8 | `motion-reduce` present on any added animation |
-| 9 | Lighthouse mobile ≥ 95 (perf & a11y) or findings consciously waived |
+| 9 | `npx impeccable detect` clean or findings consciously waived |
 | 10 | Env additions documented in `.env.example` + `ARCHITECTURE.md` §7.2 |
 
 ### 7.4 CI Gate
-`pnpm lint` → `pnpm typecheck` → `vitest run` → Lighthouse mobile
-(perf ≥ 95, a11y ≥ 95) → `vercel build` (deploy preview).
-Tooling note (2026-10-07): the `impeccable` skills were removed from this
-environment; the detector step is retired and Lighthouse is the design-quality
-gate now.
+`pnpm lint` → `pnpm typecheck` → `vitest run` → `npx impeccable detect app components lib`
+(0 findings, or waived with a note) → Lighthouse mobile (perf ≥ 95, a11y ≥ 95) →
+`vercel build` (deploy preview).
+Tooling note: `impeccable` was briefly unavailable (its skill had been linked
+from a temp checkout that Windows cleaned; the official bundle endpoint had
+also been 404). Officially reinstalled 2026-10-07 via
+`npx impeccable install -y --no-hooks` into stable skill roots and restored as
+a gate here. It immediately earned the reinstall by flagging the curtain's
+4px one-sided gold border as a side-tab tell, now fixed with a gradient trim
+(v1.2.1).
 
 ---
 

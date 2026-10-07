@@ -1,13 +1,6 @@
 import type { Metadata, Viewport } from 'next';
-import { Cormorant_Garamond, Great_Vibes, Karla } from 'next/font/google';
+import { Great_Vibes, Karla } from 'next/font/google';
 import './globals.css';
-
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-cormorant',
-  display: 'swap',
-});
 
 const greatVibes = Great_Vibes({
   subsets: ['latin'],
@@ -31,9 +24,9 @@ export const metadata: Metadata = {
 /**
  * mobile-native baseline (viewport-fit=cover so safe-area env() vars are
  * live; theme-color per scheme matching the ivory chrome; interactive-widget
- * so the Android keyboard shrinks the layout like iOS). Fonts (v1.2 review):
- * Great Vibes = script for names, Cormorant Garamond = headings/display,
- * Karla = body.
+ * so the Android keyboard shrinks the layout like iOS). Fonts (v1.2.2):
+ * Karla = everything (display + body), Great Vibes = script accents only
+ * (names, celebration); Cormorant Garamond removed by the couple's call.
  */
 export const viewport: Viewport = {
   width: 'device-width',
@@ -48,7 +41,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${greatVibes.variable} ${karla.variable}`}>
+    <html lang="en" className={`${greatVibes.variable} ${karla.variable}`}>
       <body className="min-h-[100dvh]">{children}</body>
     </html>
   );

@@ -21,11 +21,11 @@ export function Hero() {
         <h1
           id="hero-title"
           tabIndex={-1}
-          className="font-script text-[64px] leading-[1.2] text-ink outline-none sm:text-[92px]"
+          className="font-script text-[64px] leading-[1.15] text-ink outline-none sm:text-[92px]"
         >
-          {couple.names.split(' & ')[0]} <br></br>
-          <span className="text-primary">&</span> <br></br>
-          {couple.names.split(' & ')[1]}
+          <span className="block pb-[0.06em]">{couple.names.split(' & ')[0]}</span>
+          <span className="block text-primary">&</span>
+          <span className="block pb-[0.06em]">{couple.names.split(' & ')[1]}</span>
         </h1>
         <div className="flex max-w-[46ch] flex-col items-center gap-3">
           <p className="font-display text-h3 text-ink">{invitation.heroMessage.lead}</p>

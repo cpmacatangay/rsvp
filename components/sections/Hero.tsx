@@ -23,7 +23,8 @@ export function Hero() {
           tabIndex={-1}
           className="font-script text-[64px] leading-[1.2] text-ink outline-none sm:text-[92px]"
         >
-          {couple.names.split(' & ')[0]} <span className="text-primary">&</span>{' '}
+          {couple.names.split(' & ')[0]} <br></br>
+          <span className="text-primary">&</span> <br></br>
           {couple.names.split(' & ')[1]}
         </h1>
         <div className="flex max-w-[46ch] flex-col items-center gap-3">

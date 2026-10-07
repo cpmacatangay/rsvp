@@ -4,11 +4,11 @@ import { Section } from '~/components/ui/Section';
 import { timeline } from '~/lib/config';
 
 /**
- * Wedding-day timeline (v1.2 review): editorial blocks, not a table —
- * each moment is a free-standing block with a hairline icon (no circle),
- * an oversized display-serif time and its label, separated by whitespace
- * and a single thin rule. No container, no rail, no column chrome.
- * Icon keys verified against the installed Phosphor set (lib/config.ts).
+ * Wedding-day timeline (v1.3): compact one-line itinerary rows — free
+ * hairline icon, a fixed-width time column (so labels align down the list)
+ * and the label filling the row. This replaces the earlier two-line blocks
+ * whose stacked time + wide empty right half wasted space. One hairline
+ * between rows, no container, no rail, no circles.
  */
 
 const ICONS = {
@@ -25,26 +25,24 @@ const ICONS = {
 export function TimelineSection() {
   return (
     <Section id="timeline" ariaLabel="How the day runs" title="How the Day Runs">
-      <ol className="mt-8 flex flex-col">
+      <ol className="mt-5 flex flex-col">
         {timeline.map((item, index) => {
           const IconComponent = ICONS[item.icon];
           return (
             <li
               key={item.time}
-              className={`flex items-start gap-5 py-5 ${index > 0 ? 'border-line border-t' : ''}`}
+              className={`flex items-center gap-4 py-3 ${index > 0 ? 'border-line border-t' : ''}`}
             >
               <IconComponent
                 aria-hidden="true"
-                size={26}
+                size={20}
                 weight="light"
-                className="mt-1.5 shrink-0 text-primary"
+                className="shrink-0 text-primary"
               />
-              <div className="flex flex-col gap-0.5">
-                <span className="font-display text-h2 leading-tight tabular-nums text-ink">
-                  {item.time}
-                </span>
-                <span className="font-body text-body text-ink-soft">{item.label}</span>
-              </div>
+              <span className="w-[5.4rem] shrink-0 font-body text-body font-semibold tabular-nums text-ink sm:w-[6rem]">
+                {item.time}
+              </span>
+              <span className="font-body text-body text-ink-soft">{item.label}</span>
             </li>
           );
         })}

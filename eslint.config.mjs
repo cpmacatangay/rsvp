@@ -9,7 +9,20 @@ const compat = new FlatCompat({
 const eslintConfig = [
   {
     // global ignores: generated + vendored files (RULES.md tooling hygiene)
-    ignores: ['.next/**', 'out/**', 'node_modules/**', '.git/**', 'assets/**', 'next-env.d.ts'],
+    ignores: [
+      '.next/**',
+      'out/**',
+      'node_modules/**',
+      '.git/**',
+      'assets/**',
+      'next-env.d.ts',
+      // agent-harness skill folders (vendored tooling; real dirs after the
+      // 2026-10-07 impeccable reinstall — no longer symlinks ESLint skips)
+      '.agents/**',
+      '.claude/**',
+      '.opencode/**',
+      '.playwright-mcp/**',
+    ],
   },
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
   {

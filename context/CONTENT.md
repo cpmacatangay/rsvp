@@ -1,5 +1,5 @@
 # Confirmed Content & Inputs — rsvp
-**Status:** Confirmed records · **Updated:** 2026-09-28
+**Status:** Confirmed records · **Updated:** 2026-10-08
 **Legend:** **CONFIRMED** = user-provided fact. **RECOMMENDATION** = drafted, needs user approval. **OPEN** = user to supply (ship-gated).
 
 ---
@@ -14,6 +14,8 @@
 | Venue | Minor Basilica and National Shrine of Our Lady of Peñafrancia | CONFIRMED |
 | City | Naga City, Camarines Sur, Philippines | CONFIRMED (from the couple's own maps link) |
 | Maps link | https://maps.app.goo.gl/axEuRdLZbETTy5UXA | CONFIRMED |
+| Reception venue | Villa Caceres Hotel | CONFIRMED (couple, 2026-10-08; name resolved from their maps link) |
+| Reception maps link | https://maps.app.goo.gl/z8DwwBUbPT3CZM4ZA | CONFIRMED (couple, 2026-10-08) |
 | RSVP deadline | July 10, 2028, end-of-day Asia/Manila | CONFIRMED (provisional: couple noted it might change; lives in `RSVP_DEADLINE_DATE` env only) |
 | Deadline timezone | Asia/Manila | CONFIRMED |
 

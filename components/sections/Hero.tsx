@@ -26,7 +26,7 @@ export function Hero() {
           <span className="block text-[0.65em] leading-[0.9] text-primary">&</span>
           <span className="block pb-[0.1em]">{couple.names.split(' & ')[1]}</span>
         </h1>
-        <p className="max-w-[52ch] text-left font-body text-body text-ink-soft">
+        <p className="max-w-[52ch] text-center font-body text-body text-ink-soft">
           {invitation.heroMessage}
         </p>
       </div>

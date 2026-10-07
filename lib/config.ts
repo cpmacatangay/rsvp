@@ -14,7 +14,9 @@ export const venue = {
   name: 'Minor Basilica and National Shrine of Our Lady of Peñafrancia',
   city: 'Naga City, Camarines Sur, Philippines',
   mapsUrl: 'https://maps.app.goo.gl/axEuRdLZbETTy5UXA',
-  receptionNote: 'Reception to follow',
+  /** Reception venue confirmed by the couple 2026-10-08 (CONTENT.md §1). */
+  receptionName: 'Villa Caceres Hotel',
+  receptionMapsUrl: 'https://maps.app.goo.gl/z8DwwBUbPT3CZM4ZA',
 } as const;
 
 /**
@@ -74,7 +76,7 @@ export const invitation = {
   curtainHint: 'Tap anywhere to open',
   /** hero message (v1.3.2): one paragraph, couple-approved tone */
   heroMessage:
-    'We would like to invite you to celebrate the beginning of our forever. On August 6, 2028, we will say our vows surrounded by the people we love most, and we are saving a place for you. Come as you are, bring your joy, and share this day with us.',
+    'We would like to invite you to celebrate the beginning of our forever. On our special day, we will say our vows surrounded by the people we love most, and we are saving a place for you. Come as you are, bring your joy, and share this day with us.',
   scratchHint: 'Scratch to discover the date',
   celebration: "We're getting married!",
   /** circle values are display-only; the machine date stays in weddingDate */

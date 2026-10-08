@@ -238,6 +238,9 @@ also been 404). Officially reinstalled 2026-10-07 via
 a gate here. It immediately earned the reinstall by flagging the curtain's
 4px one-sided gold border as a side-tab tell, now fixed with a gradient trim
 (v1.2.1).
+Image qualities: every `quality={n}` passed to `next/image` must be declared in
+`images.qualities` in `next.config.ts` (required from Next.js 16; currently
+`[75, 80]`). Adding a new value means updating that list in the same change.
 
 ---
 

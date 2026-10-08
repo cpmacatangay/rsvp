@@ -241,6 +241,9 @@ a gate here. It immediately earned the reinstall by flagging the curtain's
 Image qualities: every `quality={n}` passed to `next/image` must be declared in
 `images.qualities` in `next.config.ts` (required from Next.js 16; currently
 `[75, 80]`). Adding a new value means updating that list in the same change.
+Full-page captures: scroll reveals hide below-the-fold sections, so automated
+full-page screenshots must append `?capture=1` (or `?reveal=off`) to show the
+final state. Reduced-motion users and `navigator.webdriver` get it automatically.
 
 ---
 

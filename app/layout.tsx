@@ -42,7 +42,18 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${greatVibes.variable} ${karla.variable}`}>
-      <body className="min-h-[100dvh]">{children}</body>
+      <body className="min-h-[100dvh]">
+        {/* Pre-paint opt-in for scroll reveals: set before sections paint so
+            above-the-fold sections animate in without a flash. Skipped for
+            reduced-motion users and automated browsers (full-page captures). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var p=new URLSearchParams(location.search);if(!(p.get('reveal')==='off'||p.has('capture'))&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!navigator.webdriver){document.documentElement.classList.add('js-reveal')}}catch(e){}",
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

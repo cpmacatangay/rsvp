@@ -344,6 +344,17 @@ for older readers; the RSVP section states the env-driven deadline ("Please
 respond by July 10, 2028.") via `deadlineDisplayDate` while the page stays
 statically generated. Residual: text-only zoom below 380px.
 
+### v1.4 — scroll-entry reveals (2026-10-08)
+Each `main > section` now rises in (opacity + 24px translate, 480ms ease-enter)
+when it enters from below, and replays on the next downward pass; exiting
+upward keeps it revealed. Driven by `components/motion/ScrollReveal`
+(IntersectionObserver, `rootMargin` −12% bottom, transition-based so replays
+are interruptible). The hidden start state lives behind `.js-reveal`, set by a
+pre-paint inline script so above-the-fold sections animate on load without a
+flash. Capture-safe: `.js-reveal` is withheld for reduced-motion, for
+`navigator.webdriver`, and for `?capture=1` / `?reveal=off`. Full-page QA
+captures must use `?capture=1` (stealth automation is not reliably detectable).
+
 ---
 
 ## 14. Taste Application Log (Stage 2 deliverable)

@@ -8,6 +8,7 @@ import { DressCodeSection } from '~/components/sections/DressCodeSection';
 import { StorySection } from '~/components/sections/StorySection';
 import { RsvpSection } from '~/components/sections/RsvpSection';
 import { RsvpStickyCta } from '~/components/sections/RsvpStickyCta';
+import { ScrollReveal } from '~/components/motion/ScrollReveal';
 import { Footer } from '~/components/sections/Footer';
 
 /**
@@ -36,6 +37,7 @@ export default function HomePage() {
         <Footer />
       </div>
       <RsvpStickyCta />
+      <ScrollReveal />
     </>
   );
 }

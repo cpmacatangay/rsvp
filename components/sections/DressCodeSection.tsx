@@ -32,15 +32,13 @@ export function DressCodeSection() {
             </li>
           ))}
         </ul>
-        <div className="overflow-hidden rounded-lg border border-line bg-card shadow-card">
-          <Image
-            src={dressCodePhoto}
-            alt="Guests in festive celebration attire posing among tall cacti, as attire inspiration"
-            className="h-auto w-full object-cover"
-            sizes="(max-width: 768px) 100vw, 768px"
-            quality={80}
-          />
-        </div>
+        <Image
+          src={dressCodePhoto}
+          alt="Guests in festive celebration attire posing among tall cacti, as attire inspiration"
+          className="h-auto w-full rounded-lg object-cover"
+          sizes="(max-width: 768px) 100vw, 768px"
+          quality={80}
+        />
       </div>
     </Section>
   );

@@ -3,9 +3,9 @@ import type { ReactNode } from 'react';
 /**
  * Section shell — DESIGN §5/§6: single column on the locked measure.
  * Proportion: headings sit tight to their content (16px); blocks breathe.
- * Entry motion = pure CSS (`reveal-rise` keyframes + staggered delays in
- * globals.css on `main > section`) — clock-based, deterministic in captures,
- * no JS required, reduced-motion collapses to instantly-visible.
+ * Entry motion (v1.4+): scroll-triggered reveals driven by `ScrollReveal` +
+ * `.js-reveal` in globals.css; reduced-motion, no-JS, and `?capture=1` show
+ * the final state immediately.
  */
 type SectionProps = {
   id: string;

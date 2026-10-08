@@ -149,10 +149,12 @@ exists per page: the hero wordmark).
 
 ## 6. Layout & Grid
 
-Single scrolling column, no dashboard grids on the guest page. Sections order:
-hero → countdown+location → our story → day schedule → dress code → RSVP →
-footer. The RSVP form is the page's most important object: it gets the
-clearest visual weight (white card on ivory, strongest shadow).
+Single scrolling column, no dashboard grids on the guest page. Section order:
+hero → scratch-the-date → countdown → venues → day schedule → dress code →
+story → RSVP → footer. The guest page is **card-free** (v1.6): hierarchy comes
+from type, spacing, and hairline rules — not boxes. The RSVP form is the page's
+most important object; it earns weight through position, type, and the sticky
+RSVP affordance (not a card).
 
 ### Grid breakpoints
 
@@ -369,6 +371,16 @@ celebration line 500→700ms; scratch circle 200→300ms; back-to-top 150→220m
 curtain hint pulse 2.2→2.6s. (v1.4.x) `suppressHydrationWarning` on `<html>`
 fixes the `js-reveal` hydration mismatch in dev.
 
+### v1.6 — unboxing + venue consistency (2026-10-09)
+Guest page is card-free: the two venue `Card`s and the dress-code photo frame
+lose their fill/border/shadow; content sits on the ivory/warm surface with
+hierarchy from type + spacing (impeccable anti-card). Admin login unboxed
+(`DoubleBezel` retired; `Card`/`cardRecipe` remain for admin data surfaces).
+Venues rebuilt as one identical structure (title → name → "Get directions"),
+equal height with buttons pinned to the bottom; reception shows the hotel name
+only, church keeps its confirmed name. Church location verified against
+CONTENT.md §1 / the maps link.
+
 ---
 
 ## 14. Taste Application Log (Stage 2 deliverable)
@@ -416,7 +428,7 @@ aesthetic, leaning toward Tailwind v4 token system + restrained motion."
 | Display serif | DTF §4.1 bans Fraunces as a default: it is one of the two "LLM-favorite" display serifs. Override allowed with explicit brand justification (preflight: "or it is, with explicit brand justification") | **Superseded (v1.2.2):** the couple removed both display serifs. Karla now carries display and body; Great Vibes is the only decorative face. The earlier Fraunces justification is retained here for history but no longer applies |
 | Icon library | DTF §3.C discourages lucide (allowed if requested/already used); high-end §2 bans thick-stroked icons | **RESOLVED (couple confirmed at the M3 wrap-up):** `@phosphor-icons/react` (weight `light`) is the project icon set; DESIGN §8 updated accordingly |
 | Eyebrows | DTF §4.7 cap: max 1 eyebrow per 3 sections, hero counts as 1 | Form-card sketch amended: its "RSVP" eyebrow is dropped (headlines carry the sections). Page will use **zero decorative eyebrows**; the type scale keeps the 13px badge level reserved for semantic badges only |
-| Card architecture | high-end §4.A "Double-Bezel": outer shell + inner core with concentric radii | Adopted concentrically **within the approved radius scale** (`rounded-lg` outer, mathematically smaller inner). No 2rem squircles vs the locked 16px system |
+| Card architecture | high-end §4.A "Double-Bezel": outer shell + inner core with concentric radii | **Retired (v1.6):** the guest page is card-free and the admin login was unboxed; the `DoubleBezel` primitive is removed. Cards remain only for admin data surfaces (stat tiles, table). |
 | Section padding | high-end §4.C demands py-24 minimum (its mobile rule allows px-4/py-8 <768px) | Desktop `py-24` as decided (approved); mobile `py-16` exceeds the skill's own mobile minimum (py-8) |
 | Accent count | DTF §4.2 "max 1 accent" | Champagne gold is decoration-only (thin rules/ornaments); **interactive accent = sage, locked page-wide**. No interactive element ever uses gold |
 | Hero stack | DTF §4.7: max 4 text elements, subtext ≤ 20 words, prefs pt-24 cap | Hero = names (headline, 1-2 lines) + one date/location subtext line ≤ 20 words + 1 CTA; no eyebrow; padding ≤ pt-24 on desktop |

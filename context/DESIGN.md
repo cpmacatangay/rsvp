@@ -381,6 +381,15 @@ equal height with buttons pinned to the bottom; reception shows the hotel name
 only, church keeps its confirmed name. Church location verified against
 CONTENT.md §1 / the maps link.
 
+### v1.7 — painted venue photos (2026-10-09)
+Each venue block gained a photo above its text (`assets/venue/church.png`,
+`reception.png`), identical for both: 4:3 landscape crop (`object-cover`) under
+a soft feathered mask — two nested linear-gradient masks (`.venue-art-fade-x`
+/ `-y`) fade all four edges so the painting bleeds into the page with no sides
+or borders. The church source is portrait, so its focal point is tuned to the
+facade/tower (`object-position: 50% 45%`). Delivery stays light via
+`next/image` (AVIF: church ~78 KB, reception ~41 KB at w=640).
+
 ---
 
 ## 14. Taste Application Log (Stage 2 deliverable)

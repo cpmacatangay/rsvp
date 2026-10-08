@@ -40,12 +40,15 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // suppressHydrationWarning: the pre-paint script below adds `js-reveal` to
+  // <html> before hydration, so React must not warn about the extra class
+  // (standard pattern for theme/reveal bootstrap scripts).
   return (
-    <html lang="en" className={`${greatVibes.variable} ${karla.variable}`}>
+    <html lang="en" className={`${greatVibes.variable} ${karla.variable}`} suppressHydrationWarning>
       <body className="min-h-[100dvh]">
         {/* Pre-paint opt-in for scroll reveals: set before sections paint so
             above-the-fold sections animate in without a flash. Skipped for
-            reduced-motion users and automated browsers (full-page captures). */}
+            reduced-motion users, automated browsers, and ?capture=1. */}
         <script
           dangerouslySetInnerHTML={{
             __html:

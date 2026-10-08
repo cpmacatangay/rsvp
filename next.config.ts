@@ -2,8 +2,10 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   images: {
-    // couple's hero photo ships AVIF-first per DESIGN.md hero rules
+    // AVIF-first; qualities must be declared explicitly from Next.js 16.
+    // 80 = dress-code sample photo; 75 = Next's default for any future image.
     formats: ['image/avif', 'image/webp'],
+    qualities: [75, 80],
   },
   async headers() {
     return [

@@ -74,7 +74,7 @@ export function CountdownCell({ targetMs }: { targetMs: number | null }) {
             <span
               key={`${label}-${r[key]}`}
               className="font-display text-[clamp(30px,11vw,40px)] leading-none tabular-nums text-ink sm:text-[52px]"
-              style={{ animation: 'count-fade 180ms var(--ease-enter)' }}
+              style={{ animation: 'count-fade 320ms var(--ease-enter)' }}
             >
               {r[key]}
             </span>

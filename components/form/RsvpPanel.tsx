@@ -94,13 +94,13 @@ export function RsvpPanel() {
         animate: {
           opacity: 1,
           transform: 'translateY(0px)',
-          transition: { duration: 0.24, ease: enterEase },
+          transition: { duration: 0.38, ease: enterEase },
         },
         exit: {
           opacity: 0,
           transform: 'translateY(-8px)',
           /** asymmetric: the system always steps aside faster (Emil §Timing) */
-          transition: { duration: 0.15, ease: exitEase },
+          transition: { duration: 0.22, ease: exitEase },
         },
       };
 
@@ -139,7 +139,7 @@ export function RsvpPanel() {
               ref={successRef}
               tabIndex={-1}
               {...motionSettings}
-              transition={{ duration: reduce ? 0.01 : 0.3, ease: successEase }}
+              transition={{ duration: reduce ? 0.01 : 0.45, ease: successEase }}
               className="flex flex-col gap-4 outline-none"
               role="status"
             >
@@ -149,7 +149,7 @@ export function RsvpPanel() {
             <motion.div
               key="closed"
               {...motionSettings}
-              transition={{ duration: reduce ? 0.01 : 0.24, ease: enterEase }}
+              transition={{ duration: reduce ? 0.01 : 0.38, ease: enterEase }}
               className="flex flex-col gap-3"
             >
               <h3 className="font-display text-h1 text-ink">{copy.closedHeadline}</h3>
@@ -160,7 +160,7 @@ export function RsvpPanel() {
               <motion.div
                 key="search"
                 {...motionSettings}
-                transition={{ duration: reduce ? 0.01 : 0.24, ease: enterEase }}
+                transition={{ duration: reduce ? 0.01 : 0.38, ease: enterEase }}
                 className="flex flex-col gap-3"
               >
                 {searchContent}
@@ -172,7 +172,7 @@ export function RsvpPanel() {
             <motion.form
               key="answer"
               {...motionSettings}
-              transition={{ duration: reduce ? 0.01 : 0.24, ease: enterEase }}
+              transition={{ duration: reduce ? 0.01 : 0.38, ease: enterEase }}
               action={formAction}
               className="flex flex-col gap-4"
             >

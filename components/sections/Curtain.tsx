@@ -8,7 +8,7 @@ import { invitation } from '~/lib/config';
  * The invitation curtain (v1.3.3, critique P1b): lighter woven linen with a
  * visible rod and legible meeting edges; ONE accessible control covers the
  * overlay (tap anywhere, wheel/touch scroll, or Escape dismisses it); the
- * sweep is faster (1.1s after a 150ms beat, unmount at ~1.3s). Seen state
+ * sweep is 1.5s after a 200ms beat (unmount at ~1.75s). Seen state
  * persists in localStorage (sessionStorage is unreliable in in-app messaging
  * browsers), and a #rsvp deep link skips the curtain entirely. While closed,
  * the page behind is `inert` so focus and AT stay inside the cover.
@@ -60,11 +60,11 @@ export function Curtain() {
     } catch {
       // write failed → the curtain simply shows again next visit
     }
-    // budget: 150ms beat + 1100ms sweep = 1250ms; unmount a beat later
+    // budget: 200ms beat + 1500ms sweep = 1700ms; unmount a beat later
     window.setTimeout(() => {
       setPhase('gone');
       document.getElementById('hero-title')?.focus();
-    }, 1300);
+    }, 1750);
   }
 
   if (phase === 'gone') return null;
@@ -84,7 +84,7 @@ export function Curtain() {
       {/* LEFT panel (decorative: the overlay control handles interaction) */}
       <div
         aria-hidden="true"
-        className={`absolute inset-y-0 left-0 w-1/2 overflow-hidden shadow-[inset_-48px_0_64px_-36px_rgba(0,0,0,0.45)] transition-transform duration-[1100ms] ease-[cubic-bezier(0.32,0.72,0,1)] delay-150 ${
+        className={`absolute inset-y-0 left-0 w-1/2 overflow-hidden shadow-[inset_-48px_0_64px_-36px_rgba(0,0,0,0.45)] transition-transform duration-[1500ms] ease-[cubic-bezier(0.32,0.72,0,1)] delay-200 ${
           opening ? '-translate-x-full' : 'translate-x-0'
         }`}
       >
@@ -94,7 +94,7 @@ export function Curtain() {
       {/* RIGHT panel */}
       <div
         aria-hidden="true"
-        className={`absolute inset-y-0 right-0 w-1/2 overflow-hidden shadow-[inset_48px_0_64px_-36px_rgba(0,0,0,0.45)] transition-transform duration-[1100ms] ease-[cubic-bezier(0.32,0.72,0,1)] delay-150 ${
+        className={`absolute inset-y-0 right-0 w-1/2 overflow-hidden shadow-[inset_48px_0_64px_-36px_rgba(0,0,0,0.45)] transition-transform duration-[1500ms] ease-[cubic-bezier(0.32,0.72,0,1)] delay-200 ${
           opening ? 'translate-x-full' : 'translate-x-0'
         }`}
       >
@@ -104,7 +104,7 @@ export function Curtain() {
       {/* the rod */}
       <div
         aria-hidden="true"
-        className={`curtain-rod absolute inset-x-0 top-0 h-3 transition-opacity duration-150 ${
+        className={`curtain-rod absolute inset-x-0 top-0 h-3 transition-opacity duration-200 ${
           opening ? 'opacity-0' : 'opacity-100'
         }`}
       />
@@ -124,7 +124,7 @@ export function Curtain() {
         }`}
       >
         <span
-          className={`absolute bottom-16 left-1/2 -translate-x-1/2 font-body text-badge uppercase text-page-ivory/90 transition-opacity duration-200 ${
+          className={`absolute bottom-16 left-1/2 -translate-x-1/2 font-body text-badge uppercase text-page-ivory/90 transition-opacity duration-300 ${
             opening ? 'opacity-0' : 'curtain-hint-pulse opacity-100'
           }`}
         >

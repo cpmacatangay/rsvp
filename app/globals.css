@@ -135,7 +135,7 @@
   }
 
   .curtain-hint-pulse {
-    animation: curtain-hint-pulse 2.2s var(--ease-enter) infinite;
+    animation: curtain-hint-pulse 2.6s var(--ease-enter) infinite;
   }
 
   /* curtain fabric (v1.3.3): lighter woven linen — softer fold shading,
@@ -190,10 +190,10 @@
    */
   .js-reveal main > section {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(32px);
     transition:
-      opacity 480ms var(--ease-enter),
-      transform 480ms var(--ease-enter);
+      opacity 700ms var(--ease-enter),
+      transform 700ms var(--ease-enter);
   }
 
   .js-reveal main > section.is-revealed {

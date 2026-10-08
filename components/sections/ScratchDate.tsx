@@ -168,7 +168,7 @@ export function ScratchDate() {
           <li key={key} className="flex flex-col items-center gap-2">
             <div className="relative">
               <span
-                className={`flex h-24 w-24 select-none items-center justify-center rounded-full border-[1.5px] border-line bg-card font-display text-h2 text-primary transition-transform duration-200 ease-enter ${
+                className={`flex h-24 w-24 select-none items-center justify-center rounded-full border-[1.5px] border-line bg-card font-display text-h2 text-primary transition-transform duration-300 ease-enter ${
                   revealed[key] ? 'scale-100' : 'scale-95 opacity-40'
                 } motion-reduce:transition-none`}
                 aria-hidden={revealed[key] ? undefined : true}
@@ -225,7 +225,7 @@ export function ScratchDate() {
           aria-hidden="true"
         />
         <p
-          className={`font-script text-[44px] leading-[1.25] text-primary transition-all duration-500 ease-enter sm:text-[56px] ${
+          className={`font-script text-[44px] leading-[1.25] text-primary transition-all duration-700 ease-enter sm:text-[56px] ${
             celebrate ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
           }`}
         >

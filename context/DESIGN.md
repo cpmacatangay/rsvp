@@ -216,17 +216,22 @@ not from color fills — per `emil-design-eng` (no border/radius clashes).
 ## 9. Animations & Transitions
 
 All motion transforms `transform`/`opacity` only, `motion-reduce:` variants
-ship for everything; durations from emil/animate rules: enter 220–300ms
-ease-out, exit 120–180ms ease-in, no bounce on data-critical UI.
+ship for everything. Two tiers (emil): **functional feedback stays fast**
+(100–160ms — press, hover, focus); **authored entrances/celebrations run
+slower** for an elegant, editorial feel (v1.5: reveal 700ms, curtain sweep
+1.5s, success 450ms). No bounce on data-critical UI.
 
 | Element | Animation | Duration | Easing |
 |---|---|---|---|
-| Sections on scroll | fade + 12px rise (IntersectionObserver, once) | 300ms | ease-out |
+| Sections on scroll | fade + 32px rise (IntersectionObserver, replays on downward entry) | 700ms | ease-out |
+| Curtain sweep | two panels part (200ms beat first) | 1500ms | drawer curve |
 | Household card reveal | height+fade | 240ms | ease-out |
 | Accept/Decline pills | background-color 150ms, active scale .98 | 150ms | ease-out |
-| Success state | crossfade to card + single soft "rise" | 300ms | ease-out |
+| Success state | crossfade to card + single soft "rise" | 450ms | ease-out |
 | Confidence details in success | stagger children | 60ms/child | ease-out |
-| Countdown digits | crossfade on change | 180ms | ease-out |
+| Countdown digits | crossfade on change | 320ms | ease-out |
+| Celebration line | fade + scale-in | 700ms | ease-out |
+| Sticky RSVP pill / back-to-top | opacity + rise | 320 / 220ms | ease-out |
 | Focus states | ring-color 120ms | 120ms | linear |
 
 Banned: bounce/elastic easings, layout-property transitions, parallax gems,
@@ -354,6 +359,15 @@ pre-paint inline script so above-the-fold sections animate on load without a
 flash. Capture-safe: `.js-reveal` is withheld for reduced-motion, for
 `navigator.webdriver`, and for `?capture=1` / `?reveal=off`. Full-page QA
 captures must use `?capture=1` (stealth automation is not reliably detectable).
+
+### v1.5 — slower authored motion (2026-10-09)
+The couple asked for slower motion. Authored entrances slowed; functional
+feedback left fast (emil). Section reveals 480→700ms with 32px travel; curtain
+beat/sweep 150→200ms / 1.1→1.5s (unmount ~1.75s); countdown fade 180→320ms;
+RSVP enter/exit/success 240/150/300→380/220/450ms; sticky pill 200→320ms;
+celebration line 500→700ms; scratch circle 200→300ms; back-to-top 150→220ms;
+curtain hint pulse 2.2→2.6s. (v1.4.x) `suppressHydrationWarning` on `<html>`
+fixes the `js-reveal` hydration mismatch in dev.
 
 ---
 

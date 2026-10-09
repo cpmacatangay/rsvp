@@ -390,6 +390,18 @@ or borders. The church source is portrait, so its focal point is tuned to the
 facade/tower (`object-position: 50% 45%`). Delivery stays light via
 `next/image` (AVIF: church ~78 KB, reception ~41 KB at w=640).
 
+### v1.8 — premium venue art + Next 16 (2026-10-09)
+Supersedes v1.7's faded rectangle (a vignette tell). Each painting is now an
+organic torn-brush panel: an SVG alpha mask (`public/venue-mask.svg`, a blurred
+irregular path) for the soft painted edge, a parent `drop-shadow` (0 16px 28px)
+that follows that silhouette for depth, and a warm ivory veil + slight
+desaturation (`saturate(0.85)`) to harmonize the vivid canvas with the palette.
+Smaller (86%, max 320px) with more air; the type leads. Source images optimized
+to `assets/venue/*.jpg` (~313 KB each); the unused PNGs and originals removed.
+Platform: upgraded to **Next.js 16.4.0** (the `allowedDevOrigins`,
+`images.qualities`, and `suppressHydrationWarning` settings we'd already added
+are the Next-16 requirements).
+
 ---
 
 ## 14. Taste Application Log (Stage 2 deliverable)

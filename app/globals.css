@@ -182,42 +182,28 @@
   }
 
   /*
-   * Venue art (v1.7): painted photos with no sides or borders. Two nested
-   * linear-gradient masks feather all four edges (corners soften doubly), so
-   * the painting bleeds into the page instead of sitting in a rectangle.
+   * Venue art (v1.8): each painting is laid on the page as an organic,
+   * torn-brush panel. An SVG alpha mask (a blurred irregular path,
+   * /venue-mask.svg) gives the soft painted edge; a parent drop-shadow follows
+   * that silhouette for real depth (offset + blur, per the craft floor); and a
+   * warm ivory veil + slight desaturation harmonizes the vivid canvas with the
+   * ivory/sage palette.
    */
-  .venue-art-fade-x {
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent 0,
-      #000 12%,
-      #000 88%,
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      to right,
-      transparent 0,
-      #000 12%,
-      #000 88%,
-      transparent 100%
-    );
+  .venue-art-shadow {
+    filter: drop-shadow(0 16px 28px rgba(47, 42, 32, 0.18));
   }
 
-  .venue-art-fade-y {
-    -webkit-mask-image: linear-gradient(
-      to bottom,
-      transparent 0,
-      #000 12%,
-      #000 88%,
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      to bottom,
-      transparent 0,
-      #000 12%,
-      #000 88%,
-      transparent 100%
-    );
+  .venue-art-mask {
+    -webkit-mask-image: url('/venue-mask.svg');
+    -webkit-mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-image: url('/venue-mask.svg');
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+  }
+
+  .venue-art-img {
+    filter: saturate(0.85);
   }
 
   /*

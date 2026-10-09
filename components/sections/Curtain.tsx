@@ -53,8 +53,12 @@ export function Curtain() {
     };
   }, [phase, mounted]);
 
-  // hand off to the hero entrance once the curtain is gone (or was skipped)
+  // hand-off: `invitation-opening` starts the tied-drape cinch as the cover is
+  // drawn; `invitation-open` (once the cover is gone) starts the hero entrance.
   useEffect(() => {
+    if (phase === 'opening') {
+      document.documentElement.classList.add('invitation-opening');
+    }
     if (phase === 'gone') {
       document.documentElement.classList.add('invitation-open');
     }
@@ -88,7 +92,7 @@ export function Curtain() {
           Wavy inner edge + gather keyframe; the right panel leads by 150ms. */}
       <div
         aria-hidden="true"
-        className={`curtain-edge-left absolute inset-y-0 left-0 w-[54%] origin-left overflow-hidden shadow-[inset_-48px_0_64px_-36px_rgba(0,0,0,0.45)] ${
+        className={`curtain-edge-left absolute inset-y-0 left-0 w-[54%] origin-top-left overflow-hidden shadow-[inset_-48px_0_64px_-36px_rgba(0,0,0,0.45)] ${
           opening ? 'curtain-open-left' : ''
         }`}
       >
@@ -98,7 +102,7 @@ export function Curtain() {
       {/* RIGHT panel (54% so the two overlap at the centre — no closed seam) */}
       <div
         aria-hidden="true"
-        className={`curtain-edge-right absolute inset-y-0 right-0 w-[54%] origin-right overflow-hidden shadow-[inset_48px_0_64px_-36px_rgba(0,0,0,0.45)] ${
+        className={`curtain-edge-right absolute inset-y-0 right-0 w-[54%] origin-top-right overflow-hidden shadow-[inset_48px_0_64px_-36px_rgba(0,0,0,0.45)] ${
           opening ? 'curtain-open-right' : ''
         }`}
       >

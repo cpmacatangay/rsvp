@@ -470,6 +470,17 @@ drawn aside and, as it clears, the tied drapes are revealed and frame the
 content like a stage. Content is inset by `--drape-w` (`clamp(40px, 11vw,
 110px)`) — applied to Section/Hero/Footer padding — so nothing sits under them.
 
+### v1.18 — drape frame belongs to the hero; drawn-and-tied opening (2026-10-10)
+The couple wanted the drapes to scroll away with the hero (not a fixed frame)
+and the opening to feel drawn-and-tied rather than mechanical. The drapes now
+live INSIDE the hero (absolute; they scroll away with it) and the inset applies
+to the hero only (`--drape-w: 11.88%`, matching the cover's final compressed
+width) — Sections/Footer are full width again. The cover keyframe now carries
+fabric **sway** (rotate about the rod) and momentum, gathers down to the tie,
+then fades into the tied drape; a new `invitation-opening` class starts the
+drape **cinch** (scaleX 1.7 → 1) during the fade, while `invitation-open`
+(when the cover is gone) still starts the hero entrance.
+
 ---
 
 ## 14. Taste Application Log (Stage 2 deliverable)

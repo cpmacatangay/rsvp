@@ -8,7 +8,7 @@ import { couple, copy, venue } from '~/lib/config';
  */
 export function Footer() {
   return (
-    <footer className="border-line border-t bg-warm px-[max(1.25rem,var(--drape-w))] py-12 text-center">
+    <footer className="border-line border-t bg-warm px-5 py-12 text-center sm:px-6">
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-2">
         <p className="font-display text-h3 text-ink">{couple.names}</p>
         <p className="font-body text-body text-ink-soft">{copy.tagline}</p>

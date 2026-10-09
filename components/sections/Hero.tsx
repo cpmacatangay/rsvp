@@ -1,3 +1,4 @@
+import { Drapes } from '~/components/sections/Drapes';
 import { couple, invitation } from '~/lib/config';
 
 /**
@@ -20,9 +21,10 @@ export function Hero() {
     <header
       id="hero"
       aria-label={`${couple.names} wedding`}
-      className="flex min-h-[100dvh] flex-col items-center justify-center gap-8 px-[max(1.25rem,var(--drape-w))] pb-20 text-center"
+      className="relative flex min-h-[100dvh] flex-col items-center justify-center gap-8 px-[max(1.25rem,var(--drape-w))] pb-20 text-center"
     >
-      <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6">
+      <Drapes />
+      <div className="relative mx-auto flex w-full max-w-3xl flex-col items-center gap-6">
         <h1
           id="hero-title"
           tabIndex={-1}

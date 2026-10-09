@@ -187,40 +187,61 @@
    * edge with a soft settle, then clears off-screen. The right panel leads by
    * 150ms so the draw reads asymmetric, not mirrored.
    */
-  /* gather from the centre to the side, then a held "tied" beat, then clear */
+  /*
+   * Drawn to the side with fabric sway (rotate about the rod) and momentum,
+   * gathering down to the tie, then fading into the tied drape that takes over.
+   */
   @keyframes curtain-gather-left {
     0% {
-      transform: translateX(0) scaleX(1);
+      transform: translateX(0) scaleX(1) rotate(0deg);
+      opacity: 1;
     }
-    52% {
-      transform: translateX(0) scaleX(0.2);
+    42% {
+      transform: translateX(0) scaleX(0.52) rotate(-1.6deg);
+      opacity: 1;
     }
-    66% {
-      transform: translateX(0) scaleX(0.26);
+    64% {
+      transform: translateX(0) scaleX(0.24) rotate(1.1deg);
+      opacity: 1;
     }
-    82% {
-      transform: translateX(0) scaleX(0.26);
+    80% {
+      transform: translateX(0) scaleX(0.22) rotate(-0.5deg);
+      opacity: 1;
+    }
+    90% {
+      transform: translateX(0) scaleX(0.22) rotate(0deg);
+      opacity: 1;
     }
     100% {
-      transform: translateX(-100%) scaleX(0.26);
+      transform: translateX(0) scaleX(0.22) rotate(0deg);
+      opacity: 0;
     }
   }
 
   @keyframes curtain-gather-right {
     0% {
-      transform: translateX(0) scaleX(1);
+      transform: translateX(0) scaleX(1) rotate(0deg);
+      opacity: 1;
     }
-    52% {
-      transform: translateX(0) scaleX(0.2);
+    42% {
+      transform: translateX(0) scaleX(0.52) rotate(1.6deg);
+      opacity: 1;
     }
-    66% {
-      transform: translateX(0) scaleX(0.26);
+    64% {
+      transform: translateX(0) scaleX(0.24) rotate(-1.1deg);
+      opacity: 1;
     }
-    82% {
-      transform: translateX(0) scaleX(0.26);
+    80% {
+      transform: translateX(0) scaleX(0.22) rotate(0.5deg);
+      opacity: 1;
+    }
+    90% {
+      transform: translateX(0) scaleX(0.22) rotate(0deg);
+      opacity: 1;
     }
     100% {
-      transform: translateX(100%) scaleX(0.26);
+      transform: translateX(0) scaleX(0.22) rotate(0deg);
+      opacity: 0;
     }
   }
 
@@ -258,7 +279,8 @@
    * page content is inset by --drape-w so nothing sits under them.
    */
   :root {
-    --drape-w: clamp(40px, 11vw, 110px);
+    /* matches the cover's final compressed width (0.22 × 54% of viewport) */
+    --drape-w: 11.88%;
   }
 
   .drape {
@@ -270,10 +292,35 @@
 
   .drape-left {
     left: 0;
+    transform-origin: top left;
   }
 
   .drape-right {
     right: 0;
+    transform-origin: top right;
+  }
+
+  /* the tied drape cinches in with a sway as the cover fades into it */
+  .js-reveal .drape {
+    opacity: 0;
+    transition:
+      transform 1000ms var(--ease-enter),
+      opacity 600ms var(--ease-enter);
+    transition-delay: 2200ms;
+  }
+
+  .js-reveal .drape-left {
+    transform: scaleX(1.7) rotate(-1.2deg);
+  }
+
+  .js-reveal .drape-right {
+    transform: scaleX(1.7) rotate(1.2deg);
+  }
+
+  .invitation-opening .drape,
+  .invitation-open .drape {
+    opacity: 1;
+    transform: none;
   }
 
   .drape-fabric {

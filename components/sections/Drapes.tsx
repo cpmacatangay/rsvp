@@ -1,14 +1,13 @@
 /**
- * Tied-back drapes (v1.17): a persistent frame. Two sage drapes, each cinched
+ * Tied-back drapes (v1.18): a frame for the hero. Two sage drapes, each cinched
  * at mid-height by a gold tieback (hourglass silhouette from an SVG mask,
- * fold-lined fabric), stay at the left/right edges once the cover curtain is
- * drawn aside — framing the content like a theatre stage. Decorative and
- * non-interactive; sits above the page content (z-40) but below the cover
- * curtain (z-50), so it is revealed as the cover opens.
+ * fold-lined fabric), sit at the left/right edges of the hero — they scroll
+ * away with it. They cinch into place as the cover curtain is drawn aside and
+ * fades into them. Decorative and non-interactive.
  */
 export function Drapes() {
   return (
-    <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-40">
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0">
       <div className="drape drape-left">
         <div className="drape-fabric" />
         <div className="drape-tieback drape-tieback-left" />

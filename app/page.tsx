@@ -9,6 +9,7 @@ import { StorySection } from '~/components/sections/StorySection';
 import { RsvpSection } from '~/components/sections/RsvpSection';
 import { RsvpStickyCta } from '~/components/sections/RsvpStickyCta';
 import { ScrollReveal } from '~/components/motion/ScrollReveal';
+import { Drapes } from '~/components/sections/Drapes';
 import { Footer } from '~/components/sections/Footer';
 
 /**
@@ -38,6 +39,7 @@ export default function HomePage() {
       </div>
       <RsvpStickyCta />
       <ScrollReveal />
+      <Drapes />
     </>
   );
 }

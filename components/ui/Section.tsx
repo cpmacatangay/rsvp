@@ -23,7 +23,7 @@ export function Section({ id, ariaLabel, title, tone = 'ivory', children, classN
     <section
       id={id}
       aria-label={ariaLabel}
-      className={`px-5 py-16 sm:px-6 sm:py-24 ${tone === 'warm' ? 'bg-warm' : 'bg-page-ivory'} ${className}`}
+      className={`px-[max(1.25rem,var(--drape-w))] py-16 sm:py-24 ${tone === 'warm' ? 'bg-warm' : 'bg-page-ivory'} ${className}`}
     >
       <div className="mx-auto flex w-full max-w-3xl flex-col">
         {title ? <h2 className="font-display text-h1 text-ink">{title}</h2> : null}

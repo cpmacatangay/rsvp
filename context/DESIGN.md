@@ -460,6 +460,16 @@ overlap at the centre (no gap when closed — only the gold meeting line shows),
 and the keyframe is gather → hold a "tied" beat (scaleX 0.2 → 0.26, held
 66–82%) → clear off-screen. The wavy leading edges and the 150ms stagger stay.
 
+### v1.17 — tied-back drape frame (2026-10-10)
+Per the couple's reference, the curtain is now a **tied-back theatre drape** that
+STAYS. `components/sections/Drapes.tsx` renders two sage drapes fixed at the
+left/right edges (z-40, below the z-50 cover): each is cinched at mid-height by
+a **gold tieback** and shaped as an hourglass by an SVG mask
+(`public/drape-mask.svg` / `-flip.svg`) over fold-lined fabric. The cover is
+drawn aside and, as it clears, the tied drapes are revealed and frame the
+content like a stage. Content is inset by `--drape-w` (`clamp(40px, 11vw,
+110px)`) — applied to Section/Hero/Footer padding — so nothing sits under them.
+
 ---
 
 ## 14. Taste Application Log (Stage 2 deliverable)

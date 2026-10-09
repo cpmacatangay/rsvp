@@ -20,7 +20,7 @@ export function Hero() {
     <header
       id="hero"
       aria-label={`${couple.names} wedding`}
-      className="flex min-h-[100dvh] flex-col items-center justify-center gap-8 px-5 pb-20 text-center sm:px-6"
+      className="flex min-h-[100dvh] flex-col items-center justify-center gap-8 px-[max(1.25rem,var(--drape-w))] pb-20 text-center"
     >
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6">
         <h1

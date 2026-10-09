@@ -252,6 +252,73 @@
   }
 
   /*
+   * Tied-back drapes (v1.17): the persistent sage frame. Each drape is cinched
+   * at mid-height by a gold tieback (hourglass silhouette from an SVG mask,
+   * fold-lined fabric) and stays at the screen edge, framing the content. The
+   * page content is inset by --drape-w so nothing sits under them.
+   */
+  :root {
+    --drape-w: clamp(40px, 11vw, 110px);
+  }
+
+  .drape {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--drape-w);
+  }
+
+  .drape-left {
+    left: 0;
+  }
+
+  .drape-right {
+    right: 0;
+  }
+
+  .drape-fabric {
+    position: absolute;
+    inset: 0;
+    background-color: #7d8c6f;
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(250, 247, 240, 0.1) 0px,
+      rgba(47, 42, 32, 0.12) 9px,
+      rgba(250, 247, 240, 0.06) 20px,
+      rgba(47, 42, 32, 0.16) 32px
+    );
+    -webkit-mask-image: url('/drape-mask.svg');
+    -webkit-mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-image: url('/drape-mask.svg');
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+  }
+
+  .drape-fabric-flip {
+    -webkit-mask-image: url('/drape-mask-flip.svg');
+    mask-image: url('/drape-mask-flip.svg');
+  }
+
+  .drape-tieback {
+    position: absolute;
+    top: calc(45% - 6px);
+    height: 12px;
+    width: 52%;
+    border-radius: 2px;
+    background-image: linear-gradient(180deg, #e2cc8d, #b79b5b 45%, #8f7a45);
+    box-shadow: 0 1px 3px rgba(47, 42, 32, 0.35);
+  }
+
+  .drape-tieback-left {
+    left: 0;
+  }
+
+  .drape-tieback-right {
+    right: 0;
+  }
+
+  /*
    * Venue art (v1.10): the page is the canvas. An SVG alpha mask
    * (/venue-mask.svg — a gently turbulence-displaced, widely blurred edge)
    * dissolves the painting into the page so there is no perceivable boundary;

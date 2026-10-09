@@ -5,10 +5,11 @@ import { useEffect, useState } from 'react';
 import { invitation } from '~/lib/config';
 
 /**
- * The invitation curtain (v1.13). Opening reads like fabric being drawn aside:
- * each half-panel translates off-screen AND compresses toward its outer edge
- * (transform-origin at the rod side), so the folds gather as it goes, over a
- * slow cinematic 2.8s sweep after a 350ms beat. ONE accessible control covers
+ * The invitation curtain (v1.15). Opening reads like wavy drapes being drawn
+ * aside by hand: each half-panel has a wavy fabric leading edge (SVG alpha
+ * mask) and gathers toward its rod-side edge with a soft settle, then clears
+ * off-screen. The two panels draw unevenly — the right leads by 150ms — so the
+ * motion is asymmetric, not a mirrored squeeze. ONE accessible control covers
  * the overlay (tap anywhere, wheel/touch scroll, or Escape).
  *
  * Visibility: the curtain shows on EVERY page load / refresh — there is no
@@ -61,11 +62,11 @@ export function Curtain() {
   function open() {
     if (phase !== 'closed') return;
     setPhase('opening');
-    // budget: 350ms beat + 2800ms sweep = 3150ms; unmount a beat later
+    // budget: right panel 500ms delay + 2800ms sweep = 3300ms; unmount a beat later
     window.setTimeout(() => {
       setPhase('gone');
       document.getElementById('hero-title')?.focus();
-    }, 3250);
+    }, 3400);
   }
 
   if (phase === 'gone') return null;
@@ -83,10 +84,10 @@ export function Curtain() {
       {phase === 'closed' ? <style>{'body{overflow:hidden!important}'}</style> : null}
 
       {/* LEFT panel (decorative: the overlay control handles interaction).
-          origin-left + the gather keyframe squeeze the fabric to the rod side. */}
+          Wavy inner edge + gather keyframe; the right panel leads by 150ms. */}
       <div
         aria-hidden="true"
-        className={`absolute inset-y-0 left-0 w-1/2 origin-left overflow-hidden shadow-[inset_-48px_0_64px_-36px_rgba(0,0,0,0.45)] ${
+        className={`curtain-edge-left absolute inset-y-0 left-0 w-1/2 origin-left overflow-hidden shadow-[inset_-48px_0_64px_-36px_rgba(0,0,0,0.45)] ${
           opening ? 'curtain-open-left' : ''
         }`}
       >
@@ -96,7 +97,7 @@ export function Curtain() {
       {/* RIGHT panel */}
       <div
         aria-hidden="true"
-        className={`absolute inset-y-0 right-0 w-1/2 origin-right overflow-hidden shadow-[inset_48px_0_64px_-36px_rgba(0,0,0,0.45)] ${
+        className={`curtain-edge-right absolute inset-y-0 right-0 w-1/2 origin-right overflow-hidden shadow-[inset_48px_0_64px_-36px_rgba(0,0,0,0.45)] ${
           opening ? 'curtain-open-right' : ''
         }`}
       >

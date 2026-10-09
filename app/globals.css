@@ -182,20 +182,23 @@
   }
 
   /*
-   * Curtain opening (v1.14): the fabric GATHERS. Each half-panel compresses
-   * toward its rod-side edge (transform-origin left/right) so the folds squeeze
-   * into a tight bunch at the edge, then the bunch clears off-screen. A
-   * one-shot keyframe (not a transition) so the gather is unmistakable.
+   * Curtain opening (v1.15): wavy drapes, drawn unevenly. Each half-panel has a
+   * wavy fabric leading edge (SVG alpha mask) and gathers toward its rod-side
+   * edge with a soft settle, then clears off-screen. The right panel leads by
+   * 150ms so the draw reads asymmetric, not mirrored.
    */
   @keyframes curtain-gather-left {
     0% {
       transform: translateX(0) scaleX(1);
     }
-    62% {
-      transform: translateX(0) scaleX(0.2);
+    58% {
+      transform: translateX(0) scaleX(0.18);
+    }
+    72% {
+      transform: translateX(0) scaleX(0.24);
     }
     100% {
-      transform: translateX(-100%) scaleX(0.2);
+      transform: translateX(-100%) scaleX(0.24);
     }
   }
 
@@ -203,11 +206,14 @@
     0% {
       transform: translateX(0) scaleX(1);
     }
-    62% {
-      transform: translateX(0) scaleX(0.2);
+    58% {
+      transform: translateX(0) scaleX(0.18);
+    }
+    72% {
+      transform: translateX(0) scaleX(0.24);
     }
     100% {
-      transform: translateX(100%) scaleX(0.2);
+      transform: translateX(100%) scaleX(0.24);
     }
   }
 
@@ -216,7 +222,26 @@
   }
 
   .curtain-open-right {
-    animation: curtain-gather-right 2800ms cubic-bezier(0.5, 0, 0.2, 1) 350ms forwards;
+    animation: curtain-gather-right 2800ms cubic-bezier(0.5, 0, 0.2, 1) 500ms forwards;
+  }
+
+  /* wavy fabric leading edge (the inner edge of each panel) */
+  .curtain-edge-left {
+    -webkit-mask-image: url('/curtain-edge.svg');
+    -webkit-mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-image: url('/curtain-edge.svg');
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+  }
+
+  .curtain-edge-right {
+    -webkit-mask-image: url('/curtain-edge-flip.svg');
+    -webkit-mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-image: url('/curtain-edge-flip.svg');
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
   }
 
   /*

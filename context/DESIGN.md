@@ -445,6 +445,14 @@ rod-side edge to `scaleX(0.2)` (folds squeeze into a tight bunch at the edge),
 then the bunch clears off-screen — 2.8s after a 350ms beat. Verified mid-motion
 scaleX 0.98 → 0.36 → 0.20.
 
+### v1.15 — wavy drapes, drawn unevenly (2026-10-10)
+The mirrored squeeze read mechanical. Each half-panel now has a **wavy fabric
+leading edge** (SVG alpha mask, `public/curtain-edge.svg` / `-flip.svg`, wave
+biting inward from the panel boundary so the closed seam is a fine wavy line),
+and the two panels draw **unevenly** — the right leads by 150ms — with a soft
+settle (gather to 0.18, relax to 0.24) before clearing. Verified mid-draw the
+left is at scaleX 0.52 while the right is at 0.73.
+
 ---
 
 ## 14. Taste Application Log (Stage 2 deliverable)

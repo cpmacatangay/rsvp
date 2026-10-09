@@ -431,6 +431,13 @@ so reduced-motion/no-JS/captures show the hero at once). Everything slowed:
 reveals 700→1000ms (+40px), countdown 320→500ms, RSVP 380/220/450→550/320/700ms,
 celebration 700→1000ms, pill 320→450ms, hint pulse 2.6→3.4s.
 
+### v1.13 — curtain always on load (2026-10-10)
+Couple never saw the curtain because it was once-per-browser (`localStorage`
+`curtain-opened-v2`). Removed that persistence and the `#rsvp` deep-link skip:
+the curtain now shows on **every page load / refresh**. It stays a one-shot
+overlay, so it never re-appears when the guest scrolls back up to the hero or
+navigates an in-page anchor. The only skip is the QA `?capture=1` flag.
+
 ---
 
 ## 14. Taste Application Log (Stage 2 deliverable)

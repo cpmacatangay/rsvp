@@ -5,32 +5,29 @@ import { useEffect, useState } from 'react';
 import { invitation } from '~/lib/config';
 
 /**
- * The invitation curtain (v1.12). Opening reads like fabric being drawn aside:
+ * The invitation curtain (v1.13). Opening reads like fabric being drawn aside:
  * each half-panel translates off-screen AND compresses toward its outer edge
  * (transform-origin at the rod side), so the folds gather as it goes, over a
  * slow cinematic 2.8s sweep after a 350ms beat. ONE accessible control covers
- * the overlay (tap anywhere, wheel/touch scroll, or Escape). Seen state
- * persists in localStorage; a #rsvp deep link skips the curtain. While closed,
- * the page behind is `inert`. When the curtain is gone it adds
+ * the overlay (tap anywhere, wheel/touch scroll, or Escape).
+ *
+ * Visibility: the curtain shows on EVERY page load / refresh — there is no
+ * once-per-session persistence — and it is a one-shot overlay, so it never
+ * re-appears when the guest scrolls back up to the hero or navigates an in-page
+ * anchor. The only skip is the QA `?capture=1` flag (so full-page screenshots
+ * aren't covered). While closed, the page behind is `inert`. When it is gone it adds
  * `invitation-open` to <html>, which triggers the hero's entrance (Hero.tsx /
  * globals.css).
  */
-
-const SEEN_KEY = 'curtain-opened-v2';
-
 export function Curtain() {
   const [phase, setPhase] = useState<'closed' | 'opening' | 'gone'>('closed');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    let seen = false;
-    try {
-      seen = window.localStorage.getItem(SEEN_KEY) === '1';
-    } catch {
-      seen = false;
-    }
-    const deepLinked = window.location.hash === '#rsvp';
-    if (seen || deepLinked) setPhase('gone');
+    // QA-only escape hatch: full-page captures must not be covered by the
+    // curtain. Guests (no param) always see it on load.
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('reveal') === 'off' || params.has('capture')) setPhase('gone');
     setMounted(true);
   }, []);
 
@@ -64,11 +61,6 @@ export function Curtain() {
   function open() {
     if (phase !== 'closed') return;
     setPhase('opening');
-    try {
-      window.localStorage.setItem(SEEN_KEY, '1');
-    } catch {
-      // write failed → the curtain simply shows again next visit
-    }
     // budget: 350ms beat + 2800ms sweep = 3150ms; unmount a beat later
     window.setTimeout(() => {
       setPhase('gone');

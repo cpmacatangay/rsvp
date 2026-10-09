@@ -182,17 +182,11 @@
   }
 
   /*
-   * Venue art (v1.8): each painting is laid on the page as an organic,
-   * torn-brush panel. An SVG alpha mask (a blurred irregular path,
-   * /venue-mask.svg) gives the soft painted edge; a parent drop-shadow follows
-   * that silhouette for real depth (offset + blur, per the craft floor); and a
-   * warm ivory veil + slight desaturation harmonizes the vivid canvas with the
-   * ivory/sage palette.
+   * Venue art (v1.9): the painting is brushed onto the page. An SVG alpha mask
+   * (/venue-mask.svg — a turbulence-displaced, blurred edge) gives a painterly
+   * brush boundary; no veil, no shadow, full colour, so it reads as paint on
+   * paper rather than a cut-out sticker.
    */
-  .venue-art-shadow {
-    filter: drop-shadow(0 16px 28px rgba(47, 42, 32, 0.18));
-  }
-
   .venue-art-mask {
     -webkit-mask-image: url('/venue-mask.svg');
     -webkit-mask-size: 100% 100%;
@@ -200,10 +194,6 @@
     mask-image: url('/venue-mask.svg');
     mask-size: 100% 100%;
     mask-repeat: no-repeat;
-  }
-
-  .venue-art-img {
-    filter: saturate(0.85);
   }
 
   /*

@@ -5,13 +5,15 @@ import { useEffect, useState } from 'react';
 import { invitation } from '~/lib/config';
 
 /**
- * The invitation curtain (v1.3.3, critique P1b): lighter woven linen with a
- * visible rod and legible meeting edges; ONE accessible control covers the
- * overlay (tap anywhere, wheel/touch scroll, or Escape dismisses it); the
- * sweep is 1.5s after a 200ms beat (unmount at ~1.75s). Seen state
- * persists in localStorage (sessionStorage is unreliable in in-app messaging
- * browsers), and a #rsvp deep link skips the curtain entirely. While closed,
- * the page behind is `inert` so focus and AT stay inside the cover.
+ * The invitation curtain (v1.12). Opening reads like fabric being drawn aside:
+ * each half-panel translates off-screen AND compresses toward its outer edge
+ * (transform-origin at the rod side), so the folds gather as it goes, over a
+ * slow cinematic 2.8s sweep after a 350ms beat. ONE accessible control covers
+ * the overlay (tap anywhere, wheel/touch scroll, or Escape). Seen state
+ * persists in localStorage; a #rsvp deep link skips the curtain. While closed,
+ * the page behind is `inert`. When the curtain is gone it adds
+ * `invitation-open` to <html>, which triggers the hero's entrance (Hero.tsx /
+ * globals.css).
  */
 
 const SEEN_KEY = 'curtain-opened-v2';
@@ -52,6 +54,13 @@ export function Curtain() {
     };
   }, [phase, mounted]);
 
+  // hand off to the hero entrance once the curtain is gone (or was skipped)
+  useEffect(() => {
+    if (phase === 'gone') {
+      document.documentElement.classList.add('invitation-open');
+    }
+  }, [phase]);
+
   function open() {
     if (phase !== 'closed') return;
     setPhase('opening');
@@ -60,11 +69,11 @@ export function Curtain() {
     } catch {
       // write failed → the curtain simply shows again next visit
     }
-    // budget: 200ms beat + 1500ms sweep = 1700ms; unmount a beat later
+    // budget: 350ms beat + 2800ms sweep = 3150ms; unmount a beat later
     window.setTimeout(() => {
       setPhase('gone');
       document.getElementById('hero-title')?.focus();
-    }, 1750);
+    }, 3250);
   }
 
   if (phase === 'gone') return null;
@@ -81,11 +90,12 @@ export function Curtain() {
     >
       {phase === 'closed' ? <style>{'body{overflow:hidden!important}'}</style> : null}
 
-      {/* LEFT panel (decorative: the overlay control handles interaction) */}
+      {/* LEFT panel (decorative: the overlay control handles interaction).
+          origin-left + scale-x makes the fabric gather toward the rod side. */}
       <div
         aria-hidden="true"
-        className={`absolute inset-y-0 left-0 w-1/2 overflow-hidden shadow-[inset_-48px_0_64px_-36px_rgba(0,0,0,0.45)] transition-transform duration-[1500ms] ease-[cubic-bezier(0.32,0.72,0,1)] delay-200 ${
-          opening ? '-translate-x-full' : 'translate-x-0'
+        className={`absolute inset-y-0 left-0 w-1/2 origin-left overflow-hidden shadow-[inset_-48px_0_64px_-36px_rgba(0,0,0,0.45)] transition-transform duration-[2800ms] ease-[cubic-bezier(0.45,0,0.15,1)] delay-[350ms] ${
+          opening ? '-translate-x-full scale-x-[0.42]' : 'translate-x-0 scale-x-100'
         }`}
       >
         <Panel side="left" />
@@ -94,8 +104,8 @@ export function Curtain() {
       {/* RIGHT panel */}
       <div
         aria-hidden="true"
-        className={`absolute inset-y-0 right-0 w-1/2 overflow-hidden shadow-[inset_48px_0_64px_-36px_rgba(0,0,0,0.45)] transition-transform duration-[1500ms] ease-[cubic-bezier(0.32,0.72,0,1)] delay-200 ${
-          opening ? 'translate-x-full' : 'translate-x-0'
+        className={`absolute inset-y-0 right-0 w-1/2 origin-right overflow-hidden shadow-[inset_48px_0_64px_-36px_rgba(0,0,0,0.45)] transition-transform duration-[2800ms] ease-[cubic-bezier(0.45,0,0.15,1)] delay-[350ms] ${
+          opening ? 'translate-x-full scale-x-[0.42]' : 'translate-x-0 scale-x-100'
         }`}
       >
         <Panel side="right" />
@@ -104,7 +114,7 @@ export function Curtain() {
       {/* the rod */}
       <div
         aria-hidden="true"
-        className={`curtain-rod absolute inset-x-0 top-0 h-3 transition-opacity duration-200 ${
+        className={`curtain-rod absolute inset-x-0 top-0 h-3 transition-opacity duration-500 ${
           opening ? 'opacity-0' : 'opacity-100'
         }`}
       />
@@ -124,7 +134,7 @@ export function Curtain() {
         }`}
       >
         <span
-          className={`absolute bottom-16 left-1/2 -translate-x-1/2 font-body text-badge uppercase text-page-ivory/90 transition-opacity duration-300 ${
+          className={`absolute bottom-16 left-1/2 -translate-x-1/2 font-body text-badge uppercase text-page-ivory/90 transition-opacity duration-500 ${
             opening ? 'opacity-0' : 'curtain-hint-pulse opacity-100'
           }`}
         >

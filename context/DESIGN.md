@@ -217,23 +217,24 @@ not from color fills — per `emil-design-eng` (no border/radius clashes).
 
 ## 9. Animations & Transitions
 
-All motion transforms `transform`/`opacity` only, `motion-reduce:` variants
-ship for everything. Two tiers (emil): **functional feedback stays fast**
-(100–160ms — press, hover, focus); **authored entrances/celebrations run
-slower** for an elegant, editorial feel (v1.5: reveal 700ms, curtain sweep
-1.5s, success 450ms). No bounce on data-critical UI.
+All motion transforms `transform`/`opacity`/`translate`/`scale`/`filter` only,
+`motion-reduce:` variants ship for everything. Two tiers (emil): **functional
+feedback stays fast** (100–160ms — press, hover, focus); **authored
+entrances/celebrations run slow and cinematic** (v1.12: curtain 2.8s, hero
+stagger, reveal 1s, success 700ms). No bounce on data-critical UI.
 
 | Element | Animation | Duration | Easing |
 |---|---|---|---|
-| Sections on scroll | fade + 32px rise (IntersectionObserver, replays on downward entry) | 700ms | ease-out |
-| Curtain sweep | two panels part (200ms beat first) | 1500ms | drawer curve |
+| Hero entrance (after curtain) | names + ampersand + message rise/blur on a stagger | 1300–1400ms, 300ms apart | ease-out |
+| Sections on scroll | fade + 40px rise (IntersectionObserver, replays on downward entry) | 1000ms | ease-out |
+| Curtain sweep | panels gather toward the rod edges (translate + scaleX) | 2800ms (350ms beat) | fabric curve |
 | Household card reveal | height+fade | 240ms | ease-out |
 | Accept/Decline pills | background-color 150ms, active scale .98 | 150ms | ease-out |
-| Success state | crossfade to card + single soft "rise" | 450ms | ease-out |
+| Success state | crossfade to card + single soft "rise" | 700ms | ease-out |
 | Confidence details in success | stagger children | 60ms/child | ease-out |
-| Countdown digits | crossfade on change | 320ms | ease-out |
-| Celebration line | fade + scale-in | 700ms | ease-out |
-| Sticky RSVP pill / back-to-top | opacity + rise | 320 / 220ms | ease-out |
+| Countdown digits | crossfade on change | 500ms | ease-out |
+| Celebration line | fade + scale-in | 1000ms | ease-out |
+| Sticky RSVP pill / back-to-top | opacity + rise | 450 / 320ms | ease-out |
 | Focus states | ring-color 120ms | 120ms | linear |
 
 Banned: bounce/elastic easings, layout-property transitions, parallax gems,
@@ -416,6 +417,19 @@ spot, each block carries a decorative, heavily blurred copy of its painting
 (`blur-2xl`, `scale-125`, opacity 0.12) behind the art and text, so the
 painting's own colours wash into the ivory. Text stays `ink` on ivory (13.3:1);
 the bleed is `aria-hidden` and pointer-events-none.
+
+### v1.12 — cinematic motion: real curtain, hero entrance (2026-10-10)
+Couple asked for the curtain to feel like fabric actually being drawn aside,
+for the hero to perform after it opens, and for everything slower/cinematic.
+Curtain: each half-panel now translates off-screen AND compresses toward its
+rod-side edge (`origin-left`/`origin-right` + `scaleX 0.42`), so the folds
+gather as it opens — 2.8s sweep after a 350ms beat (verified mid-sweep
+translate −57% / scale 0.67). Hero: names, ampersand, and message rise in with
+a blur-to-sharp on a 300ms stagger once the curtain adds `.invitation-open` to
+<html> (immediately for returning guests; hidden state gated behind `.js-reveal`
+so reduced-motion/no-JS/captures show the hero at once). Everything slowed:
+reveals 700→1000ms (+40px), countdown 320→500ms, RSVP 380/220/450→550/320/700ms,
+celebration 700→1000ms, pill 320→450ms, hint pulse 2.6→3.4s.
 
 ---
 

@@ -8,6 +8,12 @@ import { couple, invitation } from '~/lib/config';
  *
  * Script-font care: Great Vibes has long ascenders/descenders, so each name
  * line keeps a small bottom reserve while the leading stays tight.
+ *
+ * Entrance (v1.12): the names, ampersand, and message carry `hero-*` classes.
+ * globals.css hides them when `.js-reveal` is present and reveals them on a
+ * slow cinematic stagger once the curtain adds `.invitation-open` (so the hero
+ * performs right after the curtain opens, and immediately for returning
+ * guests). Pure CSS — this stays a server component.
  */
 export function Hero() {
   return (
@@ -22,11 +28,15 @@ export function Hero() {
           tabIndex={-1}
           className="font-script text-[64px] leading-[0.95] text-ink outline-none sm:text-[92px]"
         >
-          <span className="block pb-[0.1em]">{couple.names.split(' & ')[0]}</span>
-          <span className="block text-[0.65em] leading-[0.9] text-primary">&</span>
-          <span className="block pb-[0.1em]">{couple.names.split(' & ')[1]}</span>
+          <span className="hero-line hero-line-1 block pb-[0.1em]">
+            {couple.names.split(' & ')[0]}
+          </span>
+          <span className="hero-amp block text-[0.65em] leading-[0.9] text-primary">&</span>
+          <span className="hero-line hero-line-2 block pb-[0.1em]">
+            {couple.names.split(' & ')[1]}
+          </span>
         </h1>
-        <p className="max-w-[52ch] text-center font-body text-body text-ink-soft">
+        <p className="hero-para max-w-[52ch] text-center font-body text-body text-ink-soft">
           {invitation.heroMessage}
         </p>
       </div>

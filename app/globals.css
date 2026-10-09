@@ -135,7 +135,7 @@
   }
 
   .curtain-hint-pulse {
-    animation: curtain-hint-pulse 2.6s var(--ease-enter) infinite;
+    animation: curtain-hint-pulse 3.4s var(--ease-enter) infinite;
   }
 
   /* curtain fabric (v1.3.3): lighter woven linen — softer fold shading,
@@ -197,6 +197,59 @@
   }
 
   /*
+   * Hero entrance (v1.12): after the curtain opens (`.invitation-open` on
+   * <html>) the name lines, ampersand, and message rise in on a slow cinematic
+   * stagger. The hidden state is gated behind `.js-reveal`, so reduced-motion,
+   * no-JS, and captures show the hero immediately.
+   */
+  .js-reveal .hero-line {
+    opacity: 0;
+    transform: translateY(44px);
+    filter: blur(12px);
+  }
+
+  .js-reveal .hero-amp {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  .js-reveal .hero-para {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(6px);
+  }
+
+  .hero-line,
+  .hero-amp,
+  .hero-para {
+    transition:
+      opacity 1300ms var(--ease-enter),
+      transform 1400ms var(--ease-enter),
+      filter 1200ms var(--ease-enter);
+  }
+
+  .hero-line-1 {
+    transition-delay: 0ms;
+  }
+  .hero-amp {
+    transition-delay: 300ms;
+  }
+  .hero-line-2 {
+    transition-delay: 600ms;
+  }
+  .hero-para {
+    transition-delay: 1050ms;
+  }
+
+  .invitation-open .hero-line,
+  .invitation-open .hero-amp,
+  .invitation-open .hero-para {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+
+  /*
    * Section scroll reveals (v1.4): each `main > section` rises in when it
    * enters from below and replays on the next downward pass. The hidden start
    * state applies ONLY when the ScrollReveal script opts in with `.js-reveal`,
@@ -205,10 +258,10 @@
    */
   .js-reveal main > section {
     opacity: 0;
-    transform: translateY(32px);
+    transform: translateY(40px);
     transition:
-      opacity 700ms var(--ease-enter),
-      transform 700ms var(--ease-enter);
+      opacity 1000ms var(--ease-enter),
+      transform 1000ms var(--ease-enter);
   }
 
   .js-reveal main > section.is-revealed {

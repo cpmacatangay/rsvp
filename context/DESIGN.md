@@ -410,6 +410,13 @@ that dissolves the painting into the page — the page reads as the canvas, with
 no perceivable boundary. v1.10 softened the displacement (scale 18) and widened
 the blur (stdDeviation 11) for a gentler fade.
 
+### v1.11 — colour bleed (page as canvas) (2026-10-09)
+To make the whole venue block feel painted rather than an image sitting in one
+spot, each block carries a decorative, heavily blurred copy of its painting
+(`blur-2xl`, `scale-125`, opacity 0.18) behind the art and text, so the
+painting's own colours wash into the ivory. Text stays `ink` on ivory (13.3:1);
+the bleed is `aria-hidden` and pointer-events-none.
+
 ---
 
 ## 14. Taste Application Log (Stage 2 deliverable)

@@ -26,7 +26,7 @@ export function Hero() {
         <h1
           id="hero-title"
           tabIndex={-1}
-          className="font-script text-[64px] leading-[0.95] text-ink outline-none sm:text-[92px]"
+          className="font-script text-[52px] leading-[0.95] text-ink outline-none sm:text-[92px]"
         >
           <span className="hero-line hero-line-1 block pb-[0.1em]">
             {couple.names.split(' & ')[0]}

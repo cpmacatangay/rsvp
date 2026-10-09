@@ -453,6 +453,13 @@ and the two panels draw **unevenly** — the right leads by 150ms — with a sof
 settle (gather to 0.18, relax to 0.24) before clearing. Verified mid-draw the
 left is at scaleX 0.52 while the right is at 0.73.
 
+### v1.16 — theatre curtain, seam closed (2026-10-10)
+The couple wanted the closed seam gone and the opening to read as a theatre
+curtain drawn to the sides and tied. Each panel is now 54% wide so the two
+overlap at the centre (no gap when closed — only the gold meeting line shows),
+and the keyframe is gather → hold a "tied" beat (scaleX 0.2 → 0.26, held
+66–82%) → clear off-screen. The wavy leading edges and the 150ms stagger stay.
+
 ---
 
 ## 14. Taste Application Log (Stage 2 deliverable)

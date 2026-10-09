@@ -5,10 +5,11 @@ import { useEffect, useState } from 'react';
 import { invitation } from '~/lib/config';
 
 /**
- * The invitation curtain (v1.15). Opening reads like wavy drapes being drawn
- * aside by hand: each half-panel has a wavy fabric leading edge (SVG alpha
- * mask) and gathers toward its rod-side edge with a soft settle, then clears
- * off-screen. The two panels draw unevenly — the right leads by 150ms — so the
+ * The invitation curtain (v1.16). Reads like a theatre curtain: each panel has
+ * a wavy fabric leading edge (SVG alpha mask) and the two overlap at the centre
+ * (54% each) so there is NO closed seam. Opening draws them from the centre out
+ * to the sides — gathering into a bunch, holding a "tied" beat, then clearing
+ * off-screen — and the two draw unevenly (the right leads by 150ms) so the
  * motion is asymmetric, not a mirrored squeeze. ONE accessible control covers
  * the overlay (tap anywhere, wheel/touch scroll, or Escape).
  *
@@ -87,17 +88,17 @@ export function Curtain() {
           Wavy inner edge + gather keyframe; the right panel leads by 150ms. */}
       <div
         aria-hidden="true"
-        className={`curtain-edge-left absolute inset-y-0 left-0 w-1/2 origin-left overflow-hidden shadow-[inset_-48px_0_64px_-36px_rgba(0,0,0,0.45)] ${
+        className={`curtain-edge-left absolute inset-y-0 left-0 w-[54%] origin-left overflow-hidden shadow-[inset_-48px_0_64px_-36px_rgba(0,0,0,0.45)] ${
           opening ? 'curtain-open-left' : ''
         }`}
       >
         <Panel side="left" />
       </div>
 
-      {/* RIGHT panel */}
+      {/* RIGHT panel (54% so the two overlap at the centre — no closed seam) */}
       <div
         aria-hidden="true"
-        className={`curtain-edge-right absolute inset-y-0 right-0 w-1/2 origin-right overflow-hidden shadow-[inset_48px_0_64px_-36px_rgba(0,0,0,0.45)] ${
+        className={`curtain-edge-right absolute inset-y-0 right-0 w-[54%] origin-right overflow-hidden shadow-[inset_48px_0_64px_-36px_rgba(0,0,0,0.45)] ${
           opening ? 'curtain-open-right' : ''
         }`}
       >

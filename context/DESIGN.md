@@ -402,6 +402,14 @@ Platform: upgraded to **Next.js 16.4.0** (the `allowedDevOrigins`,
 `images.qualities`, and `suppressHydrationWarning` settings we'd already added
 are the Next-16 requirements).
 
+### v1.9–v1.10 — venue art: brushed into the page (2026-10-09)
+v1.8's torn cut-out + washed veil + sticker shadow read cheap, so it was
+reworked: no veil, no shadow, full colour, full-width. The edge is a
+turbulence-displaced, widely blurred SVG alpha mask (`public/venue-mask.svg`)
+that dissolves the painting into the page — the page reads as the canvas, with
+no perceivable boundary. v1.10 softened the displacement (scale 18) and widened
+the blur (stdDeviation 11) for a gentler fade.
+
 ---
 
 ## 14. Taste Application Log (Stage 2 deliverable)

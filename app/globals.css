@@ -182,10 +182,10 @@
   }
 
   /*
-   * Venue art (v1.9): the painting is brushed onto the page. An SVG alpha mask
-   * (/venue-mask.svg — a turbulence-displaced, blurred edge) gives a painterly
-   * brush boundary; no veil, no shadow, full colour, so it reads as paint on
-   * paper rather than a cut-out sticker.
+   * Venue art (v1.10): the page is the canvas. An SVG alpha mask
+   * (/venue-mask.svg — a gently turbulence-displaced, widely blurred edge)
+   * dissolves the painting into the page so there is no perceivable boundary;
+   * no veil, no shadow, full colour.
    */
   .venue-art-mask {
     -webkit-mask-image: url('/venue-mask.svg');

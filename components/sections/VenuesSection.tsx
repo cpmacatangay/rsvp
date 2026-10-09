@@ -45,7 +45,7 @@ export function VenuesSection() {
             {/* colour bleed: the painting's own colours wash into the page */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -inset-x-6 -top-6 -bottom-4 z-0 overflow-hidden opacity-[0.18] blur-2xl"
+              className="pointer-events-none absolute -inset-x-6 -top-6 -bottom-4 z-0 overflow-hidden opacity-[0.12] blur-2xl"
             >
               <Image
                 src={photo}

@@ -83,11 +83,11 @@ export function Curtain() {
       {phase === 'closed' ? <style>{'body{overflow:hidden!important}'}</style> : null}
 
       {/* LEFT panel (decorative: the overlay control handles interaction).
-          origin-left + scale-x makes the fabric gather toward the rod side. */}
+          origin-left + the gather keyframe squeeze the fabric to the rod side. */}
       <div
         aria-hidden="true"
-        className={`absolute inset-y-0 left-0 w-1/2 origin-left overflow-hidden shadow-[inset_-48px_0_64px_-36px_rgba(0,0,0,0.45)] transition-transform duration-[2800ms] ease-[cubic-bezier(0.45,0,0.15,1)] delay-[350ms] ${
-          opening ? '-translate-x-full scale-x-[0.42]' : 'translate-x-0 scale-x-100'
+        className={`absolute inset-y-0 left-0 w-1/2 origin-left overflow-hidden shadow-[inset_-48px_0_64px_-36px_rgba(0,0,0,0.45)] ${
+          opening ? 'curtain-open-left' : ''
         }`}
       >
         <Panel side="left" />
@@ -96,8 +96,8 @@ export function Curtain() {
       {/* RIGHT panel */}
       <div
         aria-hidden="true"
-        className={`absolute inset-y-0 right-0 w-1/2 origin-right overflow-hidden shadow-[inset_48px_0_64px_-36px_rgba(0,0,0,0.45)] transition-transform duration-[2800ms] ease-[cubic-bezier(0.45,0,0.15,1)] delay-[350ms] ${
-          opening ? 'translate-x-full scale-x-[0.42]' : 'translate-x-0 scale-x-100'
+        className={`absolute inset-y-0 right-0 w-1/2 origin-right overflow-hidden shadow-[inset_48px_0_64px_-36px_rgba(0,0,0,0.45)] ${
+          opening ? 'curtain-open-right' : ''
         }`}
       >
         <Panel side="right" />

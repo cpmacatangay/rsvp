@@ -438,6 +438,13 @@ the curtain now shows on **every page load / refresh**. It stays a one-shot
 overlay, so it never re-appears when the guest scrolls back up to the hero or
 navigates an in-page anchor. The only skip is the QA `?capture=1` flag.
 
+### v1.14 — curtain gathers harder (2026-10-10)
+The v1.12 sweep slid more than it gathered. Switched the panels from a
+transition to a one-shot gather keyframe: each half-panel compresses toward its
+rod-side edge to `scaleX(0.2)` (folds squeeze into a tight bunch at the edge),
+then the bunch clears off-screen — 2.8s after a 350ms beat. Verified mid-motion
+scaleX 0.98 → 0.36 → 0.20.
+
 ---
 
 ## 14. Taste Application Log (Stage 2 deliverable)

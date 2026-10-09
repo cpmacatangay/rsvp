@@ -182,6 +182,44 @@
   }
 
   /*
+   * Curtain opening (v1.14): the fabric GATHERS. Each half-panel compresses
+   * toward its rod-side edge (transform-origin left/right) so the folds squeeze
+   * into a tight bunch at the edge, then the bunch clears off-screen. A
+   * one-shot keyframe (not a transition) so the gather is unmistakable.
+   */
+  @keyframes curtain-gather-left {
+    0% {
+      transform: translateX(0) scaleX(1);
+    }
+    62% {
+      transform: translateX(0) scaleX(0.2);
+    }
+    100% {
+      transform: translateX(-100%) scaleX(0.2);
+    }
+  }
+
+  @keyframes curtain-gather-right {
+    0% {
+      transform: translateX(0) scaleX(1);
+    }
+    62% {
+      transform: translateX(0) scaleX(0.2);
+    }
+    100% {
+      transform: translateX(100%) scaleX(0.2);
+    }
+  }
+
+  .curtain-open-left {
+    animation: curtain-gather-left 2800ms cubic-bezier(0.5, 0, 0.2, 1) 350ms forwards;
+  }
+
+  .curtain-open-right {
+    animation: curtain-gather-right 2800ms cubic-bezier(0.5, 0, 0.2, 1) 350ms forwards;
+  }
+
+  /*
    * Venue art (v1.10): the page is the canvas. An SVG alpha mask
    * (/venue-mask.svg — a gently turbulence-displaced, widely blurred edge)
    * dissolves the painting into the page so there is no perceivable boundary;
